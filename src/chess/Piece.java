@@ -12,7 +12,5 @@ public interface Piece{
   int currentX;
   // hold current y value
   int currentY;
-  // if it is still in game or not
-  boolean deleted;
 
 }
