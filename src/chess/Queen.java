@@ -1,7 +1,6 @@
 import java.math.*;
 
 public class King implements Piece {
-
     public King(int originalX, int OriginalY, boolean newColor) {
         currentX = originalX;
         currentY = originalY;
@@ -18,11 +17,17 @@ public class King implements Piece {
         if (newX == currentX && newY == currentY) {
             return false;
         }
-        return Math.abs(newX - currentX) < 2 && Math.abs(newY - currentY) < 2;
+
+        // so a queen can go straight in one direction or diagonally
+        if (currentX == newX || currentY == newY) {
+            return true;
+        }
+
+        // diagonal check
+        return Math.abs(newX - currentX) == Math.abs(newY - currentY);
     }
 
     public boolean insideBounds(int x, int y) {
         return (x >= 0 && x < 8 && y >= 0 && y < 8);
     }
-
 }
