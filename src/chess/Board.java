@@ -12,15 +12,3 @@ public class Board {
 
     // update the bottom 2 and top two rows in board to have default peices
 }
-
-
-// Create a cell class or square class
-
-// class Cell {
-//     int x, y;
-//     boolean containsPeice;
-//
-//     if (containsPeice) {
-//         Piece piece;
-//     }
-// }
