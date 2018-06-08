@@ -1,10 +1,9 @@
 import java.math.*;
 
-public class Rook implements Piece {
+public class Rook extends Piece {
+
     public Rook(int originalX, int OriginalY, boolean newColor) {
-        currentX = originalX;
-        currentY = originalY;
-        color = newColor;
+        super(originalX, originalY, newColor);
     }
 
     // implement valid attack elsewhere (most likely in the game class)
@@ -20,8 +19,6 @@ public class Rook implements Piece {
 
         // so a queen can go straight in one direction or diagonally
         return(currentX == newX || currentY == newY);
-
-
     }
 
     public boolean insideBounds(int x, int y) {

@@ -1,10 +1,9 @@
 import java.math.*;
 
-public class Pawn implements Piece {
-    public Pawn(int originalX, int OriginalY, boolean newColor) {
-        currentX = originalX;
-        currentY = originalY;
-        color = newColor;
+public class Pawn extends Piece {
+
+    public Pawn(int originalX, int originalY, boolean newColor) {
+        super(originalX, originalY, newColor);
     }
 
 

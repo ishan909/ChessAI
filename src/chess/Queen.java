@@ -1,10 +1,9 @@
 import java.math.*;
 
-public class Queen implements Piece {
-    public Queen(int originalX, int OriginalY, boolean newColor) {
-        currentX = originalX;
-        currentY = originalY;
-        color = newColor;
+public class Queen extends Piece {
+
+    public Queen(int originalX, int originalY, boolean newColor) {
+        super(originalX, originalY, newColor);
     }
 
     // implement valid attack elsewhere (most likely in the game class)
