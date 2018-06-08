@@ -7,6 +7,13 @@ public class Piece {
     // hold current x and y values
     int currentX, currentY;
 
+    // without colorChoice
+
+    public Piece(int originalX, int originalY){
+      this.currentX = originalX;
+      this.currentY = originalY;s
+    }
+
     public Piece(int originalX, int originalY, boolean color) {
         this.currentX = originalX;
         this.currentY = originalY;
