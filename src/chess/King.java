@@ -2,15 +2,22 @@ import java.math.*;
 
 public class King extends Piece {
 
+    /**
+     * Constructor for a new King
+     */
     public King(int originalX, int originalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
 
     // implement valid attack elsewhere (most likely in the game class)
 
+    /**
+     * Checks if the king can move to a new location
+     * @return if king can move to the new location
+     */
     public boolean validMove(int newX, int newY) {
         // bound checks
-        if (!insideBounds(newX, newY)) {
+        if (!super.insideBounds(newX, newY)) {
             return false;
         }
         if (newX == currentX && newY == currentY) {
@@ -18,9 +25,4 @@ public class King extends Piece {
         }
         return Math.abs(newX - currentX) < 2 && Math.abs(newY - currentY) < 2;
     }
-
-    public boolean insideBounds(int x, int y) {
-        return (x >= 0 && x < 8 && y >= 0 && y < 8);
-    }
-
 }

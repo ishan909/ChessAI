@@ -2,6 +2,9 @@ import java.math.*;
 
 public class Pawn extends Piece {
 
+    /**
+     * Constructor for a new Pawn
+     */
     public Pawn(int originalX, int originalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
@@ -12,18 +15,17 @@ public class Pawn extends Piece {
 
     // implement valid attack elsewhere (most likely in the game class)
 
+    /**
+     * Checks if the pawn can move to a new location
+     * @return if pawn can move to the new location
+     */
     public boolean validMove(int newX, int newY) {
         // bound checks
-        if (!insideBounds(newX, newY)) {
+        if (!super.insideBounds(newX, newY)) {
             return false;
         }
         if (newX == currentX && newY == currentY) {
             return false;
         }
-
-    }
-
-    public boolean insideBounds(int x, int y) {
-        return (x >= 0 && x < 8 && y >= 0 && y < 8);
     }
 }

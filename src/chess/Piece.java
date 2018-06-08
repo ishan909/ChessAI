@@ -4,16 +4,20 @@ public class Piece {
     // black is true, white is false
     boolean color;
 
-    // hold current x and y values
+    // hold x and y values of the piece
     int currentX, currentY;
 
-    // without colorChoice
-
-    public Piece(int originalX, int originalY){
+    /**
+     * Constructor for a new Piece without a color
+     */
+    public Piece(int originalX, int originalY) {
       this.currentX = originalX;
-      this.currentY = originalY;s
+      this.currentY = originalY;
     }
 
+    /**
+     * Constructor for a new Piece with a color
+     */
     public Piece(int originalX, int originalY, boolean color) {
         this.currentX = originalX;
         this.currentY = originalY;
@@ -22,8 +26,16 @@ public class Piece {
 
     // implement valid attack elsewhere (most likely in the game class)
 
-    // check if there is a piece there or not (opponent or same side) + is it valid?
+    // TODO check if there is a piece there or not (opponent or same side) + is it valid?
     boolean validAttack(int newX, int newY) {
         return;
+    }
+
+    /**
+     * Checks if a location is inside the bounds of the Board
+     * @return if an x and a y is inside a Board
+     */
+    public boolean insideBounds(int x, int y) {
+        return (x >= 0 && x < 8 && y >= 0 && y < 8);
     }
 }
