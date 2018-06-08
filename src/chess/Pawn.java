@@ -14,7 +14,7 @@ public class Pawn extends Piece {
 
     public boolean validMove(int newX, int newY) {
         // bound checks
-        if (!insideBounds(newX, newY)){
+        if (!insideBounds(newX, newY)) {
             return false;
         }
         if (newX == currentX && newY == currentY) {

@@ -1,7 +1,7 @@
 import java.math.*;
 
 public class Bishop extends Piece {
-    
+
     public Bishop(int originalX, int originalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
@@ -10,7 +10,7 @@ public class Bishop extends Piece {
 
     public boolean validMove(int newX, int newY) {
         // bound checks
-        if (!insideBounds(newX, newY)){
+        if (!insideBounds(newX, newY)) {
             return false;
         }
         if (newX == currentX && newY == currentY) {
