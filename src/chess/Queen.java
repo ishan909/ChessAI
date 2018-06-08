@@ -1,7 +1,7 @@
 import java.math.*;
 
-public class King implements Piece {
-    public King(int originalX, int OriginalY, boolean newColor) {
+public class Queen implements Piece {
+    public Queen(int originalX, int OriginalY, boolean newColor) {
         currentX = originalX;
         currentY = originalY;
         color = newColor;
