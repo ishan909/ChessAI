@@ -10,7 +10,8 @@ public class Game {
     // will determine if player is in check or checkmate
     // will determine if game has been won
 
-    private static boolean player; // whose turn (true - black's turn, false, red's turn)
+    // private static boolean player; // whose turn (true - black's turn, false, red's turn)
+    // TODO: move counter: can tell us whose turn it is (even or odd). Implement later as needed
 
     public Game() {
         Board board = new Board();
@@ -21,9 +22,9 @@ public class Game {
     public playGame(Board board) {
         Scanner input = new Scanner(System.in);
         while (true) { // true for the black player
-            if (!checkmate()) {
+            if (!board.checkmate()) {
                 System.out.println("It is black's turn.");
-                if (check(true)) { // true for the black player
+                if (board.check(true)) { // true for the black player
                     System.out.println("Black, you are in check");
                 }
                 System.out.print("Black, which piece would you like to move? ");
@@ -32,12 +33,13 @@ public class Game {
                 String move_from = input.nextLine(); // assume they will enter letter first then number (fix later)
                 System.out.print("Black, where would you like to move this piece? ");
                 String move_to = input.nextLine();
-                // TODO: Update the board with the user's move
+                // TODO: Update the board with the user's move (added to the board class)
+                // keep in mind that this returns a boolean to tell you if the move was successful
                 System.out.println("Black, your peice has been moved");
             }
-            if (!checkmate(false)) { // false for the red player
+            if (!board.checkmate(false)) { // false for the red player
                 System.out.println("It is red's turn.");
-                if (check(false)) { // false for the red player
+                if (board.check(false)) { // false for the red player
                     System.out.println("Red, you are in check");
                 }
                 System.out.print("Red, which piece would you like to move? ");
@@ -46,17 +48,10 @@ public class Game {
                 String move_from = input.nextLine(); // assume they will enter letter first then number (fix later)
                 System.out.print("Red, where would you like to move this piece? ");
                 String move_to = input.nextLine();
-                // TODO: Update the board with the user's move
+                // TODO: Update the board with the user's move (added to the board class)
+                // keep in mind that this returns a boolean to tell you if the move was successful
                 System.out.println("Red, your peice has been moved");
             }
         }
-    }
-    
-    public boolean check(boolean player) {
-
-    }
-
-    public boolean checkmate(boolean player) {
-
     }
 }

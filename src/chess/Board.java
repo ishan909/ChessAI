@@ -69,6 +69,23 @@ public class Board {
         matrix[4][7].setPiece(new King(4,7,false)); // bottom - white
     }
 
+    public boolean movePiece(int r1, int c1, int r2, int c2) {
+        // checks if the piece at r1,c1 can move to r2,c2
+        // if it can move to that spot, move it and update the board
+    }
+
+    public boolean check(boolean player) {
+        // know where the player's king is
+        // loop through all of the opposing player's pieces
+        // check the opposing player's pieces to see if they can attack the King
+        // the "canAttack" method for each piece must accept a r,c for where the king is
+    }
+
+    public boolean checkmate(boolean player) {
+        // loop through all of the possible moves for the player's king and see if it will
+        // still be in check in all of those moves
+    }
+
     /**
      * Prints a board to the console for testing purposes
      */
