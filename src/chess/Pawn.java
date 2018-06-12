@@ -9,6 +9,13 @@ public class Pawn extends Piece {
         super(originalX, originalY, newColor);
     }
 
+    /**
+     * Returns the type of this piece
+     * return the type of the piece
+     */
+    public String getType() {
+        return "Pawn";
+    }
 
     // Issues (Pawn reaching end, color means different, moving one or two spaces based on first move check or not)
 

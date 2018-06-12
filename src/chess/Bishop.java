@@ -9,6 +9,14 @@ public class Bishop extends Piece {
         super(originalX, originalY, newColor);
     }
 
+    /**
+     * Returns the type of this piece
+     * return the type of the piece
+     */
+    public String getType() {
+        return "Bishop";
+    }
+
     // implement valid attack elsewhere (most likely in the game class)
 
     /**

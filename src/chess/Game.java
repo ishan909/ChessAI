@@ -1,6 +1,5 @@
 
 public class Game {
-
     // TODO:
     // will accept inputs
     // will keep track of whose turn it is
@@ -11,4 +10,53 @@ public class Game {
     // will determine if player is in check or checkmate
     // will determine if game has been won
 
+    private static boolean player; // whose turn (true - black's turn, false, red's turn)
+
+    public Game() {
+        Board board = new Board();
+        player = false;
+        playGame(board);
+    }
+
+    public playGame(Board board) {
+        Scanner input = new Scanner(System.in);
+        while (true) { // true for the black player
+            if (!checkmate()) {
+                System.out.println("It is black's turn.");
+                if (check(true)) { // true for the black player
+                    System.out.println("Black, you are in check");
+                }
+                System.out.print("Black, which piece would you like to move? ");
+                // TODO: make sure input is valid -- must make sure there is a piece there,
+                // that piece is that player's piece, and the string is formatted correctly (letter + num)
+                String move_from = input.nextLine(); // assume they will enter letter first then number (fix later)
+                System.out.print("Black, where would you like to move this piece? ");
+                String move_to = input.nextLine();
+                // TODO: Update the board with the user's move
+                System.out.println("Black, your peice has been moved");
+            }
+            if (!checkmate(false)) { // false for the red player
+                System.out.println("It is red's turn.");
+                if (check(false)) { // false for the red player
+                    System.out.println("Red, you are in check");
+                }
+                System.out.print("Red, which piece would you like to move? ");
+                // TODO: make sure input is valid -- must make sure there is a piece there,
+                // that piece is that player's piece, and the string is formatted correctly (letter + num)
+                String move_from = input.nextLine(); // assume they will enter letter first then number (fix later)
+                System.out.print("Red, where would you like to move this piece? ");
+                String move_to = input.nextLine();
+                // TODO: Update the board with the user's move
+                System.out.println("Red, your peice has been moved");
+            }
+        }
+    }
+    
+    public boolean check(boolean player) {
+
+    }
+
+    public boolean checkmate(boolean player) {
+
+    }
 }
