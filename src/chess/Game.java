@@ -13,6 +13,8 @@ public class Game {
     // private static boolean player; // whose turn (true - black's turn, false, red's turn)
     // TODO: move counter: can tell us whose turn it is (even or odd). Implement later as needed
 
+    private int moveCount;
+
     public Game() {
         Board board = new Board();
         player = false;
@@ -54,4 +56,9 @@ public class Game {
             }
         }
     }
+    public int turn() {
+
+    }
+
+
 }

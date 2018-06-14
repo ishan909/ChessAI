@@ -5,11 +5,16 @@ public class Board {
     // grid holding the cells on the board
     Cell[][] matrix = new Cell[8][8];
 
+    private boolean red_king;
+    private boolean black_king;
+
     /**
      * Board constructor
      */
     public Board() {
         initializeBoard();
+        red_king = true;
+        black_king = true;
     }
 
     /**
