@@ -36,6 +36,7 @@ public class King extends Piece {
 
     /**
      * Checks if the king can attack an opposing King
+     * @param x,y
      * @return if king can attack the opponent King
      */
     public boolean canAttack(int x, int y){

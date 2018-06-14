@@ -48,7 +48,7 @@ public class Knight extends Piece {
           return false;
       }
       // use the board
-      if(Math.square(newX) + Math.square(newY) == 5){
+      if(Math.square(newX) + Math.square(newY) == 5 ){
         return true;
       }
       else{

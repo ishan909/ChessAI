@@ -1,5 +1,6 @@
 // Create a cell class or square class
 
+
 class Cell {
     private int x, y; // location of this cell
     private boolean containsPiece; // whether this cell is currently holding a piece
@@ -42,7 +43,7 @@ class Cell {
      * true is black, false is red
      * @return color of Cell as a boolean
      */
-    public boolean getColor() {
+    public boolean getCellColor() {
       return color;
     }
 
