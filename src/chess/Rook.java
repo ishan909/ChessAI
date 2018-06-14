@@ -35,4 +35,37 @@ public class Rook extends Piece {
         // so a queen can go straight in one direction or diagonally
         return(currentX == newX || currentY == newY);
     }
+    /**
+     * Checks if the rook can attack an opposing King
+     * @param x,y
+     * @return if rook can attack the opponent King
+     */
+    public boolean canAttack(int x, int y, Board board){
+      if(currentX == x && currentY == y){
+        return false;
+      }
+      // same x, but different y
+      if(currentX == x){
+          // positive or negative y direction
+          if( y > currentY){
+            // see if all the spots in between are empty
+
+            // pass in Board
+            for(int i = currentY+1; i < y; i++){
+
+            }
+          }
+          else{
+
+          }
+      }
+      // same y, but different x
+      else if(currentY == y){
+
+      }
+      else{
+        return false;
+      }
+
+    }
 }

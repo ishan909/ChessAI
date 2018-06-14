@@ -33,4 +33,12 @@ public class King extends Piece {
         }
         return Math.abs(newX - currentX) < 2 && Math.abs(newY - currentY) < 2;
     }
+
+    /**
+     * Checks if the king can attack an opposing King
+     * @return if king can attack the opponent King
+     */
+    public boolean canAttack(int x, int y){
+      return false;
+    }
 }

@@ -85,7 +85,9 @@ public class Board {
         // loop through all of the possible moves for the player's king and see if it will
         // still be in check in all of those moves
     }
-
+    public Cell getCell(int x, int y){
+      return matrix[x][y];
+    }
     /**
      * Prints a board to the console for testing purposes
      */
