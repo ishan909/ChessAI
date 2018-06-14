@@ -49,23 +49,45 @@ public class Rook extends Piece {
           // positive or negative y direction
           if( y > currentY){
             // see if all the spots in between are empty
-
             // pass in Board
             for(int i = currentY+1; i < y; i++){
-
+              if(board.getCell(x,i).containsPiece){
+                return false;
+              }
             }
           }
           else{
+            for(int i = currentY-1; i > y; i--){
+              if(board.getCell(x,i).containsPiece){
+                return false;
+              }
+            }
 
           }
       }
       // same y, but different x
       else if(currentY == y){
-
+          // positive or negative x direction
+          if(x > currentX){
+            for(int i = currentX+1; i < x; i++){
+              if(board.getCell(i,y).containsPiece){
+                return false;
+              }
+            }
+          }
+          else{
+            for(int i = currentX-1; i > x; i--){
+              if(board.getCell(i,y).containsPiece){
+                return false;
+              }
+            }
+          }
       }
       else{
         return false;
       }
+      return true;
+
 
     }
 }
