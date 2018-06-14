@@ -47,6 +47,6 @@ public class Pawn extends Piece {
         if(x == currentX && y == currentY){
           return false;
         }
-        // attack 
+        // attack
     }
 }
