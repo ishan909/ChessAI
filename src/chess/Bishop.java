@@ -35,6 +35,9 @@ public class Bishop extends Piece {
         // diagonal check
         return Math.abs(newX - currentX) == Math.abs(newY - currentY);
     }
+
+    // TODO
+    // make sure the piece can't attack it's own set of pieces
     /**
      * Checks if the bishop can attack a piece
      * @param x,y
@@ -47,7 +50,7 @@ public class Bishop extends Piece {
       // check the 4 diagonals
 
       // it is in the bishop's path (potentially)
-      if(Math.abs(newX - currentX) == Math.abs(newY - currentY)){
+      if(Math.abs(x - currentX) == Math.abs(y - currentY)){
         // positive x, positive y
         if((x-currentX) > 0 &&  (y - currentY) > 0){
           for(int i = currentX+1; i < x; i++){

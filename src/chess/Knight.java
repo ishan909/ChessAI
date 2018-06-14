@@ -44,16 +44,18 @@ public class Knight extends Piece {
       if (!super.insideBounds(newX, newY)) {
           return false;
       }
-      if (newX == currentX && newY == currentY) {
+      if (x == currentX && y == currentY) {
           return false;
       }
       // use the board
-      if(Math.square(newX) + Math.square(newY) == 5 ){
+      if(Math.square(x) + Math.square(y) == 5 ){
         return true;
       }
       else{
         return false;
       }
 
+      // TODO
+      // make sure the piece can't attack it's own set of pieces
     }
 }
