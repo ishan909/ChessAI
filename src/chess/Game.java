@@ -12,6 +12,8 @@ public class Game {
 
     // private static boolean player; // whose turn (true - black's turn, false, red's turn)
     // TODO: move counter: can tell us whose turn it is (even or odd). Implement later as needed
+    // TODO: find a way to store the kings' locations to check if they are in checkmate or not, this is for both
+    // ----> lead into making a moves method
 
     private int moveCount;
 
@@ -57,6 +59,8 @@ public class Game {
         }
     }
     public int turn() {
+      moveCount = 1;
+
 
     }
 
