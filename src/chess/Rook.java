@@ -36,9 +36,9 @@ public class Rook extends Piece {
         return(currentX == newX || currentY == newY);
     }
     /**
-     * Checks if the rook can attack an opposing King
+     * Checks if the rook can attack a piece
      * @param x,y
-     * @return if rook can attack the opponent King
+     * @return if rook can attack a piece
      */
     public boolean canAttack(int x, int y, Board board){
       if(currentX == x && currentY == y){

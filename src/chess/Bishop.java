@@ -35,4 +35,63 @@ public class Bishop extends Piece {
         // diagonal check
         return Math.abs(newX - currentX) == Math.abs(newY - currentY);
     }
+    /**
+     * Checks if the bishop can attack a piece
+     * @param x,y
+     * @return if bishop can attack a piece
+     */
+    public boolean canAttack(int x, int y, Board board){
+      if(currentX == x && currentY == y){
+        return false;
+      }
+      // check the 4 diagonals
+
+      // it is in the bishop's path (potentially)
+      if(Math.abs(newX - currentX) == Math.abs(newY - currentY)){
+        // positive x, positive y
+        if((x-currentX) > 0 &&  (y - currentY) > 0){
+          for(int i = currentX+1; i < x; i++){
+            for(int j = currentY+1; j < y; j++){
+              if(board.getCell(i,j).containsPiece){
+                return false;
+              }
+            }
+          }
+        }
+        // positive x, negative y
+        else if((x-currentX) > 0 &&  (y - currentY) < 0){
+          for(int i = currentX+1; i < x; i++){
+            for(int j = currentY-1; j > y; j--){
+              if(board.getCell(i,j).containsPiece){
+                return false;
+              }
+            }
+          }
+        }
+        // negative x, negative y
+        else if((x-currentX) < 0 && (y-currentY) < 0){
+          for(int i = currentX-1; i > x; i--){
+            for(int j = currentY-1; j > y; j--){
+              if(board.getCell(i,j).containsPiece){
+                return false;
+              }
+            }
+          }
+        }
+        // negative x, positive y
+        else{
+          for(int i = currentX-1; i > x; i--){
+            for(int j = currentY+1; j < y; j++){
+              if(board.getCell(i,j).containsPiece){
+                return false;
+              }
+            }
+          }
+        }
+
+      }
+      else{
+        return false;
+      }
+    }
 }
