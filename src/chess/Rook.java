@@ -35,6 +35,8 @@ public class Rook extends Piece {
         // so a queen can go straight in one direction or diagonally
         return(currentX == newX || currentY == newY);
     }
+    // TODO
+    // make sure the piece can't attack it's own set of pieces
     /**
      * Checks if the rook can attack a piece
      * @param x,y
