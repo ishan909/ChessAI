@@ -34,4 +34,26 @@ public class Knight extends Piece {
         return Math.square(newX) + Math.square(newY) == 5;
 
     }
+    /**
+     * Checks if the knight can attack a piece
+     * @param x,y
+     * @return if knight can attack a piece
+     */
+    public boolean canAttack(int x, int y, Board board){
+
+      if (!super.insideBounds(newX, newY)) {
+          return false;
+      }
+      if (newX == currentX && newY == currentY) {
+          return false;
+      }
+      // use the board
+      if(Math.square(newX) + Math.square(newY) == 5){
+        return true;
+      }
+      else{
+        return false;
+      }
+
+    }
 }
