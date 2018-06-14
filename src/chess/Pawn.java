@@ -37,13 +37,13 @@ public class Pawn extends Piece {
     }
     /**
      * Checks if the piece can attack a piece
-     * @param x,y
+     * @param x - x location of new position
+     * @param y - y location of new position
+     * @param board - the board we are playing on
      * @return if piece can attack a piece
      */
-
-     // TODO
-     // make sure you can not attack your own piece
     public boolean canAttack(int x, int y, Board board) {
+        // make sure you can not attack your own piece
         if (x == currentX && y == currentY) {
             return false;
         }

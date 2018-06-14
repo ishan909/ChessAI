@@ -31,65 +31,59 @@ public class Rook extends Piece {
         if (newX == currentX && newY == currentY) {
             return false;
         }
-
         // so a queen can go straight in one direction or diagonally
         return(currentX == newX || currentY == newY);
     }
-    // TODO
-    // make sure the piece can't attack it's own set of pieces
+
     /**
      * Checks if the rook can attack a piece
-     * @param x,y
+     * @param x - x location of new position
+     * @param y - y location of new position
+     * @param board - the board we are playing on
      * @return if rook can attack a piece
      */
-    public boolean canAttack(int x, int y, Board board){
-      if(currentX == x && currentY == y){
-        return false;
-      }
-      // same x, but different y
-      if(currentX == x){
-          // positive or negative y direction
-          if( y > currentY){
-            // see if all the spots in between are empty
-            // pass in Board
-            for(int i = currentY+1; i < y; i++){
-              if(board.getCell(x,i).containsPiece){
-                return false;
-              }
+    public boolean canAttack(int x, int y, Board board) {
+        // TODO
+        // make sure the piece can't attack it's own set of pieces
+        if (currentX == x && currentY == y) {
+            return false;
+        }
+        // same x, but different y
+        if (currentX == x) {
+            // positive or negative y direction
+            if (y > currentY) {
+                // see if all the spots in between are empty
+                // pass in Board
+                for (int i = currentY + 1; i < y; i++) {
+                    if (board.getCell(x,i).containsPiece) {
+                        return false;
+                    }
+                }
+            } else {
+                for (int i = currentY - 1; i > y; i--) {
+                    if (board.getCell(x,i).containsPiece) {
+                        return false;
+                    }
+                }
             }
-          }
-          else{
-            for(int i = currentY-1; i > y; i--){
-              if(board.getCell(x,i).containsPiece){
-                return false;
-              }
+        } else if (currentY == y) { // same y, but different x
+            // positive or negative x direction
+            if (x > currentX) {
+                for (int i = currentX + 1; i < x; i++) {
+                    if (board.getCell(i,y).containsPiece) {
+                        return false;
+                    }
+                }
+            } else {
+                for (int i = currentX - 1; i > x; i--) {
+                    if (board.getCell(i, y).containsPiece) {
+                        return false;
+                    }
+                }
             }
-
-          }
-      }
-      // same y, but different x
-      else if(currentY == y){
-          // positive or negative x direction
-          if(x > currentX){
-            for(int i = currentX+1; i < x; i++){
-              if(board.getCell(i,y).containsPiece){
-                return false;
-              }
-            }
-          }
-          else{
-            for(int i = currentX-1; i > x; i--){
-              if(board.getCell(i,y).containsPiece){
-                return false;
-              }
-            }
-          }
-      }
-      else{
-        return false;
-      }
-      return true;
-
-
+        } else {
+            return false;
+        }
+        return true;
     }
 }
