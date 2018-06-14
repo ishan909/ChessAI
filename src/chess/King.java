@@ -34,16 +34,19 @@ public class King extends Piece {
         return Math.abs(newX - currentX) < 2 && Math.abs(newY - currentY) < 2;
     }
 
-    public boolean KingLife(){
-      return true;
+    public boolean KingLife() {
+        return true;
     }
 
     /**
      * Checks if the king can attack an opposing King
-     * @param x,y
+     * @param x - x location of new position
+     * @param y - y location of new position
+     * @param board - the board we are playing on
      * @return if king can attack the opponent King
      */
-    public boolean canAttack(int x, int y){
-      return false;
+    public boolean canAttack(int x, int y, Board board) {
+        // king cannot attack an opponet king
+        return false;
     }
 }

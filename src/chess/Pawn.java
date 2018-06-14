@@ -44,9 +44,10 @@ public class Pawn extends Piece {
      // TODO
      // make sure you can not attack your own piece
     public boolean canAttack(int x, int y, Board board) {
-        if(x == currentX && y == currentY){
-          return false;
+        if (x == currentX && y == currentY) {
+            return false;
         }
         // attack
+        // TODO finish implementing attack
     }
 }
