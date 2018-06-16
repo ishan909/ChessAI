@@ -3,7 +3,7 @@
 public abstract class GamePiece {
     // location of the piece
     public int x, y;
-    // color of the piece: black = true, red = false;
+    // color of the piece: black = true, white = false;
     public boolean color;
     // if this is the first move of the piece
     public boolean firstMove;
