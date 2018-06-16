@@ -6,7 +6,7 @@ public class Knight implements GamePiece {
      * Constructor for a new Knight
      */
     public Knight(int originalX, int originalY, boolean newColor) {
-        super(originalX, originalY, newColor);
+      //  super(originalX, originalY, newColor);
     }
 
     /**
