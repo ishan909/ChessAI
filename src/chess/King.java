@@ -6,7 +6,7 @@ public class King implements GamePiece {
      * Constructor for a new King
      */
     public King(int originalX, int originalY, boolean newColor) {
-        super(originalX, originalY, newColor);
+        // super(originalX, originalY, newColor);
     }
 
     /**

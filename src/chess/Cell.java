@@ -1,6 +1,6 @@
 // Create a cell class or square class
 
-// do not need cell class
+// do not need cell clas
 
 
 class Cell {
