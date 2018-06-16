@@ -9,6 +9,7 @@ public class Bishop extends GamePiece {
         super(originalX, originalY, newColor);
     }
 
+
     /**
      * Returns the type of this piece
      * return the type of the piece
@@ -16,6 +17,7 @@ public class Bishop extends GamePiece {
     public String getType() {
         return "Bishop";
     }
+
 
     // TODO valid move function needs to change to a "canMove" function
     /**
@@ -35,6 +37,7 @@ public class Bishop extends GamePiece {
         // diagonal check
         return Math.abs(newX - currentX) == Math.abs(newY - currentY);
     }
+
 
     /**
      * Checks if the bishop can attack a piece

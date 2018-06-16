@@ -9,6 +9,7 @@ public class Pawn extends GamePiece {
         super(originalX, originalY, newColor);
     }
 
+
     /**
      * Returns the type of this piece
      * return the type of the piece
@@ -33,6 +34,7 @@ public class Pawn extends GamePiece {
         }
         // TODO finish implementing this
     }
+
 
     /**
      * Checks if the piece can attack a piece

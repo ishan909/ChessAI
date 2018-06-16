@@ -9,6 +9,7 @@ public class Rook extends GamePiece {
         super(originalX, originalY, newColor);
     }
 
+
     /**
      * Returns the type of this piece
      * return the type of the piece
@@ -17,7 +18,6 @@ public class Rook extends GamePiece {
         return "Rook";
     }
 
-    // implement valid attack elsewhere (most likely in the game class)
 
     /**
      * Checks if the rook can move to a new location
@@ -34,6 +34,7 @@ public class Rook extends GamePiece {
         // so a queen can go straight in one direction or diagonally
         return(currentX == newX || currentY == newY);
     }
+
 
     /**
      * Checks if the rook can attack a piece

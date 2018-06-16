@@ -9,6 +9,7 @@ public class King extends GamePiece {
         super(originalX, originalY, newColor);
     }
 
+
     /**
      * Returns the type of this piece
      * return the type of the piece
@@ -16,6 +17,7 @@ public class King extends GamePiece {
     public String getType() {
         return "King";
     }
+
 
     /**
      * Checks if the king can move to a new location
@@ -33,6 +35,7 @@ public class King extends GamePiece {
         return Math.abs(newX - currentX) < 2 && Math.abs(newY - currentY) < 2;
     }
 
+
     /**
      * Checks if the king can attack an opposing King
      * @param x - x location of new position
@@ -48,7 +51,7 @@ public class King extends GamePiece {
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }
-        
+
         double distance = Math.sqrt((currentX - x) * (currentX - x)
                 + (currentY - y) * (currentY - y));
         if (distance > Math.sqrt(2)) {

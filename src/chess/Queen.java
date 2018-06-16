@@ -9,6 +9,7 @@ public class Queen extends GamePiece {
         super(originalX, originalY, newColor);
     }
 
+
     /**
      * Returns the type of this piece
      * return the type of the piece
@@ -17,7 +18,6 @@ public class Queen extends GamePiece {
         return "Queen";
     }
 
-    // implement valid attack elsewhere (most likely in the game class)
 
     /**
      * Checks if the queen can move to a new location
@@ -39,6 +39,7 @@ public class Queen extends GamePiece {
         // diagonal check
         return Math.abs(newX - currentX) == Math.abs(newY - currentY);
     }
+
 
     /**
      * Checks if the knight can attack a piece

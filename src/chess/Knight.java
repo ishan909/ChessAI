@@ -9,6 +9,7 @@ public class Knight extends GamePiece {
         super(originalX, originalY, newColor);
     }
 
+
     /**
      * Returns the type of this piece
      * return the type of the piece
@@ -16,6 +17,7 @@ public class Knight extends GamePiece {
     public String getType() {
         return "Knight";
     }
+
 
     /**
      * Checks if the knight can move to a new location
@@ -31,6 +33,8 @@ public class Knight extends GamePiece {
         }
         return Math.square(newX) + Math.square(newY) == 5;
     }
+
+
     /**
      * Checks if the knight can attack a piece
      * @param x - x location of new position
