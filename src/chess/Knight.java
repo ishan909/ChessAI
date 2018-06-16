@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Knight {
+public class Knight implements GamePiece {
 
     /**
      * Constructor for a new Knight
