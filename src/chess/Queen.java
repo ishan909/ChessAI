@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Queen implements GamePiece  {
+public class Queen extends GamePiece {
 
     /**
      * Constructor for a new Queen

@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Bishop  {
+public class Bishop extends GamePiece {
 
     /**
      * Constructor for a new Bishop

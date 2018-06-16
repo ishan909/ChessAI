@@ -14,7 +14,8 @@ public abstract class GamePiece {
         this.x = x;
         this.y = y;
         this.color = color;
-        firstMove = true;
+        this.firstMove = true;
+        this.isAlive = true;
     }
 
     // check (king only)

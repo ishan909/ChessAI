@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Rook implements GamePiece  {
+public class Rook extends GamePiece {
 
     /**
      * Constructor for a new Rook
