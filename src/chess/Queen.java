@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Queen extends Piece {
+public class Queen  {
 
     /**
      * Constructor for a new Queen
@@ -39,7 +39,7 @@ public class Queen extends Piece {
         // diagonal check
         return Math.abs(newX - currentX) == Math.abs(newY - currentY);
     }
-    
+
     /**
      * Checks if the knight can attack a piece
      * @param x,y

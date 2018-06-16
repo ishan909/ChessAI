@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Knight extends Piece {
+public class Knight {
 
     /**
      * Constructor for a new Knight

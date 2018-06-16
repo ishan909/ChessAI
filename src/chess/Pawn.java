@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Pawn extends Piece {
+public class Pawn  {
 
     /**
      * Constructor for a new Pawn

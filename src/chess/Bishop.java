@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Bishop extends Piece {
+public class Bishop  {
 
     /**
      * Constructor for a new Bishop

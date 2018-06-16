@@ -15,3 +15,5 @@ public interface GamePiece {
 
 
 }
+
+// alive parameter, int x, int y, getType
