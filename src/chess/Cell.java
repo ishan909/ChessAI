@@ -1,5 +1,7 @@
 // Create a cell class or square class
 
+// DO NOT NEED ANYMORE
+
 
 class Cell {
     private int x, y; // location of this cell
