@@ -6,7 +6,7 @@ public class Pawn implements GamePiece  {
      * Constructor for a new Pawn
      */
     public Pawn(int originalX, int originalY, boolean newColor) {
-        super(originalX, originalY, newColor);
+        //super(originalX, originalY, newColor);
     }
 
     /**

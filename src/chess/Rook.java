@@ -6,7 +6,7 @@ public class Rook implements GamePiece  {
      * Constructor for a new Rook
      */
     public Rook(int originalX, int OriginalY, boolean newColor) {
-        super(originalX, originalY, newColor);
+      //  super(originalX, originalY, newColor);
     }
 
     /**
