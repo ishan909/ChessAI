@@ -8,6 +8,15 @@ public class Board {
     private boolean red_king;
     private boolean black_king;
 
+
+    // key is the piece
+    // values are like the alive, etc.
+
+    
+
+
+
+
     /**
      * Board constructor
      */

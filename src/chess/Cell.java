@@ -1,6 +1,6 @@
 // Create a cell class or square class
 
-// DO NOT NEED ANYMORE
+// make changes to constructor, no piece anymore
 
 
 class Cell {
