@@ -17,8 +17,6 @@ public class King extends GamePiece {
         return "King";
     }
 
-    // implement valid attack elsewhere (most likely in the game class)
-
     /**
      * Checks if the king can move to a new location
      * @return if king is moving within its reach
@@ -43,7 +41,20 @@ public class King extends GamePiece {
      * @return if king can attack the opponent King
      */
     public boolean canAttack(int x, int y, Board board) {
-        // king cannot attack an opponet king
-        return false;
+        if (currentX == x && currentY == y) {
+            // makes sure it is not the same location
+            return false;
+        }
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
+            return false;
+        }
+        
+        double distance = Math.sqrt((currentX - x) * (currentX - x)
+                + (currentY - y) * (currentY - y));
+        if (distance > Math.sqrt(2)) {
+            return false;
+        }
+        // cannot attack your own piece
+        return this.color != board.getPiece(x, y).color;
     }
 }

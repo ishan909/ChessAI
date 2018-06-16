@@ -6,7 +6,7 @@ public class Knight extends GamePiece {
      * Constructor for a new Knight
      */
     public Knight(int originalX, int originalY, boolean newColor) {
-      //  super(originalX, originalY, newColor);
+        super(originalX, originalY, newColor);
     }
 
     /**
@@ -17,15 +17,13 @@ public class Knight extends GamePiece {
         return "Knight";
     }
 
-    // implement valid attack elsewhere (most likely in the game class)
-
     /**
      * Checks if the knight can move to a new location
      * @return if knight can move to the new location
      */
     public boolean validMove(int newX, int newY) {
         // bound checks
-        if (!super.insideBounds(newX, newY)) {
+        if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
             return false;
         }
         if (newX == currentX && newY == currentY) {
@@ -41,20 +39,29 @@ public class Knight extends GamePiece {
      * @return if knight can attack a piece
      */
     public boolean canAttack(int x, int y, Board board){
-        if (!super.insideBounds(newX, newY)) {
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }
         if (x == currentX && y == currentY) {
             return false;
         }
+
         // use the board
-        if (Math.square(x) + Math.square(y) == 5) {
-            return true;
-        } else {
+        if (Math.square(x) + Math.square(y) != 5) {
             return false;
         }
 
-        // TODO
-        // make sure the piece can't attack it's own set of pieces
+        if (board.getPiece(x, y) instanceof King) {
+            boolean otherColor = board.getPiece(x, y).getColor();
+            if (otherColor != this.color) {
+                if (this.color) {
+                    board.whiteInCheck = true;
+                } else {
+                    board.blackInCheck = true;
+                }
+            }
+        }
+        // cannot attack your own piece
+        return this.color != board.getPiece(x, y).color;
     }
 }

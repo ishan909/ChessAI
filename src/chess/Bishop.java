@@ -17,8 +17,7 @@ public class Bishop extends GamePiece {
         return "Bishop";
     }
 
-    // implement valid attack elsewhere (most likely in the game class)
-
+    // TODO valid move function needs to change to a "canMove" function
     /**
      * Checks if the bishop can move to a new location
      * @return if bishop is moving in the right direction (diagonally)
@@ -37,8 +36,6 @@ public class Bishop extends GamePiece {
         return Math.abs(newX - currentX) == Math.abs(newY - currentY);
     }
 
-    // TODO
-    // make sure the piece can't attack it's own set of pieces
     /**
      * Checks if the bishop can attack a piece
      * @param x - x location of new position
@@ -49,6 +46,9 @@ public class Bishop extends GamePiece {
     public boolean canAttack(int x, int y, Board board) {
         if (currentX == x && currentY == y) {
             // makes sure it is not the same location
+            return false;
+        }
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }
 
@@ -67,7 +67,7 @@ public class Bishop extends GamePiece {
             }
         } else if ((x - currentX) > 0 && (y - currentY) < 0) { // positive x, negative y
             for (int i = currentX + 1; i < x; i++) {
-                for (int j = currentY-1; j > y; j--) {
+                for (int j = currentY - 1; j > y; j--) {
                     if (board.getPiece(i, j) != null) {
                         return false;
                     }
@@ -100,6 +100,7 @@ public class Bishop extends GamePiece {
                 }
             }
         }
-        return true;
+        // cannot attack your own piece
+        return this.color != board.getPiece(x, y).color;
     }
 }

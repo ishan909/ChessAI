@@ -6,7 +6,7 @@ public class Rook extends GamePiece {
      * Constructor for a new Rook
      */
     public Rook(int originalX, int OriginalY, boolean newColor) {
-      //  super(originalX, originalY, newColor);
+        super(originalX, originalY, newColor);
     }
 
     /**
@@ -25,7 +25,7 @@ public class Rook extends GamePiece {
      */
     public boolean validMove(int newX, int newY) {
         // bound checks
-        if (!super.insideBounds(newX, newY)) {
+        if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
             return false;
         }
         if (newX == currentX && newY == currentY) {
@@ -48,6 +48,10 @@ public class Rook extends GamePiece {
         if (currentX == x && currentY == y) {
             return false;
         }
+        if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
+            return false;
+        }
+
         // same x, but different y
         if (currentX == x) {
             // positive or negative y direction
@@ -55,13 +59,13 @@ public class Rook extends GamePiece {
                 // see if all the spots in between are empty
                 // pass in Board
                 for (int i = currentY + 1; i < y; i++) {
-                    if (board.getCell(x,i).containsPiece) {
+                    if (board.getPiece(i, j) != null) {
                         return false;
                     }
                 }
             } else {
                 for (int i = currentY - 1; i > y; i--) {
-                    if (board.getCell(x,i).containsPiece) {
+                    if (board.getPiece(i, j) != null) {
                         return false;
                     }
                 }
@@ -70,20 +74,29 @@ public class Rook extends GamePiece {
             // positive or negative x direction
             if (x > currentX) {
                 for (int i = currentX + 1; i < x; i++) {
-                    if (board.getCell(i,y).containsPiece) {
+                    if (board.getPiece(i, j) != null) {
                         return false;
                     }
                 }
             } else {
                 for (int i = currentX - 1; i > x; i--) {
-                    if (board.getCell(i, y).containsPiece) {
+                    if (board.getPiece(i, j) != null) {
                         return false;
                     }
                 }
             }
-        } else {
-            return false;
         }
-        return true;
+        if (board.getPiece(x, y) instanceof King) {
+            boolean otherColor = board.getPiece(x, y).getColor();
+            if (otherColor != this.color) {
+                if (this.color) {
+                    board.whiteInCheck = true;
+                } else {
+                    board.blackInCheck = true;
+                }
+            }
+        }
+        // cannot attack your own piece
+        return this.color != board.getPiece(x, y).color;
     }
 }
