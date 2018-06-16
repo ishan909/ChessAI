@@ -6,7 +6,7 @@ public class King extends GamePiece {
      * Constructor for a new King
      */
     public King(int originalX, int originalY, boolean newColor) {
-        // super(originalX, originalY, newColor);
+        super(originalX, originalY, newColor);
     }
 
     /**
@@ -21,21 +21,18 @@ public class King extends GamePiece {
 
     /**
      * Checks if the king can move to a new location
-     * @return if king can move to the new location
+     * @return if king is moving within its reach
      */
     public boolean validMove(int newX, int newY) {
         // bound checks
-        if (!super.insideBounds(newX, newY)) {
+        if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
             return false;
         }
         if (newX == currentX && newY == currentY) {
+            // the piece does not move
             return false;
         }
         return Math.abs(newX - currentX) < 2 && Math.abs(newY - currentY) < 2;
-    }
-
-    public boolean KingLife() {
-        return true;
     }
 
     /**

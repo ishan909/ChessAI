@@ -20,15 +20,19 @@ public abstract class GamePiece {
 
     // check (king only)
     public boolean isInCheck();
-    // checks validity
-    public boolean validMove();
     // returns type of piece as String
     public String getType();
+    // checks validity
+    public boolean validMove();
     // can't take your own piece, valid square to move on
     public boolean canAttack();
     // alive
     public boolean isAlive() {
         return this.isAlive;
+    }
+    // returns the color of the piece
+    public boolean getColor() {
+        return this.color;
     }
 }
 

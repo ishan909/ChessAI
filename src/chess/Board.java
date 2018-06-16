@@ -6,11 +6,16 @@ public class Board {
     // Cell[][] matrix = new Cell[8][8];
     Piece[][] matrix = new Piece[8][8];
 
+    public boolean blackInCheck;
+    public boolean whiteInCheck;
+
     /**
      * Board constructor
      */
     public Board() {
         initializeNewBoard();
+        blackInCheck = false;
+        whiteInCheck = false;
     }
 
     /**

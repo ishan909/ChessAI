@@ -21,14 +21,15 @@ public class Bishop extends GamePiece {
 
     /**
      * Checks if the bishop can move to a new location
-     * @return if bishop can move to the new location
+     * @return if bishop is moving in the right direction (diagonally)
      */
     public boolean validMove(int newX, int newY) {
         // bound checks
-        if (!super.insideBounds(newX, newY)) {
+        if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
             return false;
         }
         if (newX == currentX && newY == currentY) {
+            // the piece does not move
             return false;
         }
 
@@ -58,7 +59,7 @@ public class Bishop extends GamePiece {
             if ((x - currentX) > 0 &&  (y - currentY) > 0) {
                 for (int i = currentX + 1; i < x; i++) {
                     for (int j = currentY + 1; j < y; j++) {
-                        if (board.getCell(i, j).containsPiece) {
+                        if (board.getPiece(i, j) != null) {
                             return false;
                         }
                     }
@@ -67,7 +68,7 @@ public class Bishop extends GamePiece {
         } else if ((x - currentX) > 0 && (y - currentY) < 0) { // positive x, negative y
             for (int i = currentX + 1; i < x; i++) {
                 for (int j = currentY-1; j > y; j--) {
-                    if (board.getCell(i, j).containsPiece) {
+                    if (board.getPiece(i, j) != null) {
                         return false;
                     }
                 }
@@ -75,7 +76,7 @@ public class Bishop extends GamePiece {
         } else if ((x - currentX) < 0 && (y - currentY) < 0) { // negative x, negative y
             for (int i = currentX - 1; i > x; i--) {
                 for (int j = currentY - 1; j > y; j--) {
-                    if (board.getCell(i,j).containsPiece) {
+                    if (board.getPiece(i, j) != null) {
                         return false;
                     }
                 }
@@ -83,13 +84,22 @@ public class Bishop extends GamePiece {
         } else { // negative x, positive y
             for (int i = currentX - 1; i > x; i--) {
                 for (int j = currentY + 1; j < y; j++) {
-                    if (board.getCell(i,j).containsPiece) {
+                    if (board.getPiece(i, j) != null) {
                         return false;
                     }
                 }
             }
-        } else {
-            return false;
         }
+        if (board.getPiece(x, y) instanceof King) {
+            boolean otherColor = board.getPiece(x, y).getColor();
+            if (otherColor != this.color) {
+                if (this.color) {
+                    board.whiteInCheck = true;
+                } else {
+                    board.blackInCheck = true;
+                }
+            }
+        }
+        return true;
     }
 }
