@@ -53,4 +53,38 @@ public class Knight extends GamePiece {
         // cannot attack your own piece
         return this.color != board.getPiece(x, y).color;
     }
+
+    /**
+     * Moves a piece on the board to a new location
+     * @param x - the new x location
+     * @param y - the new y location
+     * @param board - the board we are playing on
+     * @return if the move was successful
+     */
+    public boolean move(int x, int y, Board board) {
+        if (canMove(x, y, board)) {
+            firstMove = false;
+            board.setPiece(this, x, y);
+            board.setPiece(null, currentX, currentY);
+            currentX = x;
+            currentY = y;
+            if (this.color) {
+                if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
+                    board.whiteInCheck = true;
+                    if (baord.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
+                        // TODO terminate game
+                    }
+                }
+            } else {
+                if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
+                    board.blackInCheck = true;
+                    if (baord.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
+                        // TODO terminate game
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 }

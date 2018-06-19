@@ -21,7 +21,9 @@ abstract public class GamePiece {
     // returns type of piece as String
     abstract public String getType();
     // can't take your own piece, valid square to move on
-    abstract public boolean canMove();
+    abstract public boolean canMove(int x, int y, Board board);
+    // moves a piece on the board
+    abstract public boolean move(int x, int y, Board board);
     // alive
     public boolean isAlive() {
         return this.isAlive;

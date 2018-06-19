@@ -110,4 +110,29 @@ public class King extends GamePiece {
         }
         return true;
     }
+
+    /**
+     * Moves a piece on the board to a new location
+     * @param x - the new x location
+     * @param y - the new y location
+     * @return if the move was successful
+     */
+    public boolean move(int x, int y, Board board) {
+        if (canMove(x, y, board)) {
+            firstMove = false;
+            board.setPiece(this, x, y);
+            board.setPiece(null, currentX, currentY);
+            currentX = x;
+            currentY = y;
+            if (this.color) {
+                board.blackKingLocation[0] = x;
+                board.blackKingLocation[1] = y;
+            } else {
+                board.whiteKingLocation[0] = x;
+                board.whiteKingLocation[1] = y;
+            }
+            return true;
+        }
+        return false;
+    }
 }

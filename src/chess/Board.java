@@ -8,6 +8,8 @@ public class Board {
 
     public boolean blackInCheck;
     public boolean whiteInCheck;
+    public static int[] blackKingLocation = new int[2];
+    public static int[] whiteKingLocation = new int[2];
 
     /**
      * Board constructor
@@ -92,7 +94,25 @@ public class Board {
      * @return the piece at the x and y location
      */
     public Piece getPiece(int x, int y) {
-      return matrix[x][y];
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
+            return null;
+        }
+        return this.matrix[x][y];
+    }
+
+    /**
+     * Sets a piece to a new location
+     * @param piece - the piece we are moving
+     * @param x - the x location that we are accessing
+     * @param y - the y location that we are accessing
+     * @return if the move was successful
+     */
+    public boolean setPiece(Piece piece, int x, int y) {
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
+            return false;
+        }
+        this.matrix[x][y] = piece;
+        return true;
     }
 
 }
