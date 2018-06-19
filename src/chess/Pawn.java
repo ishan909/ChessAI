@@ -18,7 +18,8 @@ public class Pawn extends GamePiece {
         return "Pawn";
     }
 
-    // TODO: Issues (Pawn reaching end, color means different, moving one or two spaces based on first move check or not)
+    // TODO: Issues: Pawn reaching end
+    // TODO: update, in another function
 
     /**
      * Checks if there is a clear path for the queen to move given an (x,y) pairing
@@ -28,7 +29,6 @@ public class Pawn extends GamePiece {
      * @return if piece can attack a piece
      */
     public boolean canMove(int x, int y, Board board) {
-
         // make sure you can not attack your own piece
         if (x == currentX && y == currentY) {
             return false;
@@ -38,86 +38,78 @@ public class Pawn extends GamePiece {
             return false;
         }
 
-        // attack
-        // TODO finish implementing attack
-
-        if(!firstMove) {
-          // can only move up once, do by colors
-
-          // white color
-          if(!color) {
-            // make sure you can only go up
-            if(y - currentY != 1) {
-              return false;
+        if (!firstMove) { // can only move up once, do by colors
+            if (!color) { // white color
+                // make sure you can only go up
+                if (y - currentY != 1) {
+                    return false;
+                }
+                // check for dx
+                if (x - currentX == 1 || x - currentX == -1) {
+                    if (board.getPiece(x, y) != null) {
+                        return this.color != board.getPiece(x, y).color;
+                    } else {
+                        return false;
+                    }
+                }
+            } else { // black color
+                if (y - currentY != -1) {
+                    return false;
+                }
+                // check for dx
+                if (x - currentX == 1 || x - currentX == -1) {
+                    if (board.getPiece(x, y) != null) {
+                        return this.color != board.getPiece(x, y).color;
+                    } else {
+                        return false;
+                    }
+                }
             }
-            // check for dx
-            if(x-currentX == 1 || x-currentX == -1) {
-              if(y - currentY == 1) {
-                return this.color != board.getPiece(x, y).color;
-              }
+        } else { // move up 2 or 1
+            if (!color) { // white color
+                // make sure you can only go up
+                if (y - currentY != 1 || y - currentY != 2) {
+                    return false;
+                }
+                // check for dx
+                if (x - currentX == 1 || x - currentX == -1) {
+                    if (y - currentY == 1) {
+                        if (board.getPiece(x, y) != null) {
+                            return this.color != board.getPiece(x, y).color;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+                if (y - currentY == 2 && board.getPiece(x, currentY + 1) != null) {
+                    // there is a piece in the way of the move
+                    return false;
+                }
+            } else { // black color
+                if (y - currentY != -1 || y - currentY != -2) {
+                    return false;
+                }
+                // check for dx
+                if (x - currentX == 1 || x - currentX == -1) {
+                    if (y - currentY == -1) {
+                        if (board.getPiece(x, y) != null) {
+                            return this.color != board.getPiece(x, y).color;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
             }
-
-          }
-          // black color
-          else {
-            if(y - currentY != -1) {
-              return false;
-            }
-
-            // check for dx
-            if(x - currentX == 1 || x-currentX == -1) {
-              if(y - currentY == -1) {
-                return this.color != board.getPiece(x, y).color;
-              }
-            }
-
-          }
-        }
-        else {
-          // move up 2 or 1
-
-          // update, in another function
-
-          // white color
-          if(!color) {
-            // make sure you can only go up
-            if(y - currentY != 1 || y-currentY != 2) {
-              return false;
-            }
-            // check for dx
-            if(x-currentX == 1 || x-currentX == -1) {
-              if(y - currentY == 1) {
-                return this.color != board.getPiece(x, y).color;
-              }
-              else {
+            if (y - currentY == -2 && board.getPiece(x, currentY - 1) != null) {
+                // there is a piece in the way of the move
                 return false;
-              }
             }
-
-          }
-          // black color
-          else {
-            if(y - currentY != -1 || y - currentY != -2) {
-              return false;
-            }
-
-            // check for dx
-            if(x - currentX == 1 || x-currentX == -1) {
-              if(y - currentY == -1) {
-                return this.color != board.getPiece(x, y).color;
-              }
-              else {
-                return false;
-              }
-            }
-
-          }
-
-
         }
-
-
-
+        return board.getPiece(x, y) == null;
     }
 
 }
