@@ -22,10 +22,8 @@ public abstract class GamePiece {
     public boolean isInCheck();
     // returns type of piece as String
     public String getType();
-    // checks validity
-    public boolean validMove();
     // can't take your own piece, valid square to move on
-    public boolean canAttack();
+    public boolean canMove();
     // alive
     public boolean isAlive() {
         return this.isAlive;
