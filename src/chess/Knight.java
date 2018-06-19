@@ -19,30 +19,15 @@ public class Knight extends GamePiece {
     }
 
 
-    /**
-     * Checks if the knight can move to a new location
-     * @return if knight can move to the new location
-     */
-    public boolean validMove(int newX, int newY) {
-        // bound checks
-        if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
-            return false;
-        }
-        if (newX == currentX && newY == currentY) {
-            return false;
-        }
-        return Math.square(newX) + Math.square(newY) == 5;
-    }
-
 
     /**
-     * Checks if the knight can attack a piece
+     * Checks if there is a clear path for the knight to move given an (x,y) pairing
      * @param x - x location of new position
      * @param y - y location of new position
      * @param board - the board we are playing on
      * @return if knight can attack a piece
      */
-    public boolean canAttack(int x, int y, Board board){
+    public boolean canMove(int x, int y, Board board){
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }

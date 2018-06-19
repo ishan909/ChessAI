@@ -18,24 +18,6 @@ public class Rook extends GamePiece {
         return "Rook";
     }
 
-
-    /**
-     * Checks if the rook can move to a new location
-     * @return if rook can move to the new location
-     */
-    public boolean validMove(int newX, int newY) {
-        // bound checks
-        if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
-            return false;
-        }
-        if (newX == currentX && newY == currentY) {
-            return false;
-        }
-        // so a queen can go straight in one direction or diagonally
-        return(currentX == newX || currentY == newY);
-    }
-
-
     /**
      * Checks if the rook can attack a piece
      * @param x - x location of new position
@@ -43,7 +25,7 @@ public class Rook extends GamePiece {
      * @param board - the board we are playing on
      * @return if rook can attack a piece
      */
-    public boolean canAttack(int x, int y, Board board) {
+    public boolean canMove(int x, int y, Board board) {
         // TODO
         // make sure the piece can't attack it's own set of pieces
         if (currentX == x && currentY == y) {

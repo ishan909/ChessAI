@@ -20,35 +20,13 @@ public class Queen extends GamePiece {
 
 
     /**
-     * Checks if the queen can move to a new location
-     * @return if queen can move to the new location
-     */
-    public boolean validMove(int newX, int newY) {
-        // bound checks
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
-            return false;
-        }
-        if (newX == currentX && newY == currentY) {
-            return false;
-        }
-
-        // so a queen can go straight in one direction or diagonally
-        if (currentX == newX || currentY == newY) {
-            return true;
-        }
-        // diagonal check
-        return Math.abs(newX - currentX) == Math.abs(newY - currentY);
-    }
-
-
-    /**
-     * Checks if the knight can attack a piece
+     * Checks if there is a clear path for the queen to move given an (x,y) pairing
      * @param x - x location of new position
      * @param y - y location of new position
      * @param board - the board we are playing on
-     * @return if knight can attack a piece
+     * @return if Queen can attack a piece
      */
-    public boolean canAttack(int x, int y, Board board) {
+    public boolean canMove(int x, int y, Board board) {
         if (currentX == x && currentY == y) {
           return false;
         }
