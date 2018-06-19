@@ -22,11 +22,11 @@ public class Pawn extends GamePiece {
     // TODO: update, in another function
 
     /**
-     * Checks if there is a clear path for the queen to move given an (x,y) pairing
+     * Checks if there is a clear path for the pawn to move given an (x,y) pairing
      * @param x - x location of new position
      * @param y - y location of new position
      * @param board - the board we are playing on
-     * @return if piece can attack a piece
+     * @return if the pawn can move to and/or attack a piece
      */
     public boolean canMove(int x, int y, Board board) {
         // make sure you can not attack your own piece

@@ -25,7 +25,7 @@ public class Knight extends GamePiece {
      * @param x - x location of new position
      * @param y - y location of new position
      * @param board - the board we are playing on
-     * @return if knight can attack a piece
+     * @return if knight can move to and/or attack a piece
      */
     public boolean canMove(int x, int y, Board board){
         if (x < 0 || x > 7 || y < 0 || y > 7) {

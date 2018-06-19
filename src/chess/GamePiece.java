@@ -1,6 +1,6 @@
 
 
-public abstract class GamePiece {
+abstract public class GamePiece {
     // location of the piece
     public int x, y;
     // color of the piece: black = true, white = false;
@@ -18,12 +18,10 @@ public abstract class GamePiece {
         this.isAlive = true;
     }
 
-    // check (king only)
-    public boolean isInCheck();
     // returns type of piece as String
-    public String getType();
+    abstract public String getType();
     // can't take your own piece, valid square to move on
-    public boolean canMove();
+    abstract public boolean canMove();
     // alive
     public boolean isAlive() {
         return this.isAlive;
