@@ -67,7 +67,14 @@ public class Board {
 
         // Kings
         matrix[4][0].setPiece(new King(4, 0, true)); // top - black
+        // fill
+        blackKingLocation[0] = 4;
+        blackKingLocation[1] = 0;
+
         matrix[4][7].setPiece(new King(4, 7, false)); // bottom - white
+        // fill
+        whiteKingLocation[0] = 4;
+        whiteKingLocation[1] = 7;
     }
 
     public boolean movePiece(int r1, int c1, int r2, int c2) {
