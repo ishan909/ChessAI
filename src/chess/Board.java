@@ -4,7 +4,7 @@ public class Board {
 
     // grid holding the cells on the board
     // Cell[][] matrix = new Cell[8][8];
-    Piece[][] matrix = new Piece[8][8];
+    GamePiece[][] matrix = new GamePiece[8][8];
 
     public boolean blackInCheck;
     public boolean whiteInCheck;
