@@ -1,14 +1,12 @@
 import java.math.*;
 
 public class Rook extends GamePiece {
-
     /**
      * Constructor for a new Rook
      */
     public Rook(int originalX, int OriginalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
-
 
     /**
      * Returns the type of this piece
@@ -100,14 +98,14 @@ public class Rook extends GamePiece {
             if (this.color) {
                 if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
-                    if (baord.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }
             } else {
                 if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
                     board.blackInCheck = true;
-                    if (baord.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }

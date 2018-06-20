@@ -1,14 +1,12 @@
 import java.math.*;
 
 public class King extends GamePiece {
-
     /**
      * Constructor for a new King
      */
     public King(int originalX, int originalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
-
 
     /**
      * Returns the type of this piece

@@ -1,5 +1,4 @@
 
-
 abstract public class GamePiece {
     // location of the piece
     public int x, y;
@@ -33,5 +32,3 @@ abstract public class GamePiece {
         return this.color;
     }
 }
-
-// alive parameter, int x, int y, getType

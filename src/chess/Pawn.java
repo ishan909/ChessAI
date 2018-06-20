@@ -1,7 +1,6 @@
 import java.math.*;
 
 public class Pawn extends GamePiece {
-
     /**
      * Constructor for a new Pawn
      */
@@ -9,9 +8,9 @@ public class Pawn extends GamePiece {
         super(originalX, originalY, newColor);
     }
 
-
     /**
-     * Returns the type of this piece
+     * Returns the type of th
+     is piece
      * return the type of the piece
      */
     public String getType() {
@@ -19,7 +18,7 @@ public class Pawn extends GamePiece {
     }
 
     // TODO: Issues: Pawn reaching end
-    // TODO: update, in another function
+    //      update, in another function
 
     /**
      * Checks if there is a clear path for the pawn to move given an (x,y) pairing
@@ -129,14 +128,14 @@ public class Pawn extends GamePiece {
             if (this.color) {
                 if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
-                    if (baord.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }
             } else {
                 if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
                     board.blackInCheck = true;
-                    if (baord.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }

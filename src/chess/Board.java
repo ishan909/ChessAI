@@ -120,9 +120,11 @@ public class Board {
         // check the opposing player's pieces to see if they can attack the King
         // the "canAttack" method for each piece must accept a r,c for where the king is
         if (player) {
-            return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck();
+            blackInCheck = this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck();
+            return blackInCheck;
         } else {
-            return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck();
+            whiteInCheck = this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck();
+            return whiteInCheck;
         }
     }
 
@@ -162,6 +164,44 @@ public class Board {
         }
         this.matrix[x][y] = piece;
         return true;
+    }
+
+    /**
+     * Prints a board to the console for testing purposes
+     */
+    public static void printBoard() {
+        System.out.println("-11-12-13-14-15-16-17-18-");
+        System.out.println("-------------------------");
+        for (int r = 0; r < 8; r++) {
+            System.out.print("" + (r + 1) + "|");
+            for (int c = 0; c < 8; c++) {
+                if (!matrix[r][c].containsPiece()) {
+                    System.out.print("  ")
+                } else {
+                    Piece p = matrix[r][c].getPiece();
+                    if (p.getColor()) {
+                        System.out.print("B");
+                    } else {
+                        System.out.print("W");
+                    }
+                    if (p.getType().equals("Rook")) {
+                        System.out.print("R");
+                    } else if (p.getType().equals("Knight")) {
+                        System.out.print("k");
+                    } else if (p.getType().equals("Bishop")) {
+                        System.out.print("B");
+                    } else if (p.getType().equals("King")) {
+                        System.out.print("K");
+                    } else if (p.getType().equals("Queen")) {
+                        System.out.print("Q");
+                    } else if (p.getType().equals("Pawn")) {
+                        System.out.print("P");
+                    }
+                }
+                System.out.print("|")
+            }
+        }
+        System.out.println("-------------------------");
     }
 
 }

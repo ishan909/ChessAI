@@ -1,14 +1,12 @@
 import java.math.*;
 
 public class Knight extends GamePiece {
-
     /**
      * Constructor for a new Knight
      */
     public Knight(int originalX, int originalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
-
 
     /**
      * Returns the type of this piece
@@ -17,8 +15,6 @@ public class Knight extends GamePiece {
     public String getType() {
         return "Knight";
     }
-
-
 
     /**
      * Checks if there is a clear path for the knight to move given an (x,y) pairing
@@ -71,14 +67,14 @@ public class Knight extends GamePiece {
             if (this.color) {
                 if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
-                    if (baord.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }
             } else {
                 if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
                     board.blackInCheck = true;
-                    if (baord.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }

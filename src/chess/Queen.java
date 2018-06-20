@@ -1,14 +1,12 @@
 import java.math.*;
 
 public class Queen extends GamePiece {
-
     /**
      * Constructor for a new Queen
      */
     public Queen(int originalX, int originalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
-
 
     /**
      * Returns the type of this piece
@@ -17,7 +15,6 @@ public class Queen extends GamePiece {
     public String getType() {
         return "Queen";
     }
-
 
     /**
      * Checks if there is a clear path for the queen to move given an (x,y) pairing
@@ -133,14 +130,14 @@ public class Queen extends GamePiece {
             if (this.color) {
                 if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
-                    if (baord.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }
             } else {
                 if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
                     board.blackInCheck = true;
-                    if (baord.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }

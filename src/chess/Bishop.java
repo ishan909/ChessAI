@@ -1,14 +1,12 @@
 import java.math.*;
 
 public class Bishop extends GamePiece {
-
     /**
      * Constructor for a new Bishop
      */
     public Bishop(int originalX, int originalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
-
 
     /**
      * Returns the type of this piece
@@ -17,7 +15,6 @@ public class Bishop extends GamePiece {
     public String getType() {
         return "Bishop";
     }
-
 
     /**
      * Checks if there is a clear path for the Bishop to move given an (x,y) pairing
@@ -34,7 +31,6 @@ public class Bishop extends GamePiece {
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }
-
         // check the 4 diagonals
         // it is in the bishop's path (potentially)
         if (Math.abs(x - currentX) == Math.abs(y - currentY)) {
@@ -104,14 +100,14 @@ public class Bishop extends GamePiece {
             if (this.color) {
                 if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
-                    if (baord.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }
             } else {
                 if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
                     board.blackInCheck = true;
-                    if (baord.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }
