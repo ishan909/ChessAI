@@ -77,9 +77,44 @@ public class Board {
         whiteKingLocation[1] = 7;
     }
 
-    public boolean movePiece(int r1, int c1, int r2, int c2) {
+    public boolean movePiece(int r1, int c1, int r2, int c2, int turn) {
         // checks if the piece at r1,c1 can move to r2,c2
         // if it can move to that spot, move it and update the board
+        GamePiece tmp = board.getPiece(r1,c1);
+
+        // if it's there or not
+
+        // do we automatically set a square to null when there's no piece on it
+        if(tmp == null) {
+          return false;
+        }
+        // true is black?
+        if(tmp.getColor()) {
+          // even is white
+          if(turn % 2 == 0) {
+            return false;
+          }
+        } else {
+          // odd is black
+          if(turn % 2 == 1) {
+            return false;
+          }
+        }
+
+        if(tmp.canMove(r2,c2,this)) {
+            this.matrix[r1][c1] = null;
+            // tmp.move(r2,c2) make it happen
+        }
+
+
+        return false;
+
+        // null square, if you can reach it place
+        // if it's your own piece then you can't in terms of color
+        // if it's an opponent piece and is not a king, then you can take it
+
+
+
     }
 
     public boolean check(boolean player) {
@@ -100,7 +135,7 @@ public class Board {
      * @param y - the y location that we are accessing
      * @return the piece at the x and y location
      */
-    public Piece getPiece(int x, int y) {
+    public GamePiece getPiece(int x, int y) {
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             return null;
         }

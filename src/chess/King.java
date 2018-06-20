@@ -79,7 +79,7 @@ public class King extends GamePiece {
         }
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
-                Piece piece = board.getPiece(r, c);
+                GamePiece piece = board.getPiece(r, c);
                 if (piece != null) {
                     if (piece.getColor() != this.color) {
                         if (piece.canMove(currentX, currentY)) {
