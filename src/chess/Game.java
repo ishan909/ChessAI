@@ -10,7 +10,6 @@ public class Game {
     // will determine if player is in check or checkmate
     // will determine if game has been won
 
-    // TODO: move counter: can tell us whose turn it is (even or odd). Implement later as needed
     // TODO: if a king is in check, that player's next move must remove them from check
     // ----> lead into making a moves method
 
@@ -25,13 +24,9 @@ public class Game {
     public playGame(Board board) {
         Scanner input = new Scanner(System.in);
         // Initialize move counter
-
         int move_counter = 0;
 
         while (true) { // true for the black player
-
-
-
             if (!board.checkmate()) {
                 System.out.println("It is black's turn.");
                 if (board.check(true)) { // true for the black player
@@ -39,8 +34,7 @@ public class Game {
                 }
                 System.out.print("Black, which piece would you like to move? ");
                 // TODO: make sure input is valid -- must make sure there is a piece there,
-                // that piece is that player's piece, and the string is formatted correctly (letter + num)
-              //  String move_from = input.nextLine(); // assume they will enter letter first then number (fix later)
+                //      that piece is that player's piece, and the string is formatted correctly (letter + num)
                 int current_horizontal = input.nextInt();
                 int current_vertical = input.nextInt();
                 System.out.print("Black, where would you like to move this piece? ");
@@ -53,7 +47,7 @@ public class Game {
                 board.movePiece(current_horizontal, current_vertical, new_horizontal, new_vertical, move_counter);
 
                 System.out.println("Black, your peice has been moved");
-                move_counter+=1;
+                move_counter += 1;
 
             }
             if (!board.checkmate(false)) { // false for the red player
@@ -75,7 +69,7 @@ public class Game {
 
                 System.out.println("Red, your peice has been moved");
 
-                move_counter+=1;
+                move_counter += 1;
             }
         }
     }

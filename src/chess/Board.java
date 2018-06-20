@@ -6,8 +6,10 @@ public class Board {
     // Cell[][] matrix = new Cell[8][8];
     GamePiece[][] matrix = new GamePiece[8][8];
 
+    // TODO: may not need blackInCheck and whiteInCheck
     public boolean blackInCheck;
     public boolean whiteInCheck;
+
     public static int[] blackKingLocation = new int[2];
     public static int[] whiteKingLocation = new int[2];
 
@@ -85,36 +87,31 @@ public class Board {
         // if it's there or not
 
         // do we automatically set a square to null when there's no piece on it
-        if(tmp == null) {
-          return false;
+        if (tmp == null) {
+            return false;
         }
         // true is black?
-        if(tmp.getColor()) {
-          // even is white
-          if(turn % 2 == 0) {
-            return false;
-          }
+        if (tmp.getColor()) {
+            // even is white
+            if (turn % 2 == 0) {
+                return false;
+            }
         } else {
-          // odd is black
-          if(turn % 2 == 1) {
-            return false;
-          }
+            // odd is black
+            if (turn % 2 == 1) {
+                return false;
+            }
         }
 
-        if(tmp.canMove(r2,c2,this)) {
+        if (tmp.canMove(r2, c2, this)) {
             this.matrix[r1][c1] = null;
             // tmp.move(r2,c2) make it happen
         }
-
-
         return false;
 
         // null square, if you can reach it place
         // if it's your own piece then you can't in terms of color
         // if it's an opponent piece and is not a king, then you can take it
-
-
-
     }
 
     public boolean check(boolean player) {
@@ -122,11 +119,21 @@ public class Board {
         // loop through all of the opposing player's pieces
         // check the opposing player's pieces to see if they can attack the King
         // the "canAttack" method for each piece must accept a r,c for where the king is
+        if (player) {
+            return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck();
+        } else {
+            return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck();
+        }
     }
 
     public boolean checkmate(boolean player) {
         // loop through all of the possible moves for the player's king and see if it will
         // still be in check in all of those moves
+        if (player) {
+            return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate();
+        } else {
+            return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate();
+        }
     }
 
     /**
