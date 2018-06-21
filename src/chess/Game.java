@@ -1,3 +1,4 @@
+import java.util.*; // get scanner
 
 public class Game {
     // TODO: if a king is in check, that player's next move must remove them from check
@@ -36,7 +37,7 @@ public class Game {
                 // keep in mind that this returns a boolean to tell you if the move was successful
 
                 // TODO: figure out how to work with bad input (throw exceptions later)
-                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, moveCounter) || board.check(true)) {
+                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, ) || board.check(true)) {
 
                     System.out.println("Invalid Move. ");
                     System.out.print("Black, which piece would you like to move? Enter horizonal first, then vertical: ");
@@ -47,7 +48,7 @@ public class Game {
                     int new_vertical = input.nextInt();
                 }
                 System.out.println("Black, your piece has been moved.");
-                moveCounter += 1;
+                 += 1;
             } else {
                 break;
             }
@@ -66,7 +67,7 @@ public class Game {
                 int new_vertical = input.nextInt();
                 // TODO: Update the board with the user's move (added to the board class)
                 // keep in mind that this returns a boolean to tell you if the move was successful
-                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, moveCounter) || board.check(true)) {
+                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, ) || board.check(true)) {
                     System.out.println("Invalid Move. ");
                     System.out.print("Red, which piece would you like to move? Enter horizonal first, then vertical: ");
                     int currentHorizontal = input.nextInt();
@@ -76,7 +77,7 @@ public class Game {
                     int new_vertical = input.nextInt();
                 }
                 System.out.println("Red, your piece has been moved.");
-                moveCounter += 1;
+                 += 1;
             } else {
                 break;
             }

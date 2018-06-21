@@ -1,5 +1,8 @@
 // This class will contain what is at each location of the board
 
+import java.util.*;
+
+
 public class Board {
 
     // grid holding the cells on the board
@@ -202,6 +205,36 @@ public class Board {
             }
         }
         System.out.println("-------------------------");
+    }
+
+    // if a pawn reaches the end, and has to be changed, cannot be pawn
+    public void setPawnToPiece(int r, int c, Pawn p) {
+      Scanner tmp = new Scanner(System.in);
+      System.out.print("Please enter what piece you would like to change the pawn to:  ");
+      // throw exceptions or make it ask again if the user types in a pawn again and no new King
+      String piece = in.next();
+      while(!piece.equals("Queen") || !piece.equals("Bishop") || !piece.equals("Knight") || !piece.equals("Rook")) {
+        System.out.print("Please enter what piece would you like to change the pawn to:  ");
+        piece = in.next();
+      }
+      
+      // queen
+      if("Queen".equals(piece)) {
+        matrix[r][c].setPiece(new Queen(r, c, p.getColor()),r,c);
+      }
+      // bishop
+      if("Bishop".equals(piece)) {
+        matrix[r][c].setPiece(new Bishop(r, c, p.getColor()),r,c);
+      }
+      // knight
+      if("Knight".equals(piece)) {
+        matrix[r][c].setPiece(new Knight(r, c, p.getColor()),r,c);
+      }
+      // rook
+      if("Rook".equals(piece)) {
+        matrix[r][c].setPiece(new Rook(r,c,p.getColor()),r,c);
+      }
+
     }
 
 }
