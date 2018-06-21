@@ -1,3 +1,5 @@
+package chess;
+
 import java.util.*; // get scanner
 
 public class Game {
@@ -11,7 +13,7 @@ public class Game {
         playGame(board);
     }
 
-    public playGame(Board board) {
+	public void playGame(Board board) {
         Scanner input = new Scanner(System.in);
         // Initialize move counter
         moveCount = 0;
@@ -36,17 +38,17 @@ public class Game {
                 // keep in mind that this returns a boolean to tell you if the move was successful
 
                 // TODO: figure out how to work with bad input (throw exceptions later)
-                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, ) || board.check(true)) {
+                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, moveCount, board) || board.check(true)) {
                     System.out.println("Invalid Move. ");
                     System.out.print("Black, which piece would you like to move? Enter horizonal first, then vertical: ");
-                    int currentHorizontal = input.nextInt();
-                    int currentVertical = input.nextInt();
+                    currentHorizontal = input.nextInt();
+                    currentVertical = input.nextInt();
                     System.out.print("Black, where would you like to move this piece? Enter horizonal first, then vertical: ");
-                    int new_horizontal = input.nextInt();
-                    int new_vertical = input.nextInt();
+                    new_horizontal = input.nextInt();
+                    new_vertical = input.nextInt();
                 }
                 System.out.println("Black, your piece has been moved.");
-                 += 1;
+                moveCount += 1;
             } else {
                 break;
             }
@@ -66,17 +68,17 @@ public class Game {
                 int new_vertical = input.nextInt();
                 // TODO: Update the board with the user's move (added to the board class)
                 // keep in mind that this returns a boolean to tell you if the move was successful
-                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, ) || board.check(true)) {
+                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, moveCount, board) || board.check(true)) {
                     System.out.println("Invalid Move. ");
                     System.out.print("Red, which piece would you like to move? Enter horizonal first, then vertical: ");
-                    int currentHorizontal = input.nextInt();
-                    int currentVertical = input.nextInt();
+                    currentHorizontal = input.nextInt();
+                    currentVertical = input.nextInt();
                     System.out.print("Red, where would you like to move this piece? Enter horizonal first, then vertical: ");
-                    int new_horizontal = input.nextInt();
-                    int new_vertical = input.nextInt();
+                    new_horizontal = input.nextInt();
+                    new_vertical = input.nextInt();
                 }
                 System.out.println("Red, your piece has been moved.");
-                 += 1;
+                moveCount += 1;
             } else {
                 break;
             }

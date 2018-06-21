@@ -1,3 +1,5 @@
+package chess;
+
 import java.math.*;
 
 public class Rook extends GamePiece {

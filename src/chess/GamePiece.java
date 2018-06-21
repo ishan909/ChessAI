@@ -1,3 +1,5 @@
+package chess;
+
 
 abstract public class GamePiece {
     // location of the piece

@@ -1,3 +1,5 @@
+package chess;
+
 import java.math.*;
 
 public class Pawn extends GamePiece {

@@ -1,3 +1,5 @@
+package chess;
+
 import java.math.*;
 
 public class Bishop extends GamePiece {

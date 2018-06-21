@@ -1,3 +1,5 @@
+package chess;
+
 // This class will contain what is at each location of the board
 
 import java.util.*;
@@ -7,7 +9,7 @@ public class Board {
 
     // grid holding the cells on the board
     // Cell[][] matrix = new Cell[8][8];
-    GamePiece[][] matrix = new GamePiece[8][8];
+    public static GamePiece[][] matrix = new GamePiece[8][8];
 
     // TODO: may not need blackInCheck and whiteInCheck
     public boolean blackInCheck;
@@ -42,47 +44,47 @@ public class Board {
         // insert the pieces
         // all of the pawns
         for (int c = 0; c < 8; c++) {
-            matrix[1][c].setPiece(new Pawn(1, c, true));  // top - black
+            setPiece(new Pawn(1, c, true), 1, c);  // top - black
         }
         for (int c = 0; c < 8; c++) {
-            matrix[6][c].setPiece(new Pawn(6, c, false)); // bottom - white
+            setPiece(new Pawn(6, c, false), 6, c); // bottom - white
         }
 
         // all the rooks
-        matrix[0][0].setPiece(new Rook(0, 0, true)); // top - black
-        matrix[0][7].setPiece(new Rook(0, 7, true));
-        matrix[7][0].setPiece(new Rook(7, 0, false)); // bottom - white
-        matrix[7][7].setPiece(new Rook(7, 7, false));
+        setPiece(new Rook(0, 0, true), 0, 0); // top - black
+        setPiece(new Rook(0, 7, true), 0, 7);
+        setPiece(new Rook(7, 0, false), 7, 0); // bottom - white
+        setPiece(new Rook(7, 7, false), 7, 7);
 
         // knights
-        matrix[1][0].setPiece(new Knight(1, 0, true)); // top - black
-        matrix[6][0].setPiece(new Knight(6, 0, true));
-        matrix[1][7].setPiece(new Knight(1, 7, false)); // bottom - white
-        matrix[6][7].setPiece(new Knight(6, 7, false));
+        setPiece(new Knight(1, 0, true), 1, 0); // top - black
+        setPiece(new Knight(6, 0, true), 6, 0);
+        setPiece(new Knight(1, 7, false), 1 ,7); // bottom - white
+        setPiece(new Knight(6, 7, false), 6, 7);
 
         // bishops
-        matrix[2][0].setPiece(new Bishop(2, 0, true)); // top - black
-        matrix[5][0].setPiece(new Bishop(5, 0, true));
-        matrix[2][7].setPiece(new Bishop(2, 7, false)); // bottom - white
-        matrix[5][7].setPiece(new Knight(1, 7, false));
+        setPiece(new Bishop(2, 0, true), 2, 0); // top - black
+        setPiece(new Bishop(5, 0, true), 5, 0);
+        setPiece(new Bishop(2, 7, false), 2, 7); // bottom - white
+        setPiece(new Knight(1, 7, false), 5, 7);
 
         //Queens
-        matrix[3][0].setPiece(new Queen(3, 0, true)); // top - black
-        matrix[3][7].setPiece(new Queen(3, 7, false)); // bottom - white
+        setPiece(new Queen(3, 0, true), 3, 0); // top - black
+        setPiece(new Queen(3, 7, false), 3, 7); // bottom - white
 
         // Kings
-        matrix[4][0].setPiece(new King(4, 0, true)); // top - black
+        setPiece(new King(4, 0, true), 4, 0); // top - black
         // fill
         blackKingLocation[0] = 4;
         blackKingLocation[1] = 0;
 
-        matrix[4][7].setPiece(new King(4, 7, false)); // bottom - white
+        setPiece(new King(4, 7, false), 4, 7); // bottom - white
         // fill
         whiteKingLocation[0] = 4;
         whiteKingLocation[1] = 7;
     }
 
-    public boolean movePiece(int r1, int c1, int r2, int c2, int turn) {
+    public boolean movePiece(int r1, int c1, int r2, int c2, int turn, Board board) {
         // checks if the piece at r1,c1 can move to r2,c2
         // if it can move to that spot, move it and update the board
         GamePiece tmp = board.getPiece(r1,c1);
@@ -151,7 +153,7 @@ public class Board {
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             return null;
         }
-        return this.matrix[x][y];
+        return matrix[x][y];
     }
 
     /**
@@ -161,11 +163,11 @@ public class Board {
      * @param y - the y location that we are accessing
      * @return if the move was successful
      */
-    public boolean setPiece(Piece piece, int x, int y) {
+    public boolean setPiece(GamePiece piece, int x, int y) {
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }
-        this.matrix[x][y] = piece;
+        matrix[x][y] = piece;
         return true;
     }
 
@@ -178,10 +180,10 @@ public class Board {
         for (int r = 0; r < 8; r++) {
             System.out.print("" + (r + 1) + "|");
             for (int c = 0; c < 8; c++) {
-                if (!matrix[r][c].containsPiece()) {
-                    System.out.print("  ")
+                if (matrix[r][c] != null) {
+                    System.out.print("  ");
                 } else {
-                    Piece p = matrix[r][c].getPiece();
+                    GamePiece p = matrix[r][c];
                     if (p.getColor()) {
                         System.out.print("B");
                     } else {
@@ -201,7 +203,7 @@ public class Board {
                         System.out.print("P");
                     }
                 }
-                System.out.print("|")
+                System.out.print("|");
             }
         }
         System.out.println("-------------------------");
@@ -214,30 +216,33 @@ public class Board {
      * @param y - the y location of the pawn
      */
     public void setPawnToPiece(int r, int c) {
-        Scanner tmp = new Scanner(System.in);
-        System.out.print("Please enter what piece you would like to change the pawn to:  ");
-        // throw exceptions or make it ask again if the user types in a pawn again and no new King
-        String piece = in.next();
-        while (!piece.equals("Queen") || !piece.equals("Bishop") || !piece.equals("Knight") || !piece.equals("Rook")) {
-            System.out.print("Please enter what piece would you like to change the pawn to:  ");
-            piece = in.next();
-        }
-        // queen
-        if ("Queen".equals(piece)) {
-            matrix[r][c].setPiece(new Queen(r, c, p.getColor()), r, c);
-        }
-        // bishop
-        if ("Bishop".equals(piece)) {
-            matrix[r][c].setPiece(new Bishop(r, c, p.getColor()), r, c);
-        }
-        // knight
-        if ("Knight".equals(piece)) {
-            matrix[r][c].setPiece(new Knight(r, c, p.getColor()), r, c);
-        }
-        // rook
-        if ("Rook".equals(piece)) {
-            matrix[r][c].setPiece(new Rook(r, c, p.getColor()), r, c);
-        }
+    		if (matrix[r][c] != null && matrix[r][c] instanceof Pawn) {
+    			Scanner in = new Scanner(System.in);
+    	        System.out.print("Please enter what piece you would like to change the pawn to:  ");
+    	        // throw exceptions or make it ask again if the user types in a pawn again and no new King
+    	        String piece = in.next();
+    	        while (!piece.equals("Queen") || !piece.equals("Bishop") || !piece.equals("Knight") || !piece.equals("Rook")) {
+    	            System.out.print("Please enter what piece would you like to change the pawn to:  ");
+    	            piece = in.next();
+    	        }
+    	        // queen
+    	        if ("Queen".equals(piece)) {
+    	            matrix[r][c] = new Queen(r, c, matrix[r][c].getColor());
+    	        }
+    	        // bishop
+    	        if ("Bishop".equals(piece)) {
+    	            matrix[r][c] = new Bishop(r, c, matrix[r][c].getColor());
+    	        }
+    	        // knight
+    	        if ("Knight".equals(piece)) {
+    	            matrix[r][c] = new Knight(r, c, matrix[r][c].getColor());
+    	        }
+    	        // rook
+    	        if ("Rook".equals(piece)) {
+    	            matrix[r][c] = new Rook(r, c, matrix[r][c].getColor());
+    	        }
+    	        in.close();
+    		}
     }
 
 }
