@@ -9,16 +9,12 @@ public class Pawn extends GamePiece {
     }
 
     /**
-     * Returns the type of th
-     is piece
+     * Returns the type of this piece
      * return the type of the piece
      */
     public String getType() {
         return "Pawn";
     }
-
-    // TODO: Issues: Pawn reaching end
-    //      update, in another function
 
     /**
      * Checks if there is a clear path for the pawn to move given an (x,y) pairing
@@ -125,6 +121,11 @@ public class Pawn extends GamePiece {
             board.setPiece(null, currentX, currentY);
             currentX = x;
             currentY = y;
+            if (this.color && currentY == 0) {
+                board.setPawnToPiece(currentX, currentY);
+            } else if (!this.color && currentX == 7) {
+                board.setPawnToPiece(currentX, currentY);
+            }
             if (this.color) {
                 if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
