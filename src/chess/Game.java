@@ -8,7 +8,6 @@ public class Game {
 
     public Game() {
         Board board = new Board();
-        player = false;
         playGame(board);
     }
 
@@ -19,12 +18,12 @@ public class Game {
 
         while (true) { // true for the black player
             if (!board.checkmate(true)) {
+                board.printBoard();
                 System.out.println("It is black's turn.");
                 if (board.check(true)) { // true for the black player
                     System.out.println("Black, you are in check");
                 }
                 System.out.print("Black, which piece would you like to move? Enter horizonal first, then vertical: ");
-
 
                 // TODO: make sure input is valid -- must make sure there is a piece there,
                 //      that piece is that player's piece, and the string is formatted correctly (letter + num)
@@ -38,7 +37,6 @@ public class Game {
 
                 // TODO: figure out how to work with bad input (throw exceptions later)
                 while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, ) || board.check(true)) {
-
                     System.out.println("Invalid Move. ");
                     System.out.print("Black, which piece would you like to move? Enter horizonal first, then vertical: ");
                     int currentHorizontal = input.nextInt();
@@ -53,6 +51,7 @@ public class Game {
                 break;
             }
             if (!board.checkmate(false)) { // false for the red player
+                board.printBoard();
                 System.out.println("It is red's turn.");
                 if (board.check(false)) { // false for the red player
                     System.out.println("Red, you are in check");
