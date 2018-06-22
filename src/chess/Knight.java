@@ -34,7 +34,7 @@ public class Knight extends GamePiece {
         }
 
         // use the board
-        if (Math.square(x) + Math.square(y) != 5) {
+        if (x * x + y * y != 5) {
             return false;
         }
 
@@ -67,18 +67,12 @@ public class Knight extends GamePiece {
             currentX = x;
             currentY = y;
             if (this.color) {
-                if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
+                if (canMove(board.whiteKingLocation[0], board.whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
-                    if (board.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
-                        // TODO terminate game
-                    }
                 }
             } else {
-                if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
+                if (canMove(board.blackKingLocation[0], board.blackKingLocation[1], board)) {
                     board.blackInCheck = true;
-                    if (board.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
-                        // TODO terminate game
-                    }
                 }
             }
             return true;
