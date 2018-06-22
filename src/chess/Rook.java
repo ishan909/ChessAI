@@ -1,12 +1,10 @@
 package chess;
 
-import java.math.*;
-
 public class Rook extends GamePiece {
     /**
      * Constructor for a new Rook
      */
-    public Rook(int originalX, int OriginalY, boolean newColor) {
+    public Rook(int originalX, int originalY, boolean newColor) {
         super(originalX, originalY, newColor);
     }
 
@@ -31,7 +29,7 @@ public class Rook extends GamePiece {
         if (currentX == x && currentY == y) {
             return false;
         }
-        if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }
 
@@ -42,13 +40,13 @@ public class Rook extends GamePiece {
                 // see if all the spots in between are empty
                 // pass in Board
                 for (int i = currentY + 1; i < y; i++) {
-                    if (board.getPiece(i, j) != null) {
+                    if (board.getPiece(i, y) != null) {
                         return false;
                     }
                 }
             } else {
                 for (int i = currentY - 1; i > y; i--) {
-                    if (board.getPiece(i, j) != null) {
+                    if (board.getPiece(i, y) != null) {
                         return false;
                     }
                 }
@@ -57,13 +55,13 @@ public class Rook extends GamePiece {
             // positive or negative x direction
             if (x > currentX) {
                 for (int i = currentX + 1; i < x; i++) {
-                    if (board.getPiece(i, j) != null) {
+                    if (board.getPiece(i, y) != null) {
                         return false;
                     }
                 }
             } else {
                 for (int i = currentX - 1; i > x; i--) {
-                    if (board.getPiece(i, j) != null) {
+                    if (board.getPiece(i, y) != null) {
                         return false;
                     }
                 }
@@ -98,18 +96,12 @@ public class Rook extends GamePiece {
             currentX = x;
             currentY = y;
             if (this.color) {
-                if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
+                if (canMove(board.whiteKingLocation[0], board.whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
-                    if (board.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
-                        // TODO terminate game
-                    }
                 }
             } else {
-                if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
+                if (canMove(board.blackKingLocation[0], board.blackKingLocation[1], board)) {
                     board.blackInCheck = true;
-                    if (board.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
-                        // TODO terminate game
-                    }
                 }
             }
             return true;
