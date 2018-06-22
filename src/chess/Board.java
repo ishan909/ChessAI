@@ -9,7 +9,7 @@ public class Board {
 
     // grid holding the cells on the board
     // Cell[][] matrix = new Cell[8][8];
-    public static GamePiece[][] matrix = new GamePiece[8][8];
+    public GamePiece[][] matrix = new GamePiece[8][8];
 
     // TODO: may not need blackInCheck and whiteInCheck
     public boolean blackInCheck;
