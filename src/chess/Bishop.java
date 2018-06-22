@@ -1,6 +1,6 @@
 package chess;
 
-import java.math.*;
+
 
 public class Bishop extends GamePiece {
     /**
@@ -99,21 +99,6 @@ public class Bishop extends GamePiece {
             board.setPiece(null, currentX, currentY);
             currentX = x;
             currentY = y;
-            if (this.color) {
-                if (canMove(board.whiteKingLocation[0], board.whiteKingLocation[1], board)) {
-                    board.whiteInCheck = true;
-                    if (board.getPiece(board.whiteKingLocation[0], board.whiteKingLocation[1]).isInCheckmate(board)) {
-                        // TODO terminate game
-                    }
-                }
-            } else {
-                if (canMove(board.blackKingLocation[0], board.blackKingLocation[1], board)) {
-                    board.blackInCheck = true;
-                    if (board.getPiece(board.blackKingLocation[0], board.blackKingLocation[1]).isInCheckmate(board)) {
-                        // TODO terminate game
-                    }
-                }
-            }
             return true;
         }
         return false;
