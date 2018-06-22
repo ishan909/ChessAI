@@ -84,5 +84,6 @@ public class Game {
             }
         }
         System.out.println("Game Over! Player " + ((moveCount + 1) % 2) + " won!");
+        input.close();
     }
 }
