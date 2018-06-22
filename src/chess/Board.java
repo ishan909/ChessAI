@@ -15,8 +15,8 @@ public class Board {
     public boolean blackInCheck;
     public boolean whiteInCheck;
 
-    public static int[] blackKingLocation = new int[2];
-    public static int[] whiteKingLocation = new int[2];
+    public int[] blackKingLocation = new int[2];
+    public int[] whiteKingLocation = new int[2];
 
     /**
      * Board constructor
