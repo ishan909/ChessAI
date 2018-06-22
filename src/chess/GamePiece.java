@@ -3,7 +3,7 @@ package chess;
 
 abstract public class GamePiece {
     // location of the piece
-    public int x, y;
+    public int currentX, currentY;
     // color of the piece: black = true, white = false;
     public boolean color;
     // if this is the first move of the piece
@@ -12,8 +12,8 @@ abstract public class GamePiece {
     public boolean isAlive;
 
     public GamePiece(int x, int y, boolean color) {
-        this.x = x;
-        this.y = y;
+        this.currentX = x;
+        this.currentY = y;
         this.color = color;
         this.firstMove = true;
         this.isAlive = true;

@@ -100,16 +100,16 @@ public class Bishop extends GamePiece {
             currentX = x;
             currentY = y;
             if (this.color) {
-                if (canMove(whiteKingLocation[0], whiteKingLocation[1], board)) {
+                if (canMove(board.whiteKingLocation[0], board.whiteKingLocation[1], board)) {
                     board.whiteInCheck = true;
-                    if (board.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(board.whiteKingLocation[0], board.whiteKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }
             } else {
-                if (canMove(blackKingLocation[0], blackKingLocation[1], board)) {
+                if (canMove(board.blackKingLocation[0], board.blackKingLocation[1], board)) {
                     board.blackInCheck = true;
-                    if (board.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(board)) {
+                    if (board.getPiece(board.blackKingLocation[0], board.blackKingLocation[1]).isInCheckmate(board)) {
                         // TODO terminate game
                     }
                 }
