@@ -1,6 +1,6 @@
 package chess;
 
-import java.math.*;
+
 
 public class King extends GamePiece {
     /**
