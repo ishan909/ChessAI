@@ -127,15 +127,6 @@ public class Queen extends GamePiece {
             board.setPiece(null, currentX, currentY);
             currentX = x;
             currentY = y;
-            if (this.color) {
-                if (canMove(board.whiteKingLocation[0], board.whiteKingLocation[1], board)) {
-                    board.whiteInCheck = true;
-                }
-            } else {
-                if (canMove(board.blackKingLocation[0], board.blackKingLocation[1], board)) {
-                    board.blackInCheck = true;
-                }
-            }
             return true;
         }
         return false;

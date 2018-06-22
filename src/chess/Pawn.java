@@ -121,20 +121,6 @@ public class Pawn extends GamePiece {
             board.setPiece(null, currentX, currentY);
             currentX = x;
             currentY = y;
-            if (this.color && currentY == 0) {
-                board.setPawnToPiece(currentX, currentY);
-            } else if (!this.color && currentX == 7) {
-                board.setPawnToPiece(currentX, currentY);
-            }
-            if (this.color) {
-                if (canMove(board.whiteKingLocation[0], board.whiteKingLocation[1], board)) {
-                    board.whiteInCheck = true;
-                }
-            } else {
-                if (canMove(board.blackKingLocation[0], board.blackKingLocation[1], board)) {
-                    board.blackInCheck = true;
-                }
-            }
             return true;
         }
         return false;
