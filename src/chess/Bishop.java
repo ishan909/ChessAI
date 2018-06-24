@@ -1,5 +1,6 @@
 package chess;
 
+// Test Comment
 
 
 public class Bishop extends GamePiece {
