@@ -34,7 +34,7 @@ public class Board {
         // initialization of Chess Board -- (w/ Colors -- set as different colors than red/black)
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
-                // states that there will be at peice at r,c
+                // states that there will be at piece at r,c
                 if (r > 1 && r < 6) {
                     matrix[r][c] = null;
                 }
@@ -125,10 +125,10 @@ public class Board {
         // check the opposing player's pieces to see if they can attack the King
         // the "canAttack" method for each piece must accept a r,c for where the king is
         if (player) {
-            blackInCheck = this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck();
+            blackInCheck = this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck(this);
             return blackInCheck;
         } else {
-            whiteInCheck = this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck();
+            whiteInCheck = this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck(this);
             return whiteInCheck;
         }
     }
@@ -137,9 +137,9 @@ public class Board {
         // loop through all of the possible moves for the player's king and see if it will
         // still be in check in all of those moves
         if (player) {
-            return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate();
+            return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(this);
         } else {
-            return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate();
+            return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(this);
         }
     }
 

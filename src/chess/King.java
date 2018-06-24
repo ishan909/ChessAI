@@ -1,7 +1,5 @@
 package chess;
 
-
-
 public class King extends GamePiece {
     /**
      * Constructor for a new King
@@ -44,7 +42,7 @@ public class King extends GamePiece {
     }
 
     /**
-     * Detemrines if a king is currently in check
+     * Determines if a king is currently in check
      * @param board - the board we are playing on
      * @return if the king is currently in check
      */

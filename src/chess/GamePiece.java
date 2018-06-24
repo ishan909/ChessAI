@@ -1,6 +1,5 @@
 package chess;
 
-
 abstract public class GamePiece {
     // location of the piece
     public int currentX, currentY;
@@ -26,6 +25,12 @@ abstract public class GamePiece {
     // moves a piece on the board
     abstract public boolean move(int x, int y, Board board);
     // alive
+    public boolean isInCheck(Board board) {
+    		return false;
+    }
+    public boolean isInCheckmate(Board board) {
+		return false;
+    }
     public boolean isAlive() {
         return this.isAlive;
     }
