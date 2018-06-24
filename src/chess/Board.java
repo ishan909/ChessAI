@@ -57,31 +57,31 @@ public class Board {
         setPiece(new Rook(7, 7, false), 7, 7);
 
         // knights
-        setPiece(new Knight(1, 0, true), 1, 0); // top - black
-        setPiece(new Knight(6, 0, true), 6, 0);
-        setPiece(new Knight(1, 7, false), 1 ,7); // bottom - white
-        setPiece(new Knight(6, 7, false), 6, 7);
+        setPiece(new Knight(0, 1, true), 0, 1); // top - black
+        setPiece(new Knight(0, 6, true), 0, 6);
+        setPiece(new Knight(7, 1, false), 7 ,1); // bottom - white
+        setPiece(new Knight(7, 6, false), 7, 6);
 
         // bishops
-        setPiece(new Bishop(2, 0, true), 2, 0); // top - black
-        setPiece(new Bishop(5, 0, true), 5, 0);
-        setPiece(new Bishop(2, 7, false), 2, 7); // bottom - white
-        setPiece(new Knight(1, 7, false), 5, 7);
+        setPiece(new Bishop(0, 2, true), 0, 2); // top - black
+        setPiece(new Bishop(0, 5, true), 0, 5);
+        setPiece(new Bishop(7, 2, false), 7, 2); // bottom - white
+        setPiece(new Bishop(7, 5, false), 7, 5);
 
         //Queens
-        setPiece(new Queen(3, 0, true), 3, 0); // top - black
-        setPiece(new Queen(3, 7, false), 3, 7); // bottom - white
+        setPiece(new Queen(0, 3, true), 0, 3); // top - black
+        setPiece(new Queen(7, 3, false), 7, 3); // bottom - white
 
         // Kings
-        setPiece(new King(4, 0, true), 4, 0); // top - black
+        setPiece(new King(0, 4, true), 0, 4); // top - black
         // fill
-        blackKingLocation[0] = 4;
-        blackKingLocation[1] = 0;
+        blackKingLocation[0] = 0;
+        blackKingLocation[1] = 4;
 
-        setPiece(new King(4, 7, false), 4, 7); // bottom - white
+        setPiece(new King(7, 4, false), 7, 4); // bottom - white
         // fill
-        whiteKingLocation[0] = 4;
-        whiteKingLocation[1] = 7;
+        whiteKingLocation[0] = 7;
+        whiteKingLocation[1] = 4;
     }
 
     public boolean movePiece(int r1, int c1, int r2, int c2, int turn, Board board) {
@@ -175,21 +175,25 @@ public class Board {
      * Prints a board to the console for testing purposes
      */
     public void printBoard() {
-        System.out.println("-11-12-13-14-15-16-17-18-");
-        System.out.println("-------------------------");
+        System.out.println(" -11-12-13-14-15-16-17-18-");
+        System.out.println("---------------------------");
         for (int r = 0; r < 8; r++) {
             System.out.print("" + (r + 1) + "|");
             for (int c = 0; c < 8; c++) {
-                if (matrix[r][c] != null) {
+                if (matrix[r][c] == null) {
                     System.out.print("  ");
                 } else {
                     GamePiece p = matrix[r][c];
+                    if (p == null) {
+                			System.out.print("  |");
+                			continue;
+                    }
                     if (p.getColor()) {
                         System.out.print("B");
                     } else {
                         System.out.print("W");
                     }
-                    if (p.getType().equals("Rook")) {
+                    if (p instanceof Rook/*p.getType().equals("Rook")*/) {
                         System.out.print("R");
                     } else if (p.getType().equals("Knight")) {
                         System.out.print("k");
@@ -205,8 +209,9 @@ public class Board {
                 }
                 System.out.print("|");
             }
+            System.out.println();
         }
-        System.out.println("-------------------------");
+        System.out.println("---------------------------");
     }
 
     /**
