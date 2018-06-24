@@ -84,10 +84,10 @@ public class Board {
         whiteKingLocation[1] = 4;
     }
 
-    public boolean movePiece(int r1, int c1, int r2, int c2, int turn, Board board) {
+    public boolean movePiece(int r1, int c1, int r2, int c2, int turn) {
         // checks if the piece at r1,c1 can move to r2,c2
         // if it can move to that spot, move it and update the board
-        GamePiece tmp = board.getPiece(r1,c1);
+        GamePiece tmp = getPiece(r1, c1);
 
         // if it's there or not
 
@@ -110,7 +110,8 @@ public class Board {
 
         if (tmp.canMove(r2, c2, this)) {
             this.matrix[r1][c1] = null;
-            // tmp.move(r2,c2) make it happen
+            tmp.move(r2, c2, this);
+            return true;
         }
         return false;
 
@@ -175,10 +176,10 @@ public class Board {
      * Prints a board to the console for testing purposes
      */
     public void printBoard() {
-        System.out.println(" -11-12-13-14-15-16-17-18-");
+        System.out.println(" - 0- 1- 2- 3- 4- 5- 6- 7-");
         System.out.println("---------------------------");
         for (int r = 0; r < 8; r++) {
-            System.out.print("" + (r + 1) + "|");
+            System.out.print("" + r + "|");
             for (int c = 0; c < 8; c++) {
                 if (matrix[r][c] == null) {
                     System.out.print("  ");
