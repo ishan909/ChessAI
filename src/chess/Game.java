@@ -3,9 +3,6 @@ package chess;
 import java.util.*; // get scanner
 
 public class Game {
-    // TODO: if a king is in check, that player's next move must remove them from check
-    // ----> lead into making a moves method
-
     private int moveCount;
 
     public Game() {
@@ -34,8 +31,6 @@ public class Game {
                 System.out.print("Black, where would you like to move this piece? Enter horizonal first, then vertical: ");
                 int new_horizontal = input.nextInt();
                 int new_vertical = input.nextInt();
-                // TODO: Update the board with the user's move (added to the board class)
-                // keep in mind that this returns a boolean to tell you if the move was successful
 
                 // TODO: figure out how to work with bad input (throw exceptions later)
                 // TODO: we need to re-add that "|| board.check(true)" condition, but we also need to update the check after each input
@@ -60,8 +55,6 @@ public class Game {
                     System.out.println("Red, you are in check");
                 }
                 System.out.print("Red, which piece would you like to move? Enter horizonal first, then vertical: ");
-                // TODO: make sure input is valid -- must make sure there is a piece there,
-                // that piece is that player's piece, and the string is formatted correctly
                 int currentHorizontal = input.nextInt();
                 int currentVertical = input.nextInt();
                 System.out.print("Red, where would you like to move this piece? Enter horizonal first, then vertical: ");

@@ -1,7 +1,5 @@
 package chess;
 
-
-
 public class Bishop extends GamePiece {
     /**
      * Constructor for a new Bishop

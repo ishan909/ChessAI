@@ -110,8 +110,7 @@ public class Board {
 
         if (tmp.canMove(r2, c2, this)) {
             this.matrix[r1][c1] = null;
-            tmp.move(r2, c2, this);
-            return true;
+            return tmp.move(r2, c2, this);
         }
         return false;
 

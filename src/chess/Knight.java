@@ -1,7 +1,5 @@
 package chess;
 
-
-
 public class Knight extends GamePiece {
     /**
      * Constructor for a new Knight
