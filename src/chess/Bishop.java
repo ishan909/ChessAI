@@ -33,9 +33,8 @@ public class Bishop extends GamePiece {
         }
         // check the 4 diagonals
         // it is in the bishop's path (potentially)
-        if (Math.abs(x - currentX) == Math.abs(y - currentY)) {
-            // positive x, positive y
-            if ((x - currentX) > 0 &&  (y - currentY) > 0) {
+        if (Math.abs(x - currentX) == Math.abs(y - currentY)) { 
+            if ((x - currentX) > 0 &&  (y - currentY) > 0) { // positive x, positive y
                 for (int i = currentX + 1; i < x; i++) {
                     for (int j = currentY + 1; j < y; j++) {
                         if (board.getPiece(i, j) != null) {
@@ -43,44 +42,45 @@ public class Bishop extends GamePiece {
                         }
                     }
                 }
-            }
-        } else if ((x - currentX) > 0 && (y - currentY) < 0) { // positive x, negative y
-            for (int i = currentX + 1; i < x; i++) {
-                for (int j = currentY - 1; j > y; j--) {
-                    if (board.getPiece(i, j) != null) {
-                        return false;
+            } else if ((x - currentX) > 0 && (y - currentY) < 0) { // positive x, negative y
+                for (int i = currentX + 1; i < x; i++) {
+                    for (int j = currentY - 1; j > y; j--) {
+                        if (board.getPiece(i, j) != null) {
+                            return false;
+                        }
+                    }
+                }
+            } else if ((x - currentX) < 0 && (y - currentY) < 0) { // negative x, negative y
+                for (int i = currentX - 1; i > x; i--) {
+                    for (int j = currentY - 1; j > y; j--) {
+                        if (board.getPiece(i, j) != null) {
+                            return false;
+                        }
+                    }
+                }
+            } else { // negative x, positive y
+                for (int i = currentX - 1; i > x; i--) {
+                    for (int j = currentY + 1; j < y; j++) {
+                        if (board.getPiece(i, j) != null) {
+                            return false;
+                        }
                     }
                 }
             }
-        } else if ((x - currentX) < 0 && (y - currentY) < 0) { // negative x, negative y
-            for (int i = currentX - 1; i > x; i--) {
-                for (int j = currentY - 1; j > y; j--) {
-                    if (board.getPiece(i, j) != null) {
-                        return false;
+            if (board.getPiece(x, y) instanceof King) {
+                boolean otherColor = board.getPiece(x, y).getColor();
+                if (otherColor != this.color) {
+                    if (this.color) {
+                        board.whiteInCheck = true;
+                    } else {
+                        board.blackInCheck = true;
                     }
                 }
             }
-        } else { // negative x, positive y
-            for (int i = currentX - 1; i > x; i--) {
-                for (int j = currentY + 1; j < y; j++) {
-                    if (board.getPiece(i, j) != null) {
-                        return false;
-                    }
-                }
-            }
+            // cannot attack your own piece
+            return this.color != board.getPiece(x, y).color;
         }
-        if (board.getPiece(x, y) instanceof King) {
-            boolean otherColor = board.getPiece(x, y).getColor();
-            if (otherColor != this.color) {
-                if (this.color) {
-                    board.whiteInCheck = true;
-                } else {
-                    board.blackInCheck = true;
-                }
-            }
-        }
-        // cannot attack your own piece
-        return this.color != board.getPiece(x, y).color;
+        return false;
     }
 
     /**

@@ -38,4 +38,10 @@ abstract public class GamePiece {
     public boolean getColor() {
         return this.color;
     }
+    public int getX() {
+    		return currentX;
+    }
+    public int getY() {
+    		return currentY;
+    }
 }

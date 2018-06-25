@@ -29,19 +29,19 @@ public class Game {
                 int currentHorizontal = input.nextInt();
                 int currentVertical = input.nextInt();
                 System.out.print("Black, where would you like to move this piece? Enter horizonal first, then vertical: ");
-                int new_horizontal = input.nextInt();
-                int new_vertical = input.nextInt();
+                int newHorizontal = input.nextInt();
+                int newVertical = input.nextInt();
 
                 // TODO: figure out how to work with bad input (throw exceptions later)
                 // TODO: we need to re-add that "|| board.check(true)" condition, but we also need to update the check after each input
-                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, moveCount) /*|| board.check(true)*/) {
+                while (!board.movePiece(currentHorizontal, currentVertical, newHorizontal, newVertical, moveCount) /*|| board.check(true)*/) {
                     System.out.println("Invalid Move. ");
                     System.out.print("Black, which piece would you like to move? Enter horizonal first, then vertical: ");
                     currentHorizontal = input.nextInt();
                     currentVertical = input.nextInt();
                     System.out.print("Black, where would you like to move this piece? Enter horizonal first, then vertical: ");
-                    new_horizontal = input.nextInt();
-                    new_vertical = input.nextInt();
+                    newHorizontal = input.nextInt();
+                    newVertical = input.nextInt();
                 }
                 System.out.println("Black, your piece has been moved.");
                 moveCount += 1;
@@ -58,19 +58,19 @@ public class Game {
                 int currentHorizontal = input.nextInt();
                 int currentVertical = input.nextInt();
                 System.out.print("Red, where would you like to move this piece? Enter horizonal first, then vertical: ");
-                int new_horizontal = input.nextInt();
-                int new_vertical = input.nextInt();
+                int newHorizontal = input.nextInt();
+                int newVertical = input.nextInt();
                 
                 // TODO: figure out how to work with bad input (throw exceptions later)
                 // TODO: we need to re-add that "|| board.check(true)" condition, but we also need to update the check after each input
-                while (!board.movePiece(currentHorizontal, currentVertical, new_horizontal, new_vertical, moveCount) /*|| board.check(true)*/) {
+                while (!board.movePiece(currentHorizontal, currentVertical, newHorizontal, newVertical, moveCount) /*|| board.check(true)*/) {
                     System.out.println("Invalid Move. ");
                     System.out.print("Red, which piece would you like to move? Enter horizonal first, then vertical: ");
                     currentHorizontal = input.nextInt();
                     currentVertical = input.nextInt();
                     System.out.print("Red, where would you like to move this piece? Enter horizonal first, then vertical: ");
-                    new_horizontal = input.nextInt();
-                    new_vertical = input.nextInt();
+                    newHorizontal = input.nextInt();
+                    newVertical = input.nextInt();
                 }
                 System.out.println("Red, your piece has been moved.");
                 moveCount += 1;

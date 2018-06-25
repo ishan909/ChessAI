@@ -34,6 +34,9 @@ public class Rook extends GamePiece {
         }
 
         // same x, but different y
+        if (currentX != x || currentX != y) {
+        		return false;
+        }
         if (currentX == x) {
             // positive or negative y direction
             if (y > currentY) {

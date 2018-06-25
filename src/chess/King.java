@@ -81,6 +81,7 @@ public class King extends GamePiece {
                 if (piece != null) {
                     if (piece.getColor() != this.color) {
                         if (piece.canMove(currentX, currentY, board)) {
+                        		System.out.println(piece.getType() + " " + piece.getColor() + " " + piece.getX() + " " + piece.getY());
                             return true;
                         }
                     }

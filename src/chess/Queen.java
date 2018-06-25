@@ -48,6 +48,18 @@ public class Queen extends GamePiece {
                     }
                 }
             }
+            if (board.getPiece(x, y) instanceof King) {
+                boolean otherColor = board.getPiece(x, y).getColor();
+                if (otherColor != this.color) {
+                    if (this.color) {
+                        board.whiteInCheck = true;
+                    } else {
+                        board.blackInCheck = true;
+                    }
+                }
+            }
+            // cannot attack your own piece
+            return this.color != board.getPiece(x, y).color;
         } else if (currentY == y) { // same y, but different x
             // positive or negative x direction
             if (x > currentX) {
@@ -63,6 +75,18 @@ public class Queen extends GamePiece {
                     }
                 }
             }
+            if (board.getPiece(x, y) instanceof King) {
+                boolean otherColor = board.getPiece(x, y).getColor();
+                if (otherColor != this.color) {
+                    if (this.color) {
+                        board.whiteInCheck = true;
+                    } else {
+                        board.blackInCheck = true;
+                    }
+                }
+            }
+            // cannot attack your own piece
+            return this.color != board.getPiece(x, y).color;
         } else if (Math.abs(x - currentX) == Math.abs(y - currentY)) { // check diagonal moves
             // positive x, positive y
             if ((x - currentX) > 0 && (y - currentY) > 0) {
@@ -98,6 +122,18 @@ public class Queen extends GamePiece {
                     }
                 }
             }
+            if (board.getPiece(x, y) instanceof King) {
+                boolean otherColor = board.getPiece(x, y).getColor();
+                if (otherColor != this.color) {
+                    if (this.color) {
+                        board.whiteInCheck = true;
+                    } else {
+                        board.blackInCheck = true;
+                    }
+                }
+            }
+            // cannot attack your own piece
+            return this.color != board.getPiece(x, y).color;
         }
         if (board.getPiece(x, y) instanceof King) {
             boolean otherColor = board.getPiece(x, y).getColor();
@@ -110,7 +146,7 @@ public class Queen extends GamePiece {
             }
         }
         // cannot attack your own piece
-        return this.color != board.getPiece(x, y).color;
+        return false;
     }
 
     /**
