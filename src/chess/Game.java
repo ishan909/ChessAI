@@ -22,25 +22,29 @@ public class Game {
                 if (board.check(true)) { // true for the black player
                     System.out.println("Black, you are in check");
                 }
-                System.out.print("Black, which piece would you like to move? Enter horizonal first, then vertical: ");
 
                 // TODO: make sure input is valid -- must make sure there is a piece there,
                 //      that piece is that player's piece, and the string is formatted correctly
+                System.out.print("Black, which piece would you like to move?\nEnter horizontal: ");
                 int currentHorizontal = input.nextInt();
+                System.out.print("Enter vertical: ");
                 int currentVertical = input.nextInt();
-                System.out.print("Black, where would you like to move this piece? Enter horizonal first, then vertical: ");
+                System.out.print("Black, where would you like to move this piece?\nEnter horizontal: ");
                 int newHorizontal = input.nextInt();
+                System.out.print("Enter vertical: ");
                 int newVertical = input.nextInt();
 
                 // TODO: figure out how to work with bad input (throw exceptions later)
                 // TODO: we need to re-add that "|| board.check(true)" condition, but we also need to update the check after each input
                 while (!board.movePiece(currentHorizontal, currentVertical, newHorizontal, newVertical, moveCount) /*|| board.check(true)*/) {
-                    System.out.println("Invalid Move. ");
-                    System.out.print("Black, which piece would you like to move? Enter horizonal first, then vertical: ");
+                    System.out.println("Invalid Move.");
+                    System.out.print("Black, which piece would you like to move?\nEnter horizontal: ");
                     currentHorizontal = input.nextInt();
+                    System.out.print("Enter vertical: ");
                     currentVertical = input.nextInt();
-                    System.out.print("Black, where would you like to move this piece? Enter horizonal first, then vertical: ");
+                    System.out.print("Black, where would you like to move this piece?\nEnter horizontal: ");
                     newHorizontal = input.nextInt();
+                    System.out.print("Enter vertical: ");
                     newVertical = input.nextInt();
                 }
                 System.out.println("Black, your piece has been moved.");
@@ -50,35 +54,39 @@ public class Game {
             }
             if (!board.checkmate(false)) { // false for the red player
                 board.printBoard();
-                System.out.println("It is red's turn.");
+                System.out.println("It is white turn.");
                 if (board.check(false)) { // false for the red player
-                    System.out.println("Red, you are in check");
+                    System.out.println("White, you are in check");
                 }
-                System.out.print("Red, which piece would you like to move? Enter horizonal first, then vertical: ");
+                System.out.print("White, which piece would you like to move?\nEnter horizontal: ");
                 int currentHorizontal = input.nextInt();
+                System.out.print("Enter vertical: ");
                 int currentVertical = input.nextInt();
-                System.out.print("Red, where would you like to move this piece? Enter horizonal first, then vertical: ");
+                System.out.print("White, where would you like to move this piece?\nEnter horizontal: ");
                 int newHorizontal = input.nextInt();
+                System.out.println("Enter vertical: ");
                 int newVertical = input.nextInt();
                 
                 // TODO: figure out how to work with bad input (throw exceptions later)
-                // TODO: we need to re-add that "|| board.check(true)" condition, but we also need to update the check after each input
-                while (!board.movePiece(currentHorizontal, currentVertical, newHorizontal, newVertical, moveCount) /*|| board.check(true)*/) {
-                    System.out.println("Invalid Move. ");
-                    System.out.print("Red, which piece would you like to move? Enter horizonal first, then vertical: ");
+                // TODO: we need to re-add that "|| board.check(false)" condition, but we also need to update the check after each input
+                while (!board.movePiece(currentHorizontal, currentVertical, newHorizontal, newVertical, moveCount) /*|| board.check(false)*/) {
+                    System.out.println("Invalid Move.");
+                    System.out.print("White, which piece would you like to move?\nEnter horizontal: ");
                     currentHorizontal = input.nextInt();
+                    System.out.print("Enter vertical: ");
                     currentVertical = input.nextInt();
-                    System.out.print("Red, where would you like to move this piece? Enter horizonal first, then vertical: ");
+                    System.out.print("White, where would you like to move this piece?\nEnter horizontal: ");
                     newHorizontal = input.nextInt();
+                    System.out.print("Enter vertical: ");
                     newVertical = input.nextInt();
                 }
-                System.out.println("Red, your piece has been moved.");
+                System.out.println("White, your piece has been moved.");
                 moveCount += 1;
             } else {
                 break;
             }
         }
-        System.out.println("Game Over! Player " + ((moveCount + 1) % 2) + " won!");
+        System.out.println("Game Over! Player " + (((moveCount + 1) % 2) + 1) + " won!");
         input.close();
     }
 }
