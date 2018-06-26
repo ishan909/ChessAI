@@ -23,54 +23,54 @@ public class Pawn extends GamePiece {
      * @param board - the board we are playing on
      * @return if the pawn can move to and/or attack a piece
      */
-    public boolean canMove(int x, int y, Board board) {
+    public boolean canMove(int row, int col, Board board) {
         // make sure you can not attack your own piece
-        if (x == currentX && y == currentY) {
+        if (row == currentX && col == currentY) {
             return false;
         }
         // valid position
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
+        if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
 
         if (!firstMove) { // can only move up once, do by colors
-            if (!color) { // white color
+            if (color) { // black color
                 // make sure you can only go up
-                if (y - currentY != 1) {
+                if (row - currentX != 1) {
                     return false;
                 }
                 // check for dx
-                if (x - currentX == 1 || x - currentX == -1) {
-                    if (board.getPiece(x, y) != null) {
-                        return this.color != board.getPiece(x, y).color;
+                if (col - currentY == 1 || col - currentY == -1) {
+                    if (board.getPiece(row, col) != null) {
+                        return this.color != board.getPiece(row, col).color;
                     } else {
                         return false;
                     }
                 }
             } else { // black color
-                if (y - currentY != -1) {
+                if (row - currentX != -1) {
                     return false;
                 }
                 // check for dx
-                if (x - currentX == 1 || x - currentX == -1) {
-                    if (board.getPiece(x, y) != null) {
-                        return this.color != board.getPiece(x, y).color;
+                if (col - currentY == 1 || col - currentY == -1) {
+                    if (board.getPiece(row, col) != null) {
+                        return this.color != board.getPiece(row, col).color;
                     } else {
                         return false;
                     }
                 }
             }
-        } else { // move up 2 or 1
-            if (!color) { // white color
+        } else { // move up 1 or 2
+            if (color) { // black color
                 // make sure you can only go up
-                if (y - currentY != 1 || y - currentY != 2) {
+                if (row - currentX != 1 && row - currentX != 2) {
                     return false;
                 }
-                // check for dx
-                if (x - currentX == 1 || x - currentX == -1) {
-                    if (y - currentY == 1) {
-                        if (board.getPiece(x, y) != null) {
-                            return this.color != board.getPiece(x, y).color;
+                // check for col value change
+                if (col - currentY == 1 || col - currentY == -1) {
+                    if (col - currentY == 1) {
+                        if (board.getPiece(row, col) != null) {
+                            return this.color != board.getPiece(row, col).color;
                         } else {
                             return false;
                         }
@@ -78,19 +78,16 @@ public class Pawn extends GamePiece {
                         return false;
                     }
                 }
-                if (y - currentY == 2 && board.getPiece(x, currentY + 1) != null) {
-                    // there is a piece in the way of the move
-                    return false;
-                }
+                
             } else { // black color
-                if (y - currentY != -1 || y - currentY != -2) {
+                if (row - currentX != -1 && row - currentX != -2) {
                     return false;
                 }
                 // check for dx
-                if (x - currentX == 1 || x - currentX == -1) {
-                    if (y - currentY == -1) {
-                        if (board.getPiece(x, y) != null) {
-                            return this.color != board.getPiece(x, y).color;
+                if (col - currentY == 1 || col - currentY == -1) {
+                    if (row - currentX == -1) {
+                        if (board.getPiece(row, col) != null) {
+                            return this.color != board.getPiece(row, col).color;
                         } else {
                             return false;
                         }
@@ -99,12 +96,12 @@ public class Pawn extends GamePiece {
                     }
                 }
             }
-            if (y - currentY == -2 && board.getPiece(x, currentY - 1) != null) {
+            if (row - currentX == 2 && board.getPiece(row + 1, col) != null) {
                 // there is a piece in the way of the move
                 return false;
             }
         }
-        return board.getPiece(x, y) == null;
+        return board.getPiece(row, col) == null;
     }
 
     /**

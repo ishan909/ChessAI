@@ -45,7 +45,8 @@ public class Game {
                     System.out.print("Enter col number: ");
                     new_col = input.nextInt();
                     first_move = false;
-                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true));
+System.out.println(board.getPiece(current_row, current_col).getType());
+                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount)/* || board.check(true)*/);
                 System.out.println("Black, your piece has been moved.");
                 moveCount += 1;
             } else {
