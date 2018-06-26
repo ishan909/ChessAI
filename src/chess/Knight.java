@@ -32,7 +32,7 @@ public class Knight extends GamePiece {
         }
 
         // use the board
-        if (x * x + y * y != 5) {
+        if ((currentX - x) * (currentX - x) + (currentY - y) * (currentY - y) != 5) {
             return false;
         }
 

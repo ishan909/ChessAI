@@ -64,7 +64,7 @@ public class Game {
                 int currentVertical = input.nextInt();
                 System.out.print("White, where would you like to move this piece?\nEnter horizontal: ");
                 int newHorizontal = input.nextInt();
-                System.out.println("Enter vertical: ");
+                System.out.print("Enter vertical: ");
                 int newVertical = input.nextInt();
                 
                 // TODO: figure out how to work with bad input (throw exceptions later)

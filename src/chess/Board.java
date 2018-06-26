@@ -93,25 +93,31 @@ public class Board {
 
         // do we automatically set a square to null when there's no piece on it
         if (tmp == null) {
+System.out.println("FALSE 1");
             return false;
         }
         // true is black?
         if (tmp.getColor()) {
             // even is white
-            if (turn % 2 == 0) {
+            if (turn % 2 == 1) {
+System.out.println("FALSE 2");
                 return false;
             }
         } else {
             // odd is black
-            if (turn % 2 == 1) {
+            if (turn % 2 == 0) {
+System.out.println("FALSE 3");
                 return false;
             }
         }
-
+System.out.println(tmp.getType());
         if (tmp.canMove(r2, c2, this)) {
+        		tmp.move(r2, c2, this);
             this.matrix[r1][c1] = null;
-            return tmp.move(r2, c2, this);
+System.out.println("FALSE/TRUE 4");
+            return true;
         }
+System.out.println("FALSE 5");
         return false;
 
         // null square, if you can reach it place
@@ -177,9 +183,9 @@ public class Board {
     public void printBoard() {
         System.out.println(" - 0- 1- 2- 3- 4- 5- 6- 7-");
         System.out.println("---------------------------");
-        for (int r = 0; r < 8; r++) {
-            System.out.print("" + r + "|");
-            for (int c = 0; c < 8; c++) {
+        for (int c = 0; c < 8; c++) {
+            System.out.print("" + c + "|");
+            for (int r = 0; r < 8; r++) {
                 if (matrix[r][c] == null) {
                     System.out.print("  ");
                 } else {
