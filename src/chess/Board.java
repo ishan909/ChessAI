@@ -4,7 +4,6 @@ package chess;
 
 import java.util.*;
 
-
 public class Board {
 
     // grid holding the cells on the board
@@ -32,22 +31,22 @@ public class Board {
      */
     public void initializeNewBoard() {
         // initialization of Chess Board -- (w/ Colors -- set as different colors than red/black)
-        for (int r = 0; r < 8; r++) {
-            for (int c = 0; c < 8; c++) {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
                 // states that there will be at piece at r,c
-                if (r > 1 && r < 6) {
-                    matrix[r][c] = null;
+                if (row > 1 && row < 6) {
+                    matrix[row][col] = null;
                 }
             }
         }
 
         // insert the pieces
         // all of the pawns
-        for (int c = 0; c < 8; c++) {
-            setPiece(new Pawn(1, c, true), 1, c);  // top - black
+        for (int col = 0; col < 8; col++) {
+            setPiece(new Pawn(1, col, true), 1, col);  // top - black
         }
-        for (int c = 0; c < 8; c++) {
-            setPiece(new Pawn(6, c, false), 6, c); // bottom - white
+        for (int col = 0; col < 8; col++) {
+            setPiece(new Pawn(6, col, false), 6, col); // bottom - white
         }
 
         // all the rooks
@@ -84,40 +83,32 @@ public class Board {
         whiteKingLocation[1] = 4;
     }
 
-    public boolean movePiece(int r1, int c1, int r2, int c2, int turn) {
+    public boolean movePiece(int current_row, int current_col, int new_row, int new_col, int turn) {
         // checks if the piece at r1,c1 can move to r2,c2
         // if it can move to that spot, move it and update the board
-        GamePiece tmp = getPiece(r1, c1);
+        GamePiece temp = getPiece(current_row, current_col);
 
         // if it's there or not
-
-        // do we automatically set a square to null when there's no piece on it
-        if (tmp == null) {
-System.out.println("FALSE 1");
+        if (temp == null) {
             return false;
         }
         // true is black?
-        if (tmp.getColor()) {
+        if (temp.getColor()) {
             // even is white
             if (turn % 2 == 1) {
-System.out.println("FALSE 2");
                 return false;
             }
         } else {
             // odd is black
             if (turn % 2 == 0) {
-System.out.println("FALSE 3");
                 return false;
             }
         }
-System.out.println(tmp.getType());
-        if (tmp.canMove(r2, c2, this)) {
-        		tmp.move(r2, c2, this);
-            this.matrix[r1][c1] = null;
-System.out.println("FALSE/TRUE 4");
+        if (temp.canMove(new_row, new_col, this)) {
+        		temp.move(new_row, new_col, this);
+            this.matrix[current_row][current_col] = null;
             return true;
         }
-System.out.println("FALSE 5");
         return false;
 
         // null square, if you can reach it place
@@ -129,7 +120,7 @@ System.out.println("FALSE 5");
         // know where the player's king is
         // loop through all of the opposing player's pieces
         // check the opposing player's pieces to see if they can attack the King
-        // the "canAttack" method for each piece must accept a r,c for where the king is
+        // the "canAttack" method for each piece must accept a row,col for where the king is
         if (player) {
             blackInCheck = this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck(this);
             return blackInCheck;
@@ -151,45 +142,46 @@ System.out.println("FALSE 5");
 
     /**
      * Returns the piece at a given location
-     * @param x - the x location that we are accessing
-     * @param y - the y location that we are accessing
+     * @param row - the x location that we are accessing
+     * @param col - the y location that we are accessing
      * @return the piece at the x and y location
      */
-    public GamePiece getPiece(int x, int y) {
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
+    public GamePiece getPiece(int row, int col) {
+        if (row < 0 || row > 7 || col < 0 || col > 7) {
             return null;
         }
-        return matrix[x][y];
+        return matrix[row][col];
     }
 
     /**
      * Sets a piece to a new location
      * @param piece - the piece we are moving
-     * @param x - the x location that we are accessing
-     * @param y - the y location that we are accessing
+     * @param row - the row location that we are accessing
+     * @param col - the col location that we are accessing
      * @return if the move was successful
      */
-    public boolean setPiece(GamePiece piece, int x, int y) {
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
+    public boolean setPiece(GamePiece piece, int row, int col) {
+        if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
-        matrix[x][y] = piece;
+        matrix[row][col] = piece;
         return true;
     }
 
     /**
      * Prints a board to the console for testing purposes
      */
+    // TODO: switch rows and col and rename r/c to row/col
     public void printBoard() {
         System.out.println(" - 0- 1- 2- 3- 4- 5- 6- 7-");
         System.out.println("---------------------------");
-        for (int c = 0; c < 8; c++) {
-            System.out.print("" + c + "|");
-            for (int r = 0; r < 8; r++) {
-                if (matrix[r][c] == null) {
+        for (int row = 0; row < 8; row++) {
+            System.out.print("" + row + "|");
+            for (int col = 0; col < 8; col++) {
+                if (matrix[row][col] == null) {
                     System.out.print("  ");
                 } else {
-                    GamePiece p = matrix[r][c];
+                    GamePiece p = matrix[row][col];
                     if (p == null) {
                 			System.out.print("  |");
                 			continue;
