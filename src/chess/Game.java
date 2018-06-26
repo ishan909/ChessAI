@@ -36,16 +36,16 @@ public class Game {
 	                if (!first_move) {
 	                		System.out.println("Invalid Move.");
 	                }
-                    System.out.print("Black, which piece would you like to move?\nEnter horizontal: ");
-                    current_col = input.nextInt();
-                    System.out.print("Enter vertical: ");
+                    System.out.print("Black, which piece would you like to move?\nEnter row number: ");
                     current_row = input.nextInt();
-                    System.out.print("Black, where would you like to move this piece?\nEnter horizontal: ");
-                    new_col = input.nextInt();
-                    System.out.print("Enter vertical: ");
+                    System.out.print("Enter col number: ");
+                    current_col = input.nextInt();
+                    System.out.print("Black, where would you like to move this piece?\nEnter row number: ");
                     new_row = input.nextInt();
+                    System.out.print("Enter col number: ");
+                    new_col = input.nextInt();
                     first_move = false;
-                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) /*|| board.check(true)*/);
+                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true));
                 System.out.println("Black, your piece has been moved.");
                 moveCount += 1;
             } else {
@@ -53,7 +53,7 @@ public class Game {
             }
             if (!board.checkmate(false)) { // false for the red player
                 board.printBoard();
-                System.out.println("It is white turn.");
+                System.out.println("It is white's turn.");
                 if (board.check(false)) { // false for the red player
                     System.out.println("White, you are in check");
                 }
@@ -65,16 +65,16 @@ public class Game {
 	                if (!first_move) {
 	                		System.out.println("Invalid Move.");
 	                }
-                    System.out.print("White, which piece would you like to move?\nEnter horizontal: ");
-                    current_col = input.nextInt();
-                    System.out.print("Enter vertical: ");
+	                System.out.print("White, which piece would you like to move?\nEnter row number: ");
                     current_row = input.nextInt();
-                    System.out.print("White, where would you like to move this piece?\nEnter horizontal: ");
-                    new_col = input.nextInt();
-                    System.out.print("Enter vertical: ");
+                    System.out.print("Enter col number: ");
+                    current_col = input.nextInt();
+                    System.out.print("White, where would you like to move this piece?\nEnter row number: ");
                     new_row = input.nextInt();
+                    System.out.print("Enter col number: ");
+                    new_col = input.nextInt();
                     first_move = false;
-                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) /*|| board.check(true)*/);
+                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true));
                 System.out.println("White, your piece has been moved.");
                 moveCount += 1;
             } else {
