@@ -34,7 +34,7 @@ public class Rook extends GamePiece {
         }
 
         // same x, but different y
-        if (currentX != x || currentX != y) {
+        if (currentX != x && currentY != y) {
         		return false;
         }
         if (currentX == x) {
@@ -43,13 +43,13 @@ public class Rook extends GamePiece {
                 // see if all the spots in between are empty
                 // pass in Board
                 for (int i = currentY + 1; i < y; i++) {
-                    if (board.getPiece(i, y) != null) {
+                    if (board.getPiece(currentX, i) != null) {
                         return false;
                     }
                 }
             } else {
                 for (int i = currentY - 1; i > y; i--) {
-                    if (board.getPiece(i, y) != null) {
+                    if (board.getPiece(currentX, i) != null) {
                         return false;
                     }
                 }
@@ -81,6 +81,9 @@ public class Rook extends GamePiece {
             }
         }
         // cannot attack your own piece
+        if(board.getPiece(x, y) == null) {
+        		return true;
+        }
         return this.color != board.getPiece(x, y).color;
     }
 

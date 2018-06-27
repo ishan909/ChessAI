@@ -78,6 +78,9 @@ public class Bishop extends GamePiece {
                 }
             }
             // cannot attack your own piece
+            if(board.getPiece(x, y) == null) {
+            		return true;
+            }
             return this.color != board.getPiece(x, y).color;
         }
         return false;
