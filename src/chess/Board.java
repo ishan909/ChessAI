@@ -68,19 +68,19 @@ public class Board {
         setPiece(new Bishop(7, 5, false), 7, 5);
 
         //Queens
-        setPiece(new Queen(0, 3, true), 0, 3); // top - black
-        setPiece(new Queen(7, 3, false), 7, 3); // bottom - white
+        setPiece(new Queen(0, 4, true), 0, 4); // top - black
+        setPiece(new Queen(7, 4, false), 7, 4); // bottom - white
 
         // Kings
-        setPiece(new King(0, 4, true), 0, 4); // top - black
+        setPiece(new King(0, 3, true), 0, 3); // top - black
         // fill
         blackKingLocation[0] = 0;
-        blackKingLocation[1] = 4;
+        blackKingLocation[1] = 3;
 
-        setPiece(new King(7, 4, false), 7, 4); // bottom - white
+        setPiece(new King(7, 3, false), 7, 3); // bottom - white
         // fill
         whiteKingLocation[0] = 7;
-        whiteKingLocation[1] = 4;
+        whiteKingLocation[1] = 3;
     }
 
     public boolean movePiece(int current_row, int current_col, int new_row, int new_col, int turn) {
