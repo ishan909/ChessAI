@@ -93,16 +93,7 @@ public class Queen extends GamePiece {
                 }
             }
         }
-        if (board.getPiece(x, y) instanceof King) {
-            boolean otherColor = board.getPiece(x, y).getColor();
-            if (otherColor != this.color) {
-                if (this.color) {
-                    board.whiteInCheck = true;
-                } else {
-                    board.blackInCheck = true;
-                }
-            }
-        }
+        
         if (board.getPiece(x, y) == null) {
         		return true;
         }

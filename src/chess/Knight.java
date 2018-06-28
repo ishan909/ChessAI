@@ -36,22 +36,11 @@ public class Knight extends GamePiece {
             return false;
         }
 
-        GamePiece temp = board.getPiece(x, y);
-        if (temp != null) {
-	        	if (board.getPiece(x, y) instanceof King) {
-                boolean otherColor = board.getPiece(x, y).getColor();
-                if (otherColor != this.color) {
-                    if (this.color) {
-                        board.whiteInCheck = true;
-                    } else {
-                        board.blackInCheck = true;
-                    }
-                }
-            }
-            // cannot attack your own piece
-            return this.color != board.getPiece(x, y).color;
+        if (board.getPiece(x, y) == null) {
+            return true;
         }
-        return true;
+        // cannot attack your own piece
+        return this.color != board.getPiece(x, y).color;
     }
 
     /**

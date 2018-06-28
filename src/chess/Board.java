@@ -10,10 +10,6 @@ public class Board {
     // Cell[][] matrix = new Cell[8][8];
     public GamePiece[][] matrix = new GamePiece[8][8];
 
-    // TODO: may not need blackInCheck and whiteInCheck
-    public boolean blackInCheck;
-    public boolean whiteInCheck;
-
     public int[] blackKingLocation = new int[2];
     public int[] whiteKingLocation = new int[2];
 
@@ -22,8 +18,6 @@ public class Board {
      */
     public Board() {
         initializeNewBoard();
-        blackInCheck = false;
-        whiteInCheck = false;
     }
 
     /**
@@ -39,7 +33,7 @@ public class Board {
                 }
             }
         }
-
+        
         // insert the pieces
         // all of the pawns
         for (int col = 0; col < 8; col++) {
@@ -68,19 +62,17 @@ public class Board {
         setPiece(new Bishop(7, 5, false), 7, 5);
 
         //Queens
-        setPiece(new Queen(0, 4, true), 0, 4); // top - black
-        setPiece(new Queen(7, 4, false), 7, 4); // bottom - white
+        setPiece(new Queen(0, 3, true), 0, 3); // top - black
+        setPiece(new Queen(7, 3, false), 7, 3); // bottom - white
 
         // Kings
-        setPiece(new King(0, 3, true), 0, 3); // top - black
-        // fill
+        setPiece(new King(0, 4, true), 0, 4); // top - black
         blackKingLocation[0] = 0;
-        blackKingLocation[1] = 3;
+        blackKingLocation[1] = 4;
 
-        setPiece(new King(7, 3, false), 7, 3); // bottom - white
-        // fill
+        setPiece(new King(7, 4, false), 7,4); // bottom - white
         whiteKingLocation[0] = 7;
-        whiteKingLocation[1] = 3;
+        whiteKingLocation[1] = 4;
     }
 
     public boolean movePiece(int current_row, int current_col, int new_row, int new_col, int turn) {
@@ -122,11 +114,9 @@ public class Board {
         // check the opposing player's pieces to see if they can attack the King
         // the "canAttack" method for each piece must accept a row,col for where the king is
         if (player) {
-            blackInCheck = this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck(this);
-            return blackInCheck;
+            return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck(this);
         } else {
-            whiteInCheck = this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck(this);
-            return whiteInCheck;
+            return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck(this);
         }
     }
 

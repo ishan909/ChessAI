@@ -50,21 +50,7 @@ public class King extends GamePiece {
      * @return if the king is currently in check
      */
     public boolean isInCheck(Board board) {
-        if (isInCheckAt(currentX, currentY, board)) {
-            if (this.getColor()) {
-                board.blackInCheck = true;
-            } else {
-                board.whiteInCheck = true;
-            }
-            return true;
-        } else {
-            if (this.getColor()) {
-                board.blackInCheck = false;
-            } else {
-                board.whiteInCheck = false;
-            }
-            return false;
-        }
+        return isInCheckAt(currentX, currentY, board);
     }
 
     /**
@@ -84,7 +70,6 @@ public class King extends GamePiece {
                 if (piece != null) {
                     if (piece.getColor() != this.color) {
                         if (piece.canMove(currentX, currentY, board)) {
-                        		System.out.println(piece.getType() + " " + piece.getColor() + " " + piece.getX() + " " + piece.getY());
                             return true;
                         }
                     }
