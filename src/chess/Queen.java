@@ -24,42 +24,35 @@ public class Queen extends GamePiece {
      * @return if Queen can move to and/or attack a piece
      */
     public boolean canMove(int x, int y, Board board) {
-        if (currentX == x && currentY == y) {
-          return false;
+        // ROOK
+    		if (currentX == x && currentY == y) {
+            return false;
         }
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }
 
-        // check vertical and horizontal moves
-        if (currentX == x) { // same x, but different y
+        // same x, but different y
+        if ((currentX != x && currentY != y) && (Math.abs(x - currentX) != Math.abs(y - currentY))) {
+        		return false;
+        }
+        if (currentX == x) {
             // positive or negative y direction
             if (y > currentY) {
                 // see if all the spots in between are empty
+                // pass in Board
                 for (int i = currentY + 1; i < y; i++) {
-                    if (board.getPiece(i, y) != null) {
+                    if (board.getPiece(currentX, i) != null) {
                         return false;
                     }
                 }
             } else {
                 for (int i = currentY - 1; i > y; i--) {
-                    if (board.getPiece(i, y) != null) {
+                    if (board.getPiece(currentX, i) != null) {
                         return false;
                     }
                 }
             }
-            if (board.getPiece(x, y) instanceof King) {
-                boolean otherColor = board.getPiece(x, y).getColor();
-                if (otherColor != this.color) {
-                    if (this.color) {
-                        board.whiteInCheck = true;
-                    } else {
-                        board.blackInCheck = true;
-                    }
-                }
-            }
-            // cannot attack your own piece
-            return this.color != board.getPiece(x, y).color;
         } else if (currentY == y) { // same y, but different x
             // positive or negative x direction
             if (x > currentX) {
@@ -75,65 +68,30 @@ public class Queen extends GamePiece {
                     }
                 }
             }
-            if (board.getPiece(x, y) instanceof King) {
-                boolean otherColor = board.getPiece(x, y).getColor();
-                if (otherColor != this.color) {
-                    if (this.color) {
-                        board.whiteInCheck = true;
-                    } else {
-                        board.blackInCheck = true;
-                    }
+        } else if ((x - currentX) > 0 &&  (y - currentY) > 0) { // positive x, positive y
+            for (int i = currentX + 1, j = currentY + 1; i < x; i++, j++) {
+                if (board.getPiece(i, j) != null) {
+                    return false;
                 }
             }
-            // cannot attack your own piece
-            return this.color != board.getPiece(x, y).color;
-        } else if (Math.abs(x - currentX) == Math.abs(y - currentY)) { // check diagonal moves
-            // positive x, positive y
-            if ((x - currentX) > 0 && (y - currentY) > 0) {
-                for (int i = currentX + 1; i < x; i++) {
-                    for (int j = currentY + 1; j < y; j++) {
-                        if (board.getPiece(i, j) != null) {
-                            return false;
-                        }
-                    }
-                }
-            } else if ((x - currentX) > 0 && (y - currentY) < 0) { // positive x, negative y
-                for (int i = currentX + 1; i < x; i++) {
-                    for (int j = currentY - 1; j > y; j--) {
-                        if (board.getPiece(i, j) != null) {
-                            return false;
-                        }
-                    }
-                }
-            } else if ((x - currentX) < 0 && (y - currentY) < 0) { // negative x, negative y
-                for (int i = currentX - 1; i > x; i--) {
-                    for (int j = currentY - 1; j > y; j--) {
-                        if (board.getPiece(i, j) != null) {
-                            return false;
-                        }
-                    }
-                }
-            } else { // negative x, positive y
-                for (int i = currentX - 1; i > x; i--) {
-                    for (int j = currentY + 1; j < y; j++) {
-                        if (board.getPiece(i, j) != null) {
-                            return false;
-                        }
-                    }
+        } else if ((x - currentX) > 0 && (y - currentY) < 0) { // positive x, negative y
+            for (int i = currentX + 1, j = currentY - 1; i < x; i++, j--) {
+                if (board.getPiece(i, j) != null) {
+                    return false;
                 }
             }
-            if (board.getPiece(x, y) instanceof King) {
-                boolean otherColor = board.getPiece(x, y).getColor();
-                if (otherColor != this.color) {
-                    if (this.color) {
-                        board.whiteInCheck = true;
-                    } else {
-                        board.blackInCheck = true;
-                    }
+        } else if ((x - currentX) < 0 && (y - currentY) < 0) { // negative x, negative y
+            for (int i = currentX - 1, j = currentY - 1; i > x; i--, j--) {
+                if (board.getPiece(i, j) != null) {
+                    return false;
                 }
             }
-            // cannot attack your own piece
-            return this.color != board.getPiece(x, y).color;
+        } else { // negative x, positive y
+            for (int i = currentX - 1, j = currentY + 1; i > x; i--, j++) {
+                if (board.getPiece(i, j) != null) {
+                    return false;
+                }
+            }
         }
         if (board.getPiece(x, y) instanceof King) {
             boolean otherColor = board.getPiece(x, y).getColor();
@@ -145,8 +103,11 @@ public class Queen extends GamePiece {
                 }
             }
         }
+        if (board.getPiece(x, y) == null) {
+        		return true;
+        }
         // cannot attack your own piece
-        return false;
+        return this.color != board.getPiece(x, y).color;
     }
 
     /**

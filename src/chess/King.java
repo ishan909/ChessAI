@@ -23,22 +23,25 @@ public class King extends GamePiece {
      * @param board - the board we are playing on
      * @return if king can move to and/or attack a piece
      */
-    public boolean canMove(int x, int y, Board board) {
-        if (currentX == x && currentY == y) {
+    public boolean canMove(int row, int col, Board board) {
+        if (currentX == row && currentY == col) {
             // makes sure it is not the same location
             return false;
         }
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
+        if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
 
-        double distance = Math.sqrt((currentX - x) * (currentX - x)
-                + (currentY - y) * (currentY - y));
+        double distance = Math.sqrt((currentX - row) * (currentX - row)
+                + (currentY - col) * (currentY - col));
         if (distance > Math.sqrt(2)) {
             return false;
         }
         // cannot attack your own piece
-        return this.color != board.getPiece(x, y).color;
+        if (board.getPiece(row, col) == null) {
+        		return true;
+        }
+        return this.color != board.getPiece(row, col).color;
     }
 
     /**

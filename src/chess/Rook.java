@@ -24,8 +24,6 @@ public class Rook extends GamePiece {
      * @return if rook can move to and/or attack a piece
      */
     public boolean canMove(int x, int y, Board board) {
-        // TODO
-        // make sure the piece can't attack it's own set of pieces
         if (currentX == x && currentY == y) {
             return false;
         }
@@ -81,7 +79,10 @@ public class Rook extends GamePiece {
             }
         }
         // cannot attack your own piece
-        if(board.getPiece(x, y) == null) {
+        if (board.getPiece(x, y) == null) {
+        		return true;
+        }
+        if (board.getPiece(x, y) == null) {
         		return true;
         }
         return this.color != board.getPiece(x, y).color;

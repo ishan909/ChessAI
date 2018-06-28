@@ -31,59 +31,51 @@ public class Bishop extends GamePiece {
         if (x < 0 || x > 7 || y < 0 || y > 7) {
             return false;
         }
+        if (Math.abs(x - currentX) != Math.abs(y - currentY)) { 
+        		return false;
+        }
         // check the 4 diagonals
         // it is in the bishop's path (potentially)
-        if (Math.abs(x - currentX) == Math.abs(y - currentY)) { 
-            if ((x - currentX) > 0 &&  (y - currentY) > 0) { // positive x, positive y
-                for (int i = currentX + 1; i < x; i++) {
-                    for (int j = currentY + 1; j < y; j++) {
-                        if (board.getPiece(i, j) != null) {
-                            return false;
-                        }
-                    }
-                }
-            } else if ((x - currentX) > 0 && (y - currentY) < 0) { // positive x, negative y
-                for (int i = currentX + 1; i < x; i++) {
-                    for (int j = currentY - 1; j > y; j--) {
-                        if (board.getPiece(i, j) != null) {
-                            return false;
-                        }
-                    }
-                }
-            } else if ((x - currentX) < 0 && (y - currentY) < 0) { // negative x, negative y
-                for (int i = currentX - 1; i > x; i--) {
-                    for (int j = currentY - 1; j > y; j--) {
-                        if (board.getPiece(i, j) != null) {
-                            return false;
-                        }
-                    }
-                }
-            } else { // negative x, positive y
-                for (int i = currentX - 1; i > x; i--) {
-                    for (int j = currentY + 1; j < y; j++) {
-                        if (board.getPiece(i, j) != null) {
-                            return false;
-                        }
-                    }
+        if ((x - currentX) > 0 &&  (y - currentY) > 0) { // positive x, positive y
+            for (int i = currentX + 1, j = currentY + 1; i < x; i++, j++) {
+                if (board.getPiece(i, j) != null) {
+                    return false;
                 }
             }
-            if (board.getPiece(x, y) instanceof King) {
-                boolean otherColor = board.getPiece(x, y).getColor();
-                if (otherColor != this.color) {
-                    if (this.color) {
-                        board.whiteInCheck = true;
-                    } else {
-                        board.blackInCheck = true;
-                    }
+        } else if ((x - currentX) > 0 && (y - currentY) < 0) { // positive x, negative y
+            for (int i = currentX + 1, j = currentY - 1; i < x; i++, j--) {
+                if (board.getPiece(i, j) != null) {
+                    return false;
                 }
             }
-            // cannot attack your own piece
-            if(board.getPiece(x, y) == null) {
-            		return true;
+        } else if ((x - currentX) < 0 && (y - currentY) < 0) { // negative x, negative y
+            for (int i = currentX - 1, j = currentY - 1; i > x; i--, j--) {
+                if (board.getPiece(i, j) != null) {
+                    return false;
+                }
             }
-            return this.color != board.getPiece(x, y).color;
+        } else { // negative x, positive y
+            for (int i = currentX - 1, j = currentY + 1; i > x; i--, j++) {
+                if (board.getPiece(i, j) != null) {
+                    return false;
+                }
+            }
         }
-        return false;
+        if (board.getPiece(x, y) instanceof King) {
+            boolean otherColor = board.getPiece(x, y).getColor();
+            if (otherColor != this.color) {
+                if (this.color) {
+                    board.whiteInCheck = true;
+                } else {
+                    board.blackInCheck = true;
+                }
+            }
+        }
+        // cannot attack your own piece
+        if (board.getPiece(x, y) == null) {
+        		return true;
+        }
+        return this.color != board.getPiece(x, y).color;
     }
 
     /**
