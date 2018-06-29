@@ -12,12 +12,11 @@ public class Game {
 
 	public void playGame(Board board) {
         Scanner input = new Scanner(System.in);
-        // Initialize move counter
-        moveCount = 0;
+        moveCount = 0; // Initialize move counter
 
         while (true) { // true for the black player
+        	board.printBoard();
             if (!board.checkmate(true)) {
-                board.printBoard();
                 System.out.println("It is black's turn.");
                 if (board.check(true)) { // true for the black player
                     System.out.println("Black, you are in check");
@@ -51,10 +50,10 @@ public class Game {
             } else {
                 break;
             }
-            if (!board.checkmate(false)) { // false for the red player
-                board.printBoard();
+            board.printBoard();
+            if (!board.checkmate(false)) { // false for the white player
                 System.out.println("It is white's turn.");
-                if (board.check(false)) { // false for the red player
+                if (board.check(false)) { // false for the white player
                     System.out.println("White, you are in check");
                 }
                 

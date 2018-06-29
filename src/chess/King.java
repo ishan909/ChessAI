@@ -90,8 +90,12 @@ public class King extends GamePiece {
         }
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
-                if (!isInCheckAt(currentX + x, currentY + y, board)) {
-                    return false;
+            	int newX = currentX + x;
+            	int newY = currentY + y;
+            	if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
+            		if (canMove(newX, newY, board) && !isInCheckAt(newX, newY, board)) {
+            			return false;
+            		}
                 }
             }
         }
