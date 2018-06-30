@@ -10,9 +10,9 @@ abstract public class GamePiece {
     // if the piece is alive
     public boolean isAlive;
 
-    public GamePiece(int x, int y, boolean color) {
-        this.currentX = x;
-        this.currentY = y;
+    public GamePiece(int row, int col, boolean color) {
+        this.currentX = row;
+        this.currentY = col;
         this.color = color;
         this.firstMove = true;
         this.isAlive = true;
@@ -21,9 +21,9 @@ abstract public class GamePiece {
     // returns type of piece as String
     abstract public String getType();
     // can't take your own piece, valid square to move on
-    abstract public boolean canMove(int x, int y, Board board);
+    abstract public boolean canMove(int row, int col, Board board);
     // moves a piece on the board
-    abstract public boolean move(int x, int y, Board board);
+    abstract public boolean move(int row, int col, Board board);
     // alive
     public boolean isInCheck(Board board) {
     		return false;
@@ -39,9 +39,9 @@ abstract public class GamePiece {
         return this.color;
     }
     public int getX() {
-    		return currentX;
+    	return currentX;
     }
     public int getY() {
-    		return currentY;
+    	return currentY;
     }
 }
