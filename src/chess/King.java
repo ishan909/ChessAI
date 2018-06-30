@@ -3,23 +3,26 @@ package chess;
 public class King extends GamePiece {
     /**
      * Constructor for a new King
+     * @param row - the row location of the new piece
+     * @param col - the col location of the new piece
+     * @param color - the color of the new piece
      */
-    public King(int originalX, int originalY, boolean newColor) {
-        super(originalX, originalY, newColor);
+    public King(int row, int col, boolean color) {
+        super(row, col, color);
     }
 
     /**
      * Returns the type of this piece
-     * return the type of the piece
+     * @return the type of the piece
      */
     public String getType() {
         return "King";
     }
 
     /**
-     * Checks if there is a clear path for the king to move given an (x,y) pairing
-     * @param x - x location of new position
-     * @param y - y location of new position
+     * Checks if there is a clear path for the king to move given an (row, col) pairing
+     * @param row - row location of new position
+     * @param col - col location of new position
      * @param board - the board we are playing on
      * @return if king can move to and/or attack a piece
      */
@@ -55,13 +58,13 @@ public class King extends GamePiece {
 
     /**
      * Determines if a king would be in check if it was at a given location
-     * @param x - the x location to be checked
-     * @param y - the y location to be checked
+     * @param row - the row location to be checked
+     * @param col - the col location to be checked
      * @param board - the board we are playing on
      * @return whether the king is in checkmate
      */
-    public boolean isInCheckAt(int x, int y, Board board) {
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
+    public boolean isInCheckAt(int row, int col, Board board) {
+        if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
         for (int r = 0; r < 8; r++) {
@@ -88,10 +91,10 @@ public class King extends GamePiece {
         if (!isInCheckAt(currentX, currentY, board)) {
             return false;
         }
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-            	int newX = currentX + x;
-            	int newY = currentY + y;
+        for (int r = -1; r < 2; r++) {
+            for (int c = -1; c < 2; c++) {
+            	int newX = currentX + r;
+            	int newY = currentY + c;
             	if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
             		if (canMove(newX, newY, board) && !isInCheckAt(newX, newY, board)) {
             			return false;
@@ -104,23 +107,24 @@ public class King extends GamePiece {
 
     /**
      * Moves a piece on the board to a new location
-     * @param x - the new x location
-     * @param y - the new y location
+     * @param newRow - the new newRow location
+     * @param newCol - the new newCol location
+     * @param board - the board we are playing on
      * @return if the move was successful
      */
-    public boolean move(int x, int y, Board board) {
-        if (canMove(x, y, board)) {
+    public boolean move(int newRow, int newCol, Board board) {
+        if (canMove(newRow, newCol, board)) {
             firstMove = false;
-            board.setPiece(this, x, y);
+            board.setPiece(this, newRow, newCol);
             board.setPiece(null, currentX, currentY);
-            currentX = x;
-            currentY = y;
+            currentX = newRow;
+            currentY = newCol;
             if (this.color) {
-                board.blackKingLocation[0] = x;
-                board.blackKingLocation[1] = y;
+                board.blackKingLocation[0] = newRow;
+                board.blackKingLocation[1] = newCol;
             } else {
-                board.whiteKingLocation[0] = x;
-                board.whiteKingLocation[1] = y;
+                board.whiteKingLocation[0] = newRow;
+                board.whiteKingLocation[1] = newCol;
             }
             return true;
         }
