@@ -3,23 +3,26 @@ package chess;
 public class Pawn extends GamePiece {
     /**
      * Constructor for a new Pawn
+     * @param row - the row location of the new piece
+     * @param col - the col location of the new piece
+     * @param color - the color of the new piece
      */
-    public Pawn(int originalX, int originalY, boolean newColor) {
-        super(originalX, originalY, newColor);
+    public Pawn(int row, int col, boolean color) {
+        super(col, row, color);
     }
 
     /**
      * Returns the type of this piece
-     * return the type of the piece
+     * @return the type of the piece
      */
     public String getType() {
         return "Pawn";
     }
 
     /**
-     * Checks if there is a clear path for the pawn to move given an (x,y) pairing
-     * @param x - x location of new position
-     * @param y - y location of new position
+     * Checks if there is a clear path for the pawn to move given an (row, col) pairing
+     * @param row - the row location of new position
+     * @param col - the col location of new position
      * @param board - the board we are playing on
      * @return if the pawn can move to and/or attack a piece
      */
@@ -39,7 +42,7 @@ public class Pawn extends GamePiece {
                 if (row - currentX != 1) {
                     return false;
                 }
-                // check for dx
+                // check for diagonal move
                 if (col - currentY == 1 || col - currentY == -1) {
                     if (board.getPiece(row, col) != null) {
                         return this.color != board.getPiece(row, col).color;
@@ -51,7 +54,7 @@ public class Pawn extends GamePiece {
                 if (row - currentX != -1) {
                     return false;
                 }
-                // check for dx
+                // check for diagonal move
                 if (col - currentY == 1 || col - currentY == -1) {
                     if (board.getPiece(row, col) != null) {
                         return this.color != board.getPiece(row, col).color;
@@ -83,7 +86,7 @@ public class Pawn extends GamePiece {
                 if (row - currentX != -1 && row - currentX != -2) {
                     return false;
                 }
-                // check for dx
+                // check for diagonal move
                 if (col - currentY == 1 || col - currentY == -1) {
                     if (row - currentX == -1) {
                         if (board.getPiece(row, col) != null) {
@@ -106,18 +109,18 @@ public class Pawn extends GamePiece {
 
     /**
      * Moves a piece on the board to a new location
-     * @param x - the new x location
-     * @param y - the new y location
+     * @param newRow - the new row location
+     * @param newCol - the new col location
      * @param board - the board we are playing on
      * @return if the move was successful
      */
-    public boolean move(int x, int y, Board board) {
-        if (canMove(x, y, board)) {
+    public boolean move(int newRow, int newCol, Board board) {
+        if (canMove(newRow, newCol, board)) {
             firstMove = false;
-            board.setPiece(this, x, y);
+            board.setPiece(this, newRow, newCol);
             board.setPiece(null, currentX, currentY);
-            currentX = x;
-            currentY = y;
+            currentX = newRow;
+            currentY = newCol;
             return true;
         }
         return false;
