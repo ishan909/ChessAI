@@ -3,14 +3,17 @@ package chess;
 public class Knight extends GamePiece {
     /**
      * Constructor for a new Knight
+     * @param row - the row location of the new piece
+     * @param col - the col location of the new piece
+     * @param color - the color of the new piece
      */
-    public Knight(int originalX, int originalY, boolean newColor) {
-        super(originalX, originalY, newColor);
+    public Knight(int row, int col, boolean color) {
+        super(row, col, color);
     }
 
     /**
      * Returns the type of this piece
-     * return the type of the piece
+     * @return the type of the piece
      */
     public String getType() {
         return "Knight";
@@ -18,45 +21,45 @@ public class Knight extends GamePiece {
 
     /**
      * Checks if there is a clear path for the knight to move given an (x,y) pairing
-     * @param x - x location of new position
-     * @param y - y location of new position
+     * @param row - row location of new position
+     * @param col - col location of new position
      * @param board - the board we are playing on
      * @return if knight can move to and/or attack a piece
      */
-    public boolean canMove(int x, int y, Board board){
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
+    public boolean canMove(int row, int col, Board board){
+        if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
-        if (x == currentX && y == currentY) {
+        if (row == currentX && col == currentY) {
             return false;
         }
 
         // use the board
-        if ((currentX - x) * (currentX - x) + (currentY - y) * (currentY - y) != 5) {
+        if ((currentX - row) * (currentX - row) + (currentY - col) * (currentY - col) != 5) {
             return false;
         }
 
-        if (board.getPiece(x, y) == null) {
+        if (board.getPiece(row, col) == null) {
             return true;
         }
         // cannot attack your own piece
-        return this.color != board.getPiece(x, y).color;
+        return this.color != board.getPiece(row, col).color;
     }
 
     /**
      * Moves a piece on the board to a new location
-     * @param x - the new x location
-     * @param y - the new y location
+     * @param newRow - the new row location
+     * @param newCol - the new col location
      * @param board - the board we are playing on
      * @return if the move was successful
      */
-    public boolean move(int x, int y, Board board) {
-        if (canMove(x, y, board)) {
+    public boolean move(int newRow, int newCol, Board board) {
+        if (canMove(newRow, newCol, board)) {
             firstMove = false;
-            board.setPiece(this, x, y);
+            board.setPiece(this, newRow, newCol);
             board.setPiece(null, currentX, currentY);
-            currentX = x;
-            currentY = y;
+            currentX = newRow;
+            currentY = newCol;
           
         }
         return false;
