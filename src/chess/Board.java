@@ -99,6 +99,18 @@ public class Board {
         if (temp.canMove(new_row, new_col, this)) {
         		temp.move(new_row, new_col, this);
             this.matrix[current_row][current_col] = null;
+            if(temp instanceof Pawn) {
+            		if(!temp.getColor()) {
+            			if(new_row == 0) {
+            				setPawnToPiece(new_row,new_col);
+            			}
+            		}
+            		else {
+            			if(new_row == 7) {
+            				setPawnToPiece(new_row,new_col);
+            			}
+            		}
+            }
             return true;
         }
         return false;
@@ -214,8 +226,8 @@ public class Board {
     	        System.out.print("Please enter what piece you would like to change the pawn to:  ");
     	        // throw exceptions or make it ask again if the user types in a pawn again and no new King
     	        String piece = in.next();
-    	        while (!piece.equals("Queen") || !piece.equals("Bishop") || !piece.equals("Knight") || !piece.equals("Rook")) {
-    	            System.out.print("Please enter what piece would you like to change the pawn to:  ");
+    	        while (!piece.equals("Queen") && !piece.equals("Bishop") && !piece.equals("Knight") && !piece.equals("Rook")) {
+    	            System.out.print("Please enter what piece would you like to change the pawn to: ");
     	            piece = in.next();
     	        }
     	        // queen

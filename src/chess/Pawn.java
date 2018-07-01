@@ -8,7 +8,7 @@ public class Pawn extends GamePiece {
      * @param color - the color of the new piece
      */
     public Pawn(int row, int col, boolean color) {
-        super(col, row, color);
+        super(row, col, color);
     }
 
     /**

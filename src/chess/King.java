@@ -91,17 +91,23 @@ public class King extends GamePiece {
         if (!isInCheckAt(currentX, currentY, board)) {
             return false;
         }
+        // Where the King can potentially move
         for (int r = -1; r < 2; r++) {
             for (int c = -1; c < 2; c++) {
-            	int newX = currentX + r;
-            	int newY = currentY + c;
-            	if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
-            		if (canMove(newX, newY, board) && !isInCheckAt(newX, newY, board)) {
-            			return false;
-            		}
+	            	int newX = currentX + r;
+	            	int newY = currentY + c;
+	            	if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
+	            		if (canMove(newX, newY, board) && !isInCheckAt(newX, newY, board)) {
+	            			return false;
+	            		}
                 }
             }
         }
+        // if piece attacking can be taken
+        // if you can block path 
+        // re-check
+        
+     
         return true;
     }
 
