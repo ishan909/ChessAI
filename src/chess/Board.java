@@ -33,7 +33,7 @@ public class Board {
                 }
             }
         }
-        
+
         // insert the pieces
         // all of the pawns
         for (int col = 0; col < 8; col++) {
@@ -193,17 +193,17 @@ public class Board {
                     } else {
                         System.out.print("W");
                     }
-                    if (p instanceof Rook/*p.getType().equals("Rook")*/) {
+                    if (p instanceof Rook) {
                         System.out.print("R");
-                    } else if (p.getType().equals("Knight")) {
+                    } else if (p instanceof Knight) {
                         System.out.print("k");
-                    } else if (p.getType().equals("Bishop")) {
+                    } else if (p instanceof Bishop) {
                         System.out.print("B");
-                    } else if (p.getType().equals("King")) {
+                    } else if (p instanceof King) {
                         System.out.print("K");
-                    } else if (p.getType().equals("Queen")) {
+                    } else if (p instanceof Queen) {
                         System.out.print("Q");
-                    } else if (p.getType().equals("Pawn")) {
+                    } else if (p instanceof Pawn) {
                         System.out.print("P");
                     }
                 }
