@@ -91,63 +91,49 @@ public class King extends GamePiece {
         if (!isInCheckAt(currentX, currentY, board)) {
             return false;
         }
-        // Where the King can potentially move
-        for (int r = -1; r < 2; r++) {
-            for (int c = -1; c < 2; c++) {
-	            	int newX = currentX + r;
-	            	int newY = currentY + c;
-	            	if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
-	            		if (canMove(newX, newY, board) && !isInCheckAt(newX, newY, board)) {
-	            			return false;
-	            		}
-                }
-            }
-        }
-        // Piece on same side can attack
-        // Attacking piece can be taken 
+        
+        // Check if a piece can move to a new location and result in the board no longer being in check
         for (int r = 0; r < 8; r++) {
-        		for (int c = 0; c < 8; c++) {
-        			GamePiece p = board.getPiece(r, c);
-        			if (p != null && p.getColor() == this.color) {
-        				// see if this piece can move to a different location on the board and result in the king no longer being in check
-        				for (int newR = 0; newR < 8; newR++) {
-        					for (int newC = 0; newC < 8; newC++) {
-        						if (p.canMove(newR, newC, board)) {
-        							// move the piece on a cloned board and see if the king is still in check on the cloned board
-        							Board clone = new Board();
-        							for (int x = 0; x < 8; x++) {
-        								for (int y = 0; y < 8; y++) {
-        									if (board.getPiece(r, c) == null) {
-        										clone.matrix[x][y] = null;
-        									} else if (board.getPiece(x, y) instanceof Pawn) {
-        										clone.setPiece(new Pawn(x, y, board.getPiece(x, y).getColor()), x, y);
-        									} else if (board.getPiece(x, y) instanceof Rook) {
-        										clone.setPiece(new Rook(x, y, board.getPiece(x, y).getColor()), x, y);
-        									} else if (board.getPiece(x, y) instanceof Knight) {
-        										clone.setPiece(new Knight(x, y, board.getPiece(x, y).getColor()), x, y);
-        									} else if (board.getPiece(x, y) instanceof Bishop) {
-        										clone.setPiece(new Bishop(x, y, board.getPiece(x, y).getColor()), x, y);
-        									} else if (board.getPiece(x, y) instanceof Queen) {
-        										clone.setPiece(new Queen(x, y, board.getPiece(x, y).getColor()), x, y);
-        									} else if ((board.getPiece(x, y) instanceof King)) {
-        										clone.setPiece(new King(x, y, board.getPiece(x, y).getColor()), x, y);
-        									}
-//        									System.out.println("Triggered: " + clone.getPiece(newR, newC).getType() + " R: " + newR + " C: " + newC);
-        								}
-        							}
-        							// move the piece
-        							clone.getPiece(r, c).move(newR, newC, clone);
-        				            clone.matrix[r][c] = null;
-        				            // now check if the cloned board is still in check
-        				            if (!clone.check(this.color)) {
-        				            		System.out.println("Triggered: " + clone.getPiece(newR, newC).getType() + " R: " + newR + " C: " + newC);
-        				            		return false;
-        				            }
-        						}
-        					}
-        				}
-        			}
-        		}
+    		for (int c = 0; c < 8; c++) {
+    			GamePiece p = board.getPiece(r, c);
+    			if (p != null && p.getColor() == this.color) {
+    				// see if this piece can move to a different location on the board and result in the king no longer being in check
+    				for (int newR = 0; newR < 8; newR++) {
+    					for (int newC = 0; newC < 8; newC++) {
+    						if (p.canMove(newR, newC, board)) {
+    							// move the piece on a cloned board and see if the king is still in check on the cloned board
+    							Board clone = new Board();
+    							for (int x = 0; x < 8; x++) {
+    								for (int y = 0; y < 8; y++) {
+    									if (board.getPiece(x, y) == null) {
+    										clone.matrix[x][y] = null;
+    									} else if (board.getPiece(x, y) instanceof Pawn) {
+    										clone.setPiece(new Pawn(x, y, board.getPiece(x, y).getColor()), x, y);
+    									} else if (board.getPiece(x, y) instanceof Rook) {
+    										clone.setPiece(new Rook(x, y, board.getPiece(x, y).getColor()), x, y);
+    									} else if (board.getPiece(x, y) instanceof Knight) {
+    										clone.setPiece(new Knight(x, y, board.getPiece(x, y).getColor()), x, y);
+    									} else if (board.getPiece(x, y) instanceof Bishop) {
+    										clone.setPiece(new Bishop(x, y, board.getPiece(x, y).getColor()), x, y);
+    									} else if (board.getPiece(x, y) instanceof Queen) {
+    										clone.setPiece(new Queen(x, y, board.getPiece(x, y).getColor()), x, y);
+    									} else if ((board.getPiece(x, y) instanceof King)) {
+    										clone.setPiece(new King(x, y, board.getPiece(x, y).getColor()), x, y);
+    									}
+    								}
+    							}
+    							// move the piece
+    							clone.getPiece(r, c).move(newR, newC, clone);
+    				            clone.matrix[r][c] = null;
+    				            // now check if the cloned board is still in check
+    				            if (!clone.check(this.color)) {
+				            		return false;
+    				            }
+    						}
+    					}
+    				}
+    			}
+    		}
         }
         return true;
     }
