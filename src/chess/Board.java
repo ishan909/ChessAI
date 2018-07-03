@@ -2,8 +2,6 @@ package chess;
 
 // This class will contain what is at each location of the board
 
-import java.util.*;
-
 public class Board {
 
     // grid holding the cells on the board
@@ -99,18 +97,6 @@ public class Board {
         if (temp.canMove(new_row, new_col, this)) {
         		temp.move(new_row, new_col, this);
             this.matrix[current_row][current_col] = null;
-            if(temp instanceof Pawn) {
-            		if(!temp.getColor()) {
-            			if(new_row == 0) {
-            				setPawnToPiece(new_row,new_col);
-            			}
-            		}
-            		else {
-            			if(new_row == 7) {
-            				setPawnToPiece(new_row,new_col);
-            			}
-            		}
-            }
             return true;
         }
         return false;
@@ -213,41 +199,4 @@ public class Board {
         }
         System.out.println("---------------------------");
     }
-
-    /**
-     * If a pawn reaches the end, and has to be changed to a different piece
-     * which is not a pawn or a king
-     * @param x - the x location of the pawn
-     * @param y - the y location of the pawn
-     */
-    public void setPawnToPiece(int r, int c) {
-    		if (matrix[r][c] != null && matrix[r][c] instanceof Pawn) {
-    			Scanner in = new Scanner(System.in);
-    	        System.out.print("Please enter what piece you would like to change the pawn to:  ");
-    	        // throw exceptions or make it ask again if the user types in a pawn again and no new King
-    	        String piece = in.next();
-    	        while (!piece.equals("Queen") && !piece.equals("Bishop") && !piece.equals("Knight") && !piece.equals("Rook")) {
-    	            System.out.print("Please enter what piece would you like to change the pawn to: ");
-    	            piece = in.next();
-    	        }
-    	        // queen
-    	        if ("Queen".equals(piece)) {
-    	            matrix[r][c] = new Queen(r, c, matrix[r][c].getColor());
-    	        }
-    	        // bishop
-    	        if ("Bishop".equals(piece)) {
-    	            matrix[r][c] = new Bishop(r, c, matrix[r][c].getColor());
-    	        }
-    	        // knight
-    	        if ("Knight".equals(piece)) {
-    	            matrix[r][c] = new Knight(r, c, matrix[r][c].getColor());
-    	        }
-    	        // rook
-    	        if ("Rook".equals(piece)) {
-    	            matrix[r][c] = new Rook(r, c, matrix[r][c].getColor());
-    	        }
-    	        in.close();
-    		}
-    }
-
 }

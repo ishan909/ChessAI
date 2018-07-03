@@ -103,9 +103,9 @@ public class King extends GamePiece {
                 }
             }
         }
-        // if piece attacking can be taken
-        // if you can block path 
-        // re-check
+        /*
+         * 
+         */
         
      
         return true;

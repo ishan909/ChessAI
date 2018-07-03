@@ -36,15 +36,18 @@ public class Game {
 	                		System.out.println("Invalid Move.");
 	                }
                     System.out.print("Black, which piece would you like to move?\nEnter row number: ");
-                    current_row = input.nextInt();
+                    current_row = Integer.parseInt(input.nextLine());
                     System.out.print("Enter col number: ");
-                    current_col = input.nextInt();
+                    current_col = Integer.parseInt(input.nextLine());
                     System.out.print("Black, where would you like to move this piece?\nEnter row number: ");
-                    new_row = input.nextInt();
+                    new_row = Integer.parseInt(input.nextLine());
                     System.out.print("Enter col number: ");
-                    new_col = input.nextInt();
+                    new_col = Integer.parseInt(input.nextLine());
                     first_move = false;
                 } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true));
+                if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
+            			setPawnToPiece(new_row, new_col, board, input);
+                }
                 System.out.println("Black, your piece has been moved.");
                 moveCount += 1;
             } else {
@@ -65,15 +68,18 @@ public class Game {
 	                		System.out.println("Invalid Move.");
 	                }
 	                System.out.print("White, which piece would you like to move?\nEnter row number: ");
-                    current_row = input.nextInt();
+                    current_row = Integer.parseInt(input.nextLine());
                     System.out.print("Enter col number: ");
-                    current_col = input.nextInt();
+                    current_col = Integer.parseInt(input.nextLine());
                     System.out.print("White, where would you like to move this piece?\nEnter row number: ");
-                    new_row = input.nextInt();
+                    new_row = Integer.parseInt(input.nextLine());
                     System.out.print("Enter col number: ");
-                    new_col = input.nextInt();
+                    new_col = Integer.parseInt(input.nextLine());
                     first_move = false;
                 } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(false));
+                if (new_row == 0 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
+        				setPawnToPiece(new_row, new_col, board, input);
+                }
                 System.out.println("White, your piece has been moved.");
                 moveCount += 1;
             } else {
@@ -83,4 +89,35 @@ public class Game {
         System.out.println("Game Over! Player " + (((moveCount + 1) % 2) + 1) + " won!");
         input.close();
     }
+	
+	/**
+     * If a pawn reaches the end, and has to be changed to a different piece
+     * which is not a pawn or a king
+     * @param x - the x location of the pawn
+     * @param y - the y location of the pawn
+     * @param board - the board we are playing on
+     * @param in - Scanner for user input
+     */
+    public void setPawnToPiece(int r, int c, Board board, Scanner in) {
+    		if (board.matrix[r][c] != null && board.matrix[r][c] instanceof Pawn) {
+    	        String piece;
+    	        do {
+    	            System.out.print("Please enter what piece would you like to change the pawn to: ");
+    	            piece = in.nextLine();
+    	        } while (!piece.equals("Queen") && !piece.equals("Bishop") && !piece.equals("Knight") && !piece.equals("Rook"));
+    	        boolean color = board.matrix[r][c].getColor();
+    	        board.matrix[r][c] = null;
+    	        if ("Queen".equals(piece)) {
+    	            board.matrix[r][c] = new Queen(r, c, color);
+    	        } else if ("Bishop".equals(piece)) {
+    	            board.matrix[r][c] = new Bishop(r, c, color);
+    	        } else if ("Knight".equals(piece)) {
+    	            board.matrix[r][c] = new Knight(r, c, color);
+    	        } else if ("Rook".equals(piece)) {
+    	            board.matrix[r][c] = new Rook(r, c, color);
+    	        }
+    		}
+    }
+	
+	
 }
