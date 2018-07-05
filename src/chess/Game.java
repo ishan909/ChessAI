@@ -1,6 +1,6 @@
 package chess;
 
-import java.util.*; // get scanner
+import java.util.*;
 
 public class Game {
     private int moveCount;
@@ -10,12 +10,16 @@ public class Game {
         ChessGraphics gui = new ChessGraphics(board);
         playGame(board, gui);
     }
-
-	public void playGame(Board board, ChessGraphics gui) {
+    /**
+     * User interface for playing game
+     * @param board - an instance of the chess board
+     * @param gui - an instance of the Chess Graphics
+     */
+  	public void playGame(Board board, ChessGraphics gui) {
         Scanner input = new Scanner(System.in);
         moveCount = 0; // Initialize move counter
         gui.update(board);
-        
+
         while (true) { // true for the black player
         	board.printBoard();
             if (!board.checkmate(true)) {
@@ -25,7 +29,7 @@ public class Game {
                 }
 
                 boolean first_move = true;
-                
+
                 int current_col, current_row, new_col, new_row;
                 do {
 	                if (!first_move) {
@@ -56,7 +60,7 @@ public class Game {
                 if (board.check(false)) { // false for the white player
                     System.out.println("White, you are in check");
                 }
-                
+
                 boolean first_move = true;
                 int current_col, current_row, new_col, new_row;
                 do {
@@ -83,7 +87,7 @@ public class Game {
                 break;
             }
         }
-        
+
         System.out.println("Game Over! " + ((moveCount + 1) % 2 == 0 ? "Black" : "White") + " won!");
         input.close();
     }
