@@ -1,18 +1,9 @@
 package chess;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 //import java.awt.*;
@@ -41,12 +32,13 @@ public class ChessGraphics  {
 				colorCount = offset ? (row * 8 + col) : (row * 8 + col + 1); 
 				if (colorCount % 2 == 0) {
 					board[row][col] = new JButton();
-					board[row][col].setBackground(Color.YELLOW);
-					board[row][col].setIcon(new ImageIcon("images/BB.png"));
+					board[row][col].setBackground(Color.WHITE);
+					board[row][col].setIcon(new ImageIcon("images/transparent.png"));
 				}
 				else {
 					board[row][col] = new JButton();
-					board[row][col].setBackground(Color.BLUE);
+					board[row][col].setBackground(Color.GRAY);
+					board[row][col].setIcon(new ImageIcon("images/transparent.png"));
 				}
 				board[row][col].setBorderPainted(false);
 				board[row][col].setOpaque(true);

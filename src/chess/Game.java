@@ -8,10 +8,10 @@ public class Game {
     public Game() {
 		ChessGraphics gui = new ChessGraphics();
         Board board = new Board();
-        playGame(board);
+        playGame(board, gui);
     }
 
-	public void playGame(Board board) {
+	public void playGame(Board board, ChessGraphics gui) {
         Scanner input = new Scanner(System.in);
         moveCount = 0; // Initialize move counter
 
