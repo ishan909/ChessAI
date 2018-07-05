@@ -6,36 +6,44 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * Graphics class
+ */
 public class ChessGraphics  {
 	public JFrame window;
 	public JPanel panel;
 	public JButton[][] buttonBoard;
-	
+
 	public ChessGraphics(Board gameBoard) {
-		// JFrame - whole box (GUI container) 
+		// JFrame - whole box (GUI container)
 		window = new JFrame();
 		window.setSize(700, 700);
 		window.setVisible(true);
 		panel = new JPanel();
+		// each button is a square on the chess board
 		buttonBoard = new JButton[8][8];
 		update(gameBoard);
 	}
-	
+	/**
+	 * Update the chess board as each player makes a move
+	 * @param gameBoard - an instance of the board
+	 */
 	public void update(Board gameBoard) {
 		window.remove(panel); // remove the old panel
 		panel = new JPanel();
 		boolean offset = false;
+		// loops used to alternate between colors for the chess board
 		for (int row = 0; row < buttonBoard.length; row++) {
 			for (int col = 0; col < buttonBoard[row].length; col++) {
 				buttonBoard[row][col] = new JButton();
 				buttonBoard[row][col].addActionListener(null);
-				int colorCount = offset ? (row * 8 + col) : (row * 8 + col + 1); 
+				int colorCount = offset ? (row * 8 + col) : (row * 8 + col + 1);
 				if (colorCount % 2 == 0) {
 					buttonBoard[row][col].setBackground(Color.WHITE);
 				} else {
 					buttonBoard[row][col].setBackground(Color.GRAY);
 				}
-				
+
 				GamePiece p = gameBoard.getPiece(row, col);
 				if (p == null) {
 					buttonBoard[row][col].setIcon(new ImageIcon("images/transparent.png"));
@@ -76,11 +84,12 @@ public class ChessGraphics  {
 				panel.add(buttonBoard[row][col]);
 				panel.setVisible(false);
 			}
+			// for alternation of board colors row-by-row
 			offset = !offset;
 		}
 		window.add(panel);
 		panel.setVisible(true);
 		window.setVisible(true);
 	}
-	
+
 }
