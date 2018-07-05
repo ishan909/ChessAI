@@ -1,6 +1,6 @@
 package chess;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Game {
 	// keeps count of how many successful moves have been made

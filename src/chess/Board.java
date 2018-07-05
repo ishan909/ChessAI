@@ -10,8 +10,8 @@ public class Board {
     private GamePiece[][] matrix = new GamePiece[8][8];
 
     // Array-implementation of the location of black/white king
-    public int[] blackKingLocation = new int[2];
-    public int[] whiteKingLocation = new int[2];
+    private int[] blackKingLocation = new int[2];
+    private int[] whiteKingLocation = new int[2];
 
     /**
      * Board constructor
@@ -165,6 +165,26 @@ public class Board {
         matrix[row][col] = piece;
         return true;
     }
+    
+    public boolean setKingLocation(boolean color, int[] location) {
+    	if (location.length != 2) {
+    		return false;
+    	}
+    	if (color) {
+    		if (location[0] >= 0 && location[0] < 8 && location[1] >= 0 && location[1] < 8) {
+    			blackKingLocation = location;
+    		} else {
+    			return false;
+    		}
+    	} else {
+    		if (location[0] >= 0 && location[0] < 8 && location[1] >= 0 && location[1] < 8) {
+    			whiteKingLocation = location;
+    		} else {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
 
     /**
      * If a pawn reaches the end, and has to be changed to a different piece
@@ -192,7 +212,7 @@ public class Board {
 	        	this.setPiece(new Rook(r, c, color), r, c);
 	        }
 	   	}
-   }
+    }
 
     /**
      * Prints a board to the console for testing purposes

@@ -1,14 +1,12 @@
 package chess;
 
 abstract public class GamePiece {
-    // location of the piece (row,col)
-    public int currentX, currentY;
+    // location of the piece (row, col)
+    protected int currentX, currentY;
     // color of the piece: black = true, white = false;
-    public boolean color;
+    protected boolean color;
     // if this is the first move of the piece
-    public boolean firstMove;
-    // if the piece is alive
-    public boolean isAlive;
+    protected boolean firstMove;
 
     /**
      * Constructor for a GamePiece
@@ -21,13 +19,20 @@ abstract public class GamePiece {
         this.currentY = col;
         this.color = color;
         this.firstMove = true;
-        this.isAlive = true;
     }
 
     /**
      * Returns type of piece
      */
     abstract public String getType();
+
+    /**
+     * Returns the color of a piece
+     * @return the color of the game piece
+     */
+    public boolean getColor() {
+        return this.color;
+    }
 
     /**
      * Checks if an arbitrary piece can move to a different location
@@ -67,21 +72,5 @@ abstract public class GamePiece {
     	// default return to be false
     	// this method is overwritten in the king class
 		return false;
-    }
-
-    /**
-     * Returns of a piece is still alive
-     * @return if a piece is still alive
-     */
-    public boolean isAlive() {
-        return this.isAlive;
-    }
-
-    /**
-     * Returns the color of a piece
-     * @return the color of the game piece
-     */
-    public boolean getColor() {
-        return this.color;
     }
 }

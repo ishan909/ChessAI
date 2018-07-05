@@ -147,13 +147,9 @@ public class King extends GamePiece {
             board.setPiece(null, currentX, currentY);
             currentX = newRow;
             currentY = newCol;
-            if (this.color) {
-                board.blackKingLocation[0] = newRow;
-                board.blackKingLocation[1] = newCol;
-            } else {
-                board.whiteKingLocation[0] = newRow;
-                board.whiteKingLocation[1] = newCol;
-            }
+            // update king's location in board class
+            int[] newLocation = {newRow, newCol};
+            board.setKingLocation(this.color, newLocation);
             return true;
         }
         return false;
