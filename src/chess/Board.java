@@ -5,8 +5,7 @@ package chess;
 public class Board {
 
     // grid holding the cells on the board
-    // Cell[][] matrix = new Cell[8][8];
-    public GamePiece[][] matrix = new GamePiece[8][8];
+    private GamePiece[][] matrix = new GamePiece[8][8];
 
     public int[] blackKingLocation = new int[2];
     public int[] whiteKingLocation = new int[2];
@@ -26,7 +25,7 @@ public class Board {
         // initialization of Chess Board -- (w/ Colors -- set as different colors than red/black)
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                // states that there will be at piece at r,c
+                // states that there will be at piece at r, c
                 if (row > 1 && row < 6) {
                     matrix[row][col] = null;
                 }
@@ -51,7 +50,7 @@ public class Board {
         // knights
         setPiece(new Knight(0, 1, true), 0, 1); // top - black
         setPiece(new Knight(0, 6, true), 0, 6);
-        setPiece(new Knight(7, 1, false), 7 ,1); // bottom - white
+        setPiece(new Knight(7, 1, false), 7, 1); // bottom - white
         setPiece(new Knight(7, 6, false), 7, 6);
 
         // bishops
@@ -69,7 +68,7 @@ public class Board {
         blackKingLocation[0] = 0;
         blackKingLocation[1] = 4;
 
-        setPiece(new King(7, 4, false), 7,4); // bottom - white
+        setPiece(new King(7, 4, false), 7, 4); // bottom - white
         whiteKingLocation[0] = 7;
         whiteKingLocation[1] = 4;
     }
@@ -83,35 +82,31 @@ public class Board {
         if (temp == null) {
             return false;
         }
-        // true is black?
+        // true is black
         if (temp.getColor()) {
-            // even is white
+            // odd is white
             if (turn % 2 == 1) {
                 return false;
             }
         } else {
-            // odd is black
+            // even is black
             if (turn % 2 == 0) {
                 return false;
             }
         }
         if (temp.canMove(new_row, new_col, this)) {
-        		temp.move(new_row, new_col, this);
+        	temp.move(new_row, new_col, this);
             this.matrix[current_row][current_col] = null;
             return true;
         }
         return false;
-
-        // null square, if you can reach it place
-        // if it's your own piece then you can't in terms of color
-        // if it's an opponent piece and is not a king, then you can take it
     }
 
     public boolean check(boolean player) {
         // know where the player's king is
         // loop through all of the opposing player's pieces
         // check the opposing player's pieces to see if they can attack the King
-        // the "canAttack" method for each piece must accept a row,col for where the king is
+        // the "canAttack" method for each piece must accept a row, col for where the king is
         if (player) {
             return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck(this);
         } else {

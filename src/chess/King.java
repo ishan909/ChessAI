@@ -106,7 +106,7 @@ public class King extends GamePiece {
     							for (int x = 0; x < 8; x++) {
     								for (int y = 0; y < 8; y++) {
     									if (board.getPiece(x, y) == null) {
-    										clone.matrix[x][y] = null;
+    										clone.setPiece(null, x, y);
     									} else if (board.getPiece(x, y) instanceof Pawn) {
     										clone.setPiece(new Pawn(x, y, board.getPiece(x, y).getColor()), x, y);
     									} else if (board.getPiece(x, y) instanceof Rook) {
@@ -124,7 +124,7 @@ public class King extends GamePiece {
     							}
     							// move the piece
     							clone.getPiece(r, c).move(newR, newC, clone);
-    				            clone.matrix[r][c] = null;
+    				            clone.setPiece(null, r, c);
     				            // now check if the cloned board is still in check
     				            if (!clone.check(this.color)) {
 				            		return false;

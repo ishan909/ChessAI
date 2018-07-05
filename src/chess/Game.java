@@ -96,22 +96,22 @@ public class Game {
      * @param in - Scanner for user input
      */
     public void setPawnToPiece(int r, int c, Board board, Scanner in) {
-		if (board.matrix[r][c] != null && board.matrix[r][c] instanceof Pawn) {
+		if (board.getPiece(r, c) != null && board.getPiece(r, c) instanceof Pawn) {
 	        String piece;
 	        do {
 	            System.out.print("Please enter what piece would you like to change the pawn to: ");
 	            piece = in.nextLine();
 	        } while (!piece.equals("Queen") && !piece.equals("Bishop") && !piece.equals("Knight") && !piece.equals("Rook"));
-	        boolean color = board.matrix[r][c].getColor();
-	        board.matrix[r][c] = null; // remove the old piece
+	        boolean color = board.getPiece(r, c).getColor();
+	        board.setPiece(null, r, c); // remove the old piece
 	        if ("Queen".equals(piece)) {
-	            board.matrix[r][c] = new Queen(r, c, color);
+	            board.setPiece(new Queen(r, c, color), r, c);
 	        } else if ("Bishop".equals(piece)) {
-	            board.matrix[r][c] = new Bishop(r, c, color);
+	            board.setPiece(new Bishop(r, c, color), r, c);
 	        } else if ("Knight".equals(piece)) {
-	            board.matrix[r][c] = new Knight(r, c, color);
+	            board.setPiece(new Knight(r, c, color), r, c);
 	        } else if ("Rook".equals(piece)) {
-	            board.matrix[r][c] = new Rook(r, c, color);
+	            board.setPiece(new Rook(r, c, color), r, c);
 	        }
 		}
     }
