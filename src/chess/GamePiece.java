@@ -1,7 +1,7 @@
 package chess;
 
 abstract public class GamePiece {
-    // location of the piece
+    // location of the piece (row,col)
     public int currentX, currentY;
     // color of the piece: black = true, white = false;
     public boolean color;
@@ -10,6 +10,12 @@ abstract public class GamePiece {
     // if the piece is alive
     public boolean isAlive;
 
+    /**
+     * Constructor for a GamePiece
+     * @param row - current row location
+     * @param col - current column location
+     * @param color - current color of piece
+     */
     public GamePiece(int row, int col, boolean color) {
         this.currentX = row;
         this.currentY = col;
