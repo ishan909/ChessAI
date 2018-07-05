@@ -26,7 +26,7 @@ public class Knight extends GamePiece {
      * @param board - the board we are playing on
      * @return if knight can move to and/or attack a piece
      */
-    public boolean canMove(int row, int col, Board board){
+    public boolean canMove(int row, int col, Board board) {
         if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }

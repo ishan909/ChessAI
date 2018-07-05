@@ -24,7 +24,6 @@ abstract public class GamePiece {
         this.isAlive = true;
     }
 
-
     /**
      * Returns type of piece
      */
@@ -35,6 +34,7 @@ abstract public class GamePiece {
      * @param row - current row location of a piece
      * @param col - current column location of a piece
      * @param board - instance of a board
+     * @return if the piece can be moved
      */
     abstract public boolean canMove(int row, int col, Board board);
 
@@ -43,27 +43,35 @@ abstract public class GamePiece {
      * @param row - current row location of a piece
      * @param col - current column location of a piece
      * @param board - instance of a board
+     * @return if the move was successful
      */
     abstract public boolean move(int row, int col, Board board);
 
     /**
      * Checks if a player is in check
      * @param board - instance of a board
+     * @return if the piece is in check
      */
     public boolean isInCheck(Board board) {
-    		return false;
+    	// default return to be false
+    	// this method is overwritten in the king class
+    	return false;
     }
 
     /**
      * Checks if a player is in checkmate
      * @param board - instance of a board
+     * @return if the piece is in checkmate
      */
     public boolean isInCheckmate(Board board) {
-		    return false;
+    	// default return to be false
+    	// this method is overwritten in the king class
+		return false;
     }
 
     /**
      * Returns of a piece is still alive
+     * @return if a piece is still alive
      */
     public boolean isAlive() {
         return this.isAlive;
@@ -71,6 +79,7 @@ abstract public class GamePiece {
 
     /**
      * Returns the color of a piece
+     * @return the color of the game piece
      */
     public boolean getColor() {
         return this.color;
@@ -78,6 +87,7 @@ abstract public class GamePiece {
 
     /**
      * Returns the row location of a piece
+     * @return the row location of a piece
      */
     public int getX() {
       	return currentX;
@@ -85,6 +95,7 @@ abstract public class GamePiece {
 
     /**
      * Returns the column location of a piece
+     * @returen the column location of a piece
      */
     public int getY() {
       	return currentY;

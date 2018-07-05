@@ -118,11 +118,12 @@ public class King extends GamePiece {
     									}
     								}
     							}
+    							// move the piece in the clones board and see if it is still in check
     							clone.getPiece(r, c).move(newR, newC, clone);
-    				      clone.setPiece(null, r, c);
-    				      if (!clone.check(this.color)) {
-				            		return false;
-    				       }
+								clone.setPiece(null, r, c);
+								if (!clone.check(this.color)) {
+									return false;
+								}
     						}
     					}
     				}

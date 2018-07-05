@@ -21,7 +21,7 @@ public class Rook extends GamePiece {
 
     /**
      * Checks if the rook can attack a piece
-     * @param rwo - row location of new position
+     * @param row - row location of new position
      * @param col - col location of new position
      * @param board - the board we are playing on
      * @return if rook can move to and/or attack a piece

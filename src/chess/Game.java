@@ -3,8 +3,9 @@ package chess;
 import java.util.*;
 
 public class Game {
+	// keeps count of how many successful moves have been made
     private int moveCount;
-
+    
     /**
      * Constructor for a new Game
      */
@@ -13,6 +14,7 @@ public class Game {
         ChessGraphics gui = new ChessGraphics(board);
         playGame(board, gui);
     }
+    
     /**
      * User interface for playing game
      * @param board - an instance of the chess board

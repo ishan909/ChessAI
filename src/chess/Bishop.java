@@ -27,7 +27,6 @@ public class Bishop extends GamePiece {
      * @return if bishop can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
-
         // makes sure it is not the same location
         if (currentX == row && currentY == col) {
             return false;
@@ -67,7 +66,7 @@ public class Bishop extends GamePiece {
 
         // Check to make sure one cannot attack your own piece
         if (board.getPiece(row, col) == null) {
-        		return true;
+        	return true;
         }
         return this.color != board.getPiece(row, col).getColor();
     }

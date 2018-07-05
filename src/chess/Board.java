@@ -27,15 +27,14 @@ public class Board {
     public void initializeNewBoard() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                // intialize empty spaces in board at start of game
+                // Initialize empty spaces in board at start of game
                 if (row > 1 && row < 6) {
                     matrix[row][col] = null;
                 }
             }
         }
 
-
-        // Insert all the pawns
+        // Insert pieces to their default locations
         for (int col = 0; col < 8; col++) {
             setPiece(new Pawn(1, col, true), 1, col);  // top - black
         }
@@ -69,27 +68,28 @@ public class Board {
         setPiece(new King(0, 4, true), 0, 4); // top - black
         blackKingLocation[0] = 0;
         blackKingLocation[1] = 4;
-
         setPiece(new King(7, 4, false), 7, 4); // bottom - white
         whiteKingLocation[0] = 7;
         whiteKingLocation[1] = 4;
     }
+
     /**
      * Checks if an arbitrary piece can move to a new location and then updates the board
      * @param current_row - current row location of a piece
      * @param current_col - current column location of a piece
      * @param new_row - the new row location for a piece
      * @param new_col - the new column location for a piece
-     * @param turn - current turn (white/black)
+     * @param turn - current turn: true -> black, false -> white
+     * @return if the move was successful
      */
     public boolean movePiece(int current_row, int current_col, int new_row, int new_col, int turn) {
-
         GamePiece temp = getPiece(current_row, current_col);
 
-        // Null Check
+        // mull Check
         if (temp == null) {
             return false;
         }
+        
         // true is black
         if (temp.getColor()) {
             // odd is white
@@ -109,9 +109,11 @@ public class Board {
         }
         return false;
     }
+
     /**
      * Checks if a player is in check
      * @param player - white or black
+     * @return if the player is in check
      */
     public boolean check(boolean player) {
         if (player) {
@@ -120,9 +122,11 @@ public class Board {
             return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck(this);
         }
     }
+
     /**
      * Checks if a player is in checkmate
      * @param player - white or black
+     * @return if the player is in checkmate
      */
     public boolean checkmate(boolean player) {
         // loop through all of the possible moves for the player's king and see if it will
@@ -167,8 +171,7 @@ public class Board {
      * which is not a pawn or a king
      * @param x - the x location of the pawn
      * @param y - the y location of the pawn
-     * @param board - the board we are playing on
-     * @param in - Scanner for user input
+     * @param in - the current Scanner being used for user input
      */
     public void setPawnToPiece(int r, int c, Scanner in) {
 		if (this.getPiece(r, c) != null && this.getPiece(r, c) instanceof Pawn) {
@@ -194,7 +197,6 @@ public class Board {
     /**
      * Prints a board to the console for testing purposes
      */
-    // TODO: switch rows and col and rename r/c to row/col
     public void printBoard() {
         System.out.println(" - 0- 1- 2- 3- 4- 5- 6- 7-");
         System.out.println("---------------------------");

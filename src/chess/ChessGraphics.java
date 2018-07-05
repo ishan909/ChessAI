@@ -24,6 +24,7 @@ public class ChessGraphics  {
 		buttonBoard = new JButton[8][8];
 		update(gameBoard);
 	}
+	
 	/**
 	 * Update the chess board as each player makes a move
 	 * @param gameBoard - an instance of the board
