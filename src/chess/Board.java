@@ -9,6 +9,7 @@ public class Board {
     // grid holding the cells on the board
     private GamePiece[][] matrix = new GamePiece[8][8];
 
+    // Array-implementation of the location of black/white king
     public int[] blackKingLocation = new int[2];
     public int[] whiteKingLocation = new int[2];
 
@@ -17,25 +18,24 @@ public class Board {
      */
     public Board() {
         initializeNewBoard();
-        
+
     }
 
     /**
      * Board initializer to setup a fresh board
      */
     public void initializeNewBoard() {
-        // initialization of Chess Board -- (w/ Colors -- set as different colors than red/black)
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                // states that there will be at piece at r, c
+                // intialize empty spaces in board at start of game
                 if (row > 1 && row < 6) {
                     matrix[row][col] = null;
                 }
             }
         }
 
-        // insert the pieces
-        // all of the pawns
+
+        // Insert all the pawns
         for (int col = 0; col < 8; col++) {
             setPiece(new Pawn(1, col, true), 1, col);  // top - black
         }
@@ -43,29 +43,29 @@ public class Board {
             setPiece(new Pawn(6, col, false), 6, col); // bottom - white
         }
 
-        // all the rooks
+        // Initialize Rooks
         setPiece(new Rook(0, 0, true), 0, 0); // top - black
         setPiece(new Rook(0, 7, true), 0, 7);
         setPiece(new Rook(7, 0, false), 7, 0); // bottom - white
         setPiece(new Rook(7, 7, false), 7, 7);
 
-        // knights
+        // Initialize Knights
         setPiece(new Knight(0, 1, true), 0, 1); // top - black
         setPiece(new Knight(0, 6, true), 0, 6);
         setPiece(new Knight(7, 1, false), 7, 1); // bottom - white
         setPiece(new Knight(7, 6, false), 7, 6);
 
-        // bishops
+        // Initialize Bishops
         setPiece(new Bishop(0, 2, true), 0, 2); // top - black
         setPiece(new Bishop(0, 5, true), 0, 5);
         setPiece(new Bishop(7, 2, false), 7, 2); // bottom - white
         setPiece(new Bishop(7, 5, false), 7, 5);
 
-        //Queens
+        // Initialize Queen
         setPiece(new Queen(0, 3, true), 0, 3); // top - black
         setPiece(new Queen(7, 3, false), 7, 3); // bottom - white
 
-        // Kings
+        // Initialize Kings (using array-implementation for x,y of king)
         setPiece(new King(0, 4, true), 0, 4); // top - black
         blackKingLocation[0] = 0;
         blackKingLocation[1] = 4;
@@ -74,13 +74,19 @@ public class Board {
         whiteKingLocation[0] = 7;
         whiteKingLocation[1] = 4;
     }
-
+    /**
+     * Checks if an arbitrary piece can move to a new location and then updates the board
+     * @param current_row - current row location of a piece
+     * @param current_col - current column location of a piece
+     * @param new_row - the new row location for a piece
+     * @param new_col - the new column location for a piece
+     * @param turn - current turn (white/black)
+     */
     public boolean movePiece(int current_row, int current_col, int new_row, int new_col, int turn) {
-        // checks if the piece at r1,c1 can move to r2,c2
-        // if it can move to that spot, move it and update the board
+
         GamePiece temp = getPiece(current_row, current_col);
 
-        // if it's there or not
+        // Null Check
         if (temp == null) {
             return false;
         }
@@ -103,19 +109,21 @@ public class Board {
         }
         return false;
     }
-
+    /**
+     * Checks if a player is in check
+     * @param player - white or black
+     */
     public boolean check(boolean player) {
-        // know where the player's king is
-        // loop through all of the opposing player's pieces
-        // check the opposing player's pieces to see if they can attack the King
-        // the "canAttack" method for each piece must accept a row, col for where the king is
         if (player) {
             return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck(this);
         } else {
             return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck(this);
         }
     }
-
+    /**
+     * Checks if a player is in checkmate
+     * @param player - white or black
+     */
     public boolean checkmate(boolean player) {
         // loop through all of the possible moves for the player's king and see if it will
         // still be in check in all of those moves
@@ -153,7 +161,7 @@ public class Board {
         matrix[row][col] = piece;
         return true;
     }
-    
+
     /**
      * If a pawn reaches the end, and has to be changed to a different piece
      * which is not a pawn or a king
@@ -180,8 +188,8 @@ public class Board {
 	        } else if ("Rook".equals(piece)) {
 	        	this.setPiece(new Rook(r, c, color), r, c);
 	        }
-		}
-    }
+	   	}
+   }
 
     /**
      * Prints a board to the console for testing purposes
