@@ -27,16 +27,17 @@ public class Pawn extends GamePiece {
      * @return if the pawn can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
-        // make sure you can not attack your own piece
+
         if (row == currentX && col == currentY) {
             return false;
         }
-        // valid position
+
         if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
 
-        if (!firstMove) { // can only move up once, do by colors
+        // can only move up once, do by colors
+        if (!firstMove) {
             if (color) { // black color
                 // make sure you can only go up
                 if (row - currentX != 1) {
@@ -50,7 +51,7 @@ public class Pawn extends GamePiece {
                             return false;
                         }
                     } else {
-                    	if (board.getPiece(row, col) != null) {
+                    	if (board.getPiece(row, col) != null) { // null check
                     		return false;
                     	} else {
                     		return true;
@@ -58,6 +59,7 @@ public class Pawn extends GamePiece {
                     }
                 }
             } else { // white color
+                // make sure you can only go down
                 if (row - currentX != -1) {
                     return false;
                 } else {
@@ -69,7 +71,7 @@ public class Pawn extends GamePiece {
                             return false;
                         }
                     } else {
-                    	if (board.getPiece(row, col) != null) {
+                    	if (board.getPiece(row, col) != null) { // null check
                     		return false;
                     	} else {
                     		return true;
