@@ -5,6 +5,9 @@ import java.util.*;
 public class Game {
     private int moveCount;
 
+    /**
+     * Constructor for a new Game
+     */
     public Game() {
         Board board = new Board();
         ChessGraphics gui = new ChessGraphics(board);
