@@ -27,45 +27,45 @@ public class Bishop extends GamePiece {
      * @return if bishop can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
+
+        // makes sure it is not the same location
         if (currentX == row && currentY == col) {
-            // makes sure it is not the same location
             return false;
         }
         if (row < 0 || row > 7 || row < 0 || row > 7) {
             return false;
         }
-        if (Math.abs(row - currentX) != Math.abs(col - currentY)) { 
+        if (Math.abs(row - currentX) != Math.abs(col - currentY)) {
         		return false;
         }
-        // check the 4 diagonals
-        // it is in the bishop's path (potentially)
-        if ((row - currentX) > 0 &&  (col - currentY) > 0) { // positive x, positive y
+        // check the 4 diagonals and see if a piece is potentially in the path of a bishop
+        if ((row - currentX) > 0 &&  (col - currentY) > 0) {
             for (int i = currentX + 1, j = currentY + 1; i < row; i++, j++) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
-        } else if ((row - currentX) > 0 && (col - currentY) < 0) { // positive x, negative y
+        } else if ((row - currentX) > 0 && (col - currentY) < 0) {
             for (int i = currentX + 1, j = currentY - 1; i < row; i++, j--) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
-        } else if ((row - currentX) < 0 && (col - currentY) < 0) { // negative x, negative y
+        } else if ((row - currentX) < 0 && (col - currentY) < 0) {
             for (int i = currentX - 1, j = currentY - 1; i > row; i--, j--) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
-        } else { // negative x, positive y
+        } else {
             for (int i = currentX - 1, j = currentY + 1; i > row; i--, j++) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
         }
-       
-        // cannot attack your own piece
+
+        // Check to make sure one cannot attack your own piece
         if (board.getPiece(row, col) == null) {
         		return true;
         }
