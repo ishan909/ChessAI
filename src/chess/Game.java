@@ -6,6 +6,7 @@ public class Game {
     private int moveCount;
 
     public Game() {
+		ChessGraphics gui = new ChessGraphics();
         Board board = new Board();
         playGame(board);
     }

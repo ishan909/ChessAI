@@ -1,11 +1,14 @@
 package chess;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,40 +20,50 @@ import javax.swing.JPanel;
 
 
 public class ChessGraphics  {
+	// change to a constructor later
 	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("board");
+	// public static BufferedImage outline;
+	
+//	public static void main(String[] args) throws IOException {
+	public ChessGraphics() {
+		
+		// JFrame - whole box (GUI container) 
+		JFrame window = new JFrame();
+		window.setSize(700,700);
+		window.setVisible(true);
 		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
 		
-		paint(panel);
-		
-		frame.add(panel);
-		frame.setSize(1000,1000);
-		frame.setVisible(true);
-		
-		/*
-		JLabel label = new JLabel();
-		JLabel label2 = new JLabel();
-		ImageIcon board= new ImageIcon("images/board.png");
-		ImageIcon blackqueen = new ImageIcon("images/BQ.png");
-		label.setIcon(board);
-		label.add(label2);
-		panel.add(label);
-		panel.add(label2);
-		frame.add(panel);
-		frame.setSize(1000, 1000);
-		frame.setVisible(true);
-		
-		*/
+		JButton[][] board = new JButton[8][8];
+		boolean offset = false;
+		for(int row = 0; row < board.length; row++) {
+			for(int col = 0; col < board[row].length; col++) {
+				int colorCount;
+				colorCount = offset ? (row * 8 + col) : (row * 8 + col + 1); 
+				if (colorCount % 2 == 0) {
+					board[row][col] = new JButton();
+					board[row][col].setBackground(Color.YELLOW);
+					board[row][col].setIcon(new ImageIcon("images/BB.png"));
+				}
+				else {
+					board[row][col] = new JButton();
+					board[row][col].setBackground(Color.BLUE);
+				}
+				board[row][col].setBorderPainted(false);
+				board[row][col].setOpaque(true);
+				board[row][col].setVisible(true);
+				panel.add(board[row][col]);
+				
+				
+			}
+			offset = !offset;
+		}
+		window.add(panel);
+		panel.setVisible(true);
+		window.setVisible(true);
 	}
-	
-	public static void paint(JPanel panel) {
-		ImageIcon background = new ImageIcon("images/board.png");
-	}
-	
-
 	
 	
 }
+// Chess Board - container (Panel)
+	// make the board our background
 
