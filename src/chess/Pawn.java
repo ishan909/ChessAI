@@ -27,7 +27,6 @@ public class Pawn extends GamePiece {
      * @return if the pawn can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
-
         if (row == currentX && col == currentY) {
             return false;
         }

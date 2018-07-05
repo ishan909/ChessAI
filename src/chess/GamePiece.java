@@ -84,20 +84,4 @@ abstract public class GamePiece {
     public boolean getColor() {
         return this.color;
     }
-
-    /**
-     * Returns the row location of a piece
-     * @return the row location of a piece
-     */
-    public int getX() {
-      	return currentX;
-    }
-
-    /**
-     * Returns the column location of a piece
-     * @returen the column location of a piece
-     */
-    public int getY() {
-      	return currentY;
-    }
 }

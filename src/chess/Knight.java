@@ -40,7 +40,6 @@ public class Knight extends GamePiece {
         if (board.getPiece(row, col) == null) {
             return true;
         }
-
         return this.color != board.getPiece(row, col).color;
     }
 
