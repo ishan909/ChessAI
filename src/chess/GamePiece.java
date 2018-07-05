@@ -18,30 +18,69 @@ abstract public class GamePiece {
         this.isAlive = true;
     }
 
-    // returns type of piece as String
+
+    /**
+     * Returns type of piece
+     */
     abstract public String getType();
-    // can't take your own piece, valid square to move on
+
+    /**
+     * Checks if an arbitrary piece can move to a different location
+     * @param row - current row location of a piece
+     * @param col - current column location of a piece
+     * @param board - instance of a board
+     */
     abstract public boolean canMove(int row, int col, Board board);
-    // moves a piece on the board
+
+    /**
+     * Moves a piece on the board
+     * @param row - current row location of a piece
+     * @param col - current column location of a piece
+     * @param board - instance of a board
+     */
     abstract public boolean move(int row, int col, Board board);
-    // alive
+
+    /**
+     * Checks if a player is in check
+     * @param board - instance of a board
+     */
     public boolean isInCheck(Board board) {
     		return false;
     }
+
+    /**
+     * Checks if a player is in checkmate
+     * @param board - instance of a board
+     */
     public boolean isInCheckmate(Board board) {
-		return false;
+		    return false;
     }
+
+    /**
+     * Returns of a piece is still alive
+     */
     public boolean isAlive() {
         return this.isAlive;
     }
-    // returns the color of the piece
+
+    /**
+     * Returns the color of a piece
+     */
     public boolean getColor() {
         return this.color;
     }
+
+    /**
+     * Returns the row location of a piece
+     */
     public int getX() {
-    	return currentX;
+      	return currentX;
     }
+
+    /**
+     * Returns the column location of a piece
+     */
     public int getY() {
-    	return currentY;
+      	return currentY;
     }
 }
