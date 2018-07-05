@@ -42,7 +42,7 @@ public class Game {
                     first_move = false;
                 } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true));
                 if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
-            			setPawnToPiece(new_row, new_col, board, input);
+            		board.setPawnToPiece(new_row, new_col, input);
                 }
                 gui.update(board);
                 System.out.println("Black, your piece has been moved.");
@@ -74,7 +74,7 @@ public class Game {
                     first_move = false;
                 } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(false));
                 if (new_row == 0 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
-        				setPawnToPiece(new_row, new_col, board, input);
+        			board.setPawnToPiece(new_row, new_col, input);
                 }
                 gui.update(board);
                 System.out.println("White, your piece has been moved.");
@@ -83,36 +83,8 @@ public class Game {
                 break;
             }
         }
-        System.out.println("Game Over! Player " + (((moveCount + 1) % 2) + 1) + " won!");
+        
+        System.out.println("Game Over! " + ((moveCount + 1) % 2 == 0 ? "Black" : "White") + " won!");
         input.close();
-    }
-	
-	/**
-     * If a pawn reaches the end, and has to be changed to a different piece
-     * which is not a pawn or a king
-     * @param x - the x location of the pawn
-     * @param y - the y location of the pawn
-     * @param board - the board we are playing on
-     * @param in - Scanner for user input
-     */
-    public void setPawnToPiece(int r, int c, Board board, Scanner in) {
-		if (board.getPiece(r, c) != null && board.getPiece(r, c) instanceof Pawn) {
-	        String piece;
-	        do {
-	            System.out.print("Please enter what piece would you like to change the pawn to: ");
-	            piece = in.nextLine();
-	        } while (!piece.equals("Queen") && !piece.equals("Bishop") && !piece.equals("Knight") && !piece.equals("Rook"));
-	        boolean color = board.getPiece(r, c).getColor();
-	        board.setPiece(null, r, c); // remove the old piece
-	        if ("Queen".equals(piece)) {
-	            board.setPiece(new Queen(r, c, color), r, c);
-	        } else if ("Bishop".equals(piece)) {
-	            board.setPiece(new Bishop(r, c, color), r, c);
-	        } else if ("Knight".equals(piece)) {
-	            board.setPiece(new Knight(r, c, color), r, c);
-	        } else if ("Rook".equals(piece)) {
-	            board.setPiece(new Rook(r, c, color), r, c);
-	        }
-		}
     }
 }

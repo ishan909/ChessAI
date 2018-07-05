@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Scanner;
+
 // This class will contain what is at each location of the board
 
 public class Board {
@@ -150,6 +152,35 @@ public class Board {
         }
         matrix[row][col] = piece;
         return true;
+    }
+    
+    /**
+     * If a pawn reaches the end, and has to be changed to a different piece
+     * which is not a pawn or a king
+     * @param x - the x location of the pawn
+     * @param y - the y location of the pawn
+     * @param board - the board we are playing on
+     * @param in - Scanner for user input
+     */
+    public void setPawnToPiece(int r, int c, Scanner in) {
+		if (this.getPiece(r, c) != null && this.getPiece(r, c) instanceof Pawn) {
+	        String piece;
+	        do {
+	            System.out.print("Please enter what piece would you like to change the pawn to: ");
+	            piece = in.nextLine();
+	        } while (!piece.equals("Queen") && !piece.equals("Bishop") && !piece.equals("Knight") && !piece.equals("Rook"));
+	        boolean color = this.getPiece(r, c).getColor();
+	        this.setPiece(null, r, c); // remove the old piece
+	        if ("Queen".equals(piece)) {
+	        	this.setPiece(new Queen(r, c, color), r, c);
+	        } else if ("Bishop".equals(piece)) {
+	        	this.setPiece(new Bishop(r, c, color), r, c);
+	        } else if ("Knight".equals(piece)) {
+	        	this.setPiece(new Knight(r, c, color), r, c);
+	        } else if ("Rook".equals(piece)) {
+	        	this.setPiece(new Rook(r, c, color), r, c);
+	        }
+		}
     }
 
     /**
