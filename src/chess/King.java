@@ -91,17 +91,13 @@ public class King extends GamePiece {
         if (!isInCheckAt(currentX, currentY, board)) {
             return false;
         }
-        
-        // Check if a piece can move to a new location and result in the board no longer being in check
         for (int r = 0; r < 8; r++) {
     		for (int c = 0; c < 8; c++) {
     			GamePiece p = board.getPiece(r, c);
     			if (p != null && p.getColor() == this.color) {
-    				// see if this piece can move to a different location on the board and result in the king no longer being in check
     				for (int newR = 0; newR < 8; newR++) {
     					for (int newC = 0; newC < 8; newC++) {
     						if (p.canMove(newR, newC, board)) {
-    							// move the piece on a cloned board and see if the king is still in check on the cloned board
     							Board clone = new Board();
     							for (int x = 0; x < 8; x++) {
     								for (int y = 0; y < 8; y++) {
@@ -122,13 +118,11 @@ public class King extends GamePiece {
     									}
     								}
     							}
-    							// move the piece
     							clone.getPiece(r, c).move(newR, newC, clone);
-    				            clone.setPiece(null, r, c);
-    				            // now check if the cloned board is still in check
-    				            if (!clone.check(this.color)) {
+    				      clone.setPiece(null, r, c);
+    				      if (!clone.check(this.color)) {
 				            		return false;
-    				            }
+    				       }
     						}
     					}
     				}
