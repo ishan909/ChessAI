@@ -27,14 +27,12 @@ public class Queen extends GamePiece {
      * @return if Queen can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
-    	if (currentX == row && currentY == col) {
+    	  if (currentX == row && currentY == col) {
             return false;
         }
         if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
-
-        // same x, but different y
         if ((currentX != row && currentY != col) && (Math.abs(row - currentX) != Math.abs(col - currentY))) {
         		return false;
         }
@@ -42,7 +40,6 @@ public class Queen extends GamePiece {
             // positive or negative y direction
             if (col > currentY) {
                 // see if all the spots in between are empty
-                // pass in Board
                 for (int i = currentY + 1; i < col; i++) {
                     if (board.getPiece(currentX, i) != null) {
                         return false;
@@ -95,7 +92,7 @@ public class Queen extends GamePiece {
                 }
             }
         }
-        
+
         if (board.getPiece(row, col) == null) {
         		return true;
         }
