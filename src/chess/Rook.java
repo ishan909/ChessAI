@@ -42,7 +42,6 @@ public class Rook extends GamePiece {
             // positive or negative y direction
             if (col > currentY) {
                 // see if all the spots in between are empty
-                // pass in Board
                 for (int i = currentY + 1; i < col; i++) {
                     if (board.getPiece(row, i) != null) {
                         return false;
@@ -71,7 +70,7 @@ public class Rook extends GamePiece {
                 }
             }
         }
-       
+
         // cannot attack your own piece
         if (board.getPiece(row, col) == null) {
         		return true;
