@@ -33,8 +33,6 @@ public class Knight extends GamePiece {
         if (row == currentX && col == currentY) {
             return false;
         }
-
-        // use the board
         if ((currentX - row) * (currentX - row) + (currentY - col) * (currentY - col) != 5) {
             return false;
         }
@@ -42,7 +40,7 @@ public class Knight extends GamePiece {
         if (board.getPiece(row, col) == null) {
             return true;
         }
-        // cannot attack your own piece
+
         return this.color != board.getPiece(row, col).color;
     }
 
@@ -60,7 +58,7 @@ public class Knight extends GamePiece {
             board.setPiece(null, currentX, currentY);
             currentX = newRow;
             currentY = newCol;
-          
+
         }
         return false;
     }
