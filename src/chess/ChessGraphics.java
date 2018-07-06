@@ -1,10 +1,14 @@
 package chess;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 /**
  * Graphics class
@@ -12,7 +16,8 @@ import javax.swing.JPanel;
 public class ChessGraphics  {
 	public JFrame window;
 	public JPanel panel;
-	public JButton[][] buttonBoard;
+	public JToggleButton[][] buttonBoard;
+	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
 
 	public ChessGraphics(Board gameBoard) {
 		// JFrame - whole box (GUI container)
@@ -21,7 +26,7 @@ public class ChessGraphics  {
 		window.setVisible(true);
 		panel = new JPanel();
 		// each button is a square on the chess board
-		buttonBoard = new JButton[8][8];
+		buttonBoard = new JToggleButton[8][8];
 		update(gameBoard);
 	}
 	
@@ -36,7 +41,27 @@ public class ChessGraphics  {
 		// loops used to alternate between colors for the chess board
 		for (int row = 0; row < buttonBoard.length; row++) {
 			for (int col = 0; col < buttonBoard[row].length; col++) {
-				buttonBoard[row][col] = new JButton();
+				
+				final Integer innerRow = Integer.valueOf(row);
+				final Integer innerCol = Integer.valueOf(col);
+				
+				buttonBoard[row][col] = new JToggleButton("0");
+				buttonBoard[row][col].addActionListener(new ActionListener() {
+				    @Override
+				    public void actionPerformed(ActionEvent e) {
+				        JToggleButton btn =  (JToggleButton) e.getSource();
+				        btn.setText(btn.isSelected() ? "1" : "0");
+				        if (firstX == -1) {
+				        	firstX = innerRow;
+				        	firstY = innerCol;
+				        } else if (secondX == -1) {
+				        	secondX = innerRow;
+				        	secondY = innerCol;
+				        }
+				    }
+				});
+				
+				
 				buttonBoard[row][col].addActionListener(null);
 				int colorCount = offset ? (row * 8 + col) : (row * 8 + col + 1);
 				if (colorCount % 2 == 0) {
