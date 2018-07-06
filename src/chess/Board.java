@@ -5,20 +5,21 @@ import java.util.Scanner;
 // This class will contain what is at each location of the board
 
 public class Board {
-
     // grid holding the cells on the board
-    private GamePiece[][] matrix = new GamePiece[8][8];
+    private GamePiece[][] matrix;
 
     // Array-implementation of the location of black/white king
-    private int[] blackKingLocation = new int[2];
-    private int[] whiteKingLocation = new int[2];
+    private int[] blackKingLocation;
+    private int[] whiteKingLocation;
 
     /**
      * Board constructor
      */
     public Board() {
+    	matrix = new GamePiece[8][8];
+    	blackKingLocation = new int[2];
+    	whiteKingLocation = new int[2];
         initializeNewBoard();
-
     }
 
     /**
@@ -166,22 +167,23 @@ public class Board {
         return true;
     }
     
-    public boolean setKingLocation(boolean color, int[] location) {
-    	if (location.length != 2) {
+    /**
+     * Fills the blackKingLocation and whiteKingLocation arrays which hold the current locations of the kings
+     * @param color - the color of the king we are updating: true -> black, false -> white
+     * @param row - the row the king is being moved to
+     * @param col - the column the king is being moved to
+     * @return if the change was successful
+     */
+    public boolean setKingLocation(boolean color, int row, int col) {
+    	if (row < 0 || row > 7 || col < 0 || col > 7) {
     		return false;
     	}
     	if (color) {
-    		if (location[0] >= 0 && location[0] < 8 && location[1] >= 0 && location[1] < 8) {
-    			blackKingLocation = location;
-    		} else {
-    			return false;
-    		}
+    		blackKingLocation[0] = row;
+    		blackKingLocation[1] = col;
     	} else {
-    		if (location[0] >= 0 && location[0] < 8 && location[1] >= 0 && location[1] < 8) {
-    			whiteKingLocation = location;
-    		} else {
-    			return false;
-    		}
+    		whiteKingLocation[0] = row;
+    		whiteKingLocation[1] = col;
     	}
     	return true;
     }
@@ -228,8 +230,8 @@ public class Board {
                 } else {
                     GamePiece p = matrix[row][col];
                     if (p == null) {
-                			System.out.print("  |");
-                			continue;
+            			System.out.print("  |");
+            			continue;
                     }
                     if (p.getColor()) {
                         System.out.print("B");
