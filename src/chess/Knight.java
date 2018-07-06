@@ -30,17 +30,17 @@ public class Knight extends GamePiece {
         if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
-        if (row == currentX && col == currentY) {
+        if (row == super.getRow() && col == super.getCol()) {
             return false;
         }
-        if ((currentX - row) * (currentX - row) + (currentY - col) * (currentY - col) != 5) {
+        if ((super.getRow() - row) * (super.getRow() - row) + (super.getCol() - col) * (super.getCol() - col) != 5) {
             return false;
         }
 
         if (board.getPiece(row, col) == null) {
             return true;
         }
-        return this.color != board.getPiece(row, col).color;
+        return super.getColor() != board.getPiece(row, col).getColor();
     }
 
     /**
@@ -54,10 +54,10 @@ public class Knight extends GamePiece {
         if (canMove(newRow, newCol, board)) {
             firstMove = false;
             board.setPiece(this, newRow, newCol);
-            board.setPiece(null, currentX, currentY);
-            currentX = newRow;
-            currentY = newCol;
-
+            board.setPiece(null, super.getRow(), super.getCol());
+            super.setRow(newRow);
+            super.setCol(newCol);
+            return true;
         }
         return false;
     }

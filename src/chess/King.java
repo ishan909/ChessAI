@@ -27,7 +27,7 @@ public class King extends GamePiece {
      * @return if king can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
-        if (currentX == row && currentY == col) {
+        if (super.getRow() == row && super.getCol() == col) {
             // makes sure it is not the same location
             return false;
         }
@@ -35,8 +35,8 @@ public class King extends GamePiece {
             return false;
         }
 
-        double distance = Math.sqrt((currentX - row) * (currentX - row)
-                + (currentY - col) * (currentY - col));
+        double distance = Math.sqrt((super.getRow() - row) * (super.getRow() - row)
+                + (super.getCol() - col) * (super.getCol() - col));
         if (distance > Math.sqrt(2)) {
             return false;
         }
@@ -44,7 +44,7 @@ public class King extends GamePiece {
         if (board.getPiece(row, col) == null) {
         		return true;
         }
-        return this.color != board.getPiece(row, col).color;
+        return super.getColor() != board.getPiece(row, col).getColor();
     }
 
     /**
@@ -53,7 +53,7 @@ public class King extends GamePiece {
      * @return if the king is currently in check
      */
     public boolean isInCheck(Board board) {
-        return isInCheckAt(currentX, currentY, board);
+        return isInCheckAt(super.getRow(), super.getCol(), board);
     }
 
     /**
@@ -71,8 +71,8 @@ public class King extends GamePiece {
             for (int c = 0; c < 8; c++) {
                 GamePiece piece = board.getPiece(r, c);
                 if (piece != null) {
-                    if (piece.getColor() != this.color) {
-                        if (piece.canMove(currentX, currentY, board)) {
+                    if (piece.getColor() != super.getColor()) {
+                        if (piece.canMove(super.getRow(), super.getCol(), board)) {
                             return true;
                         }
                     }
@@ -88,13 +88,13 @@ public class King extends GamePiece {
      * @return whether the king is in checkmate
      */
     public boolean isInCheckmate(Board board) {
-        if (!isInCheckAt(currentX, currentY, board)) {
+        if (!isInCheckAt(super.getRow(), super.getCol(), board)) {
             return false;
         }
         for (int r = 0; r < 8; r++) {
     		for (int c = 0; c < 8; c++) {
     			GamePiece p = board.getPiece(r, c);
-    			if (p != null && p.getColor() == this.color) {
+    			if (p != null && p.getColor() == super.getColor()) {
     				for (int newR = 0; newR < 8; newR++) {
     					for (int newC = 0; newC < 8; newC++) {
     						if (p.canMove(newR, newC, board)) {
@@ -121,7 +121,7 @@ public class King extends GamePiece {
     							// move the piece in the clones board and see if it is still in check
     							clone.getPiece(r, c).move(newR, newC, clone);
 								clone.setPiece(null, r, c);
-								if (!clone.check(this.color)) {
+								if (!clone.check(super.getColor())) {
 									return false;
 								}
     						}
@@ -144,12 +144,12 @@ public class King extends GamePiece {
         if (canMove(newRow, newCol, board)) {
             firstMove = false;
             board.setPiece(this, newRow, newCol);
-            board.setPiece(null, currentX, currentY);
-            currentX = newRow;
-            currentY = newCol;
+            board.setPiece(null, super.getRow(), super.getCol());
+            super.setRow(newRow);
+            super.setCol(newCol);
             // update king's location in board class
             int[] newLocation = {newRow, newCol};
-            board.setKingLocation(this.color, newLocation);
+            board.setKingLocation(super.getColor(), newLocation);
             return true;
         }
         return false;

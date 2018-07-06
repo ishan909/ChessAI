@@ -27,7 +27,7 @@ public class Rook extends GamePiece {
      * @return if rook can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
-        if (currentX == row && currentY == col) {
+        if (super.getRow() == row && super.getCol() == col) {
             return false;
         }
         if (row < 0 || row > 7 || col < 0 || col > 7) {
@@ -35,35 +35,35 @@ public class Rook extends GamePiece {
         }
 
         // same x, but different y
-        if (currentX != row && currentY != col) {
-        		return false;
+        if (super.getRow() != row && super.getCol() != col) {
+        	return false;
         }
-        if (currentX == row) {
+        if (super.getRow() == row) {
             // positive or negative y direction
-            if (col > currentY) {
+            if (col > super.getCol()) {
                 // see if all the spots in between are empty
-                for (int i = currentY + 1; i < col; i++) {
+                for (int i = super.getCol() + 1; i < col; i++) {
                     if (board.getPiece(row, i) != null) {
                         return false;
                     }
                 }
             } else {
-                for (int i = currentY - 1; i > col; i--) {
+                for (int i = super.getCol() - 1; i > col; i--) {
                     if (board.getPiece(row, i) != null) {
                         return false;
                     }
                 }
             }
-        } else if (currentY == col) { // same y, but different x
+        } else if (super.getCol() == col) { // same y, but different x
             // positive or negative x direction
-            if (row > currentX) {
-                for (int i = currentX + 1; i < row; i++) {
+            if (row > super.getRow()) {
+                for (int i = super.getRow() + 1; i < row; i++) {
                     if (board.getPiece(i, col) != null) {
                         return false;
                     }
                 }
             } else {
-                for (int i = currentX - 1; i > row; i--) {
+                for (int i = super.getRow() - 1; i > row; i--) {
                     if (board.getPiece(i, col) != null) {
                         return false;
                     }
@@ -73,12 +73,12 @@ public class Rook extends GamePiece {
 
         // cannot attack your own piece
         if (board.getPiece(row, col) == null) {
-        		return true;
+        	return true;
         }
         if (board.getPiece(row, col) == null) {
-        		return true;
+        	return true;
         }
-        return this.color != board.getPiece(row, col).color;
+        return super.getColor() != board.getPiece(row, col).getColor();
     }
 
     /**
@@ -92,9 +92,9 @@ public class Rook extends GamePiece {
         if (canMove(newRow, newCol, board)) {
             firstMove = false;
             board.setPiece(this, newRow, newCol);
-            board.setPiece(null, currentX, currentY);
-            currentX = newRow;
-            currentY = newCol;
+            board.setPiece(null, super.getRow(), super.getCol());
+            super.setRow(newRow);
+            super.setCol(newCol);
             return true;
         }
         return false;

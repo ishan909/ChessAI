@@ -27,7 +27,7 @@ public class Pawn extends GamePiece {
      * @return if the pawn can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
-        if (row == currentX && col == currentY) {
+        if (row == super.getRow() && col == super.getCol()) {
             return false;
         }
 
@@ -37,15 +37,15 @@ public class Pawn extends GamePiece {
 
         // can only move up once, do by colors
         if (!firstMove) {
-            if (color) { // black color
+            if (super.getColor()) { // black color
                 // make sure you can only go up
-                if (row - currentX != 1) {
+                if (row - super.getRow() != 1) {
                     return false;
                 } else {
                 	// check for diagonal move
-                    if (col - currentY == 1 || col - currentY == -1) {
+                    if (col - super.getCol() == 1 || col - super.getCol() == -1) {
                         if (board.getPiece(row, col) != null) {
-                            return this.color != board.getPiece(row, col).color;
+                            return super.getColor() != board.getPiece(row, col).getColor();
                         } else {
                             return false;
                         }
@@ -59,13 +59,13 @@ public class Pawn extends GamePiece {
                 }
             } else { // white color
                 // make sure you can only go down
-                if (row - currentX != -1) {
+                if (row - super.getRow() != -1) {
                     return false;
                 } else {
                 	// check for diagonal move
-                    if (col - currentY == 1 || col - currentY == -1) {
+                    if (col - super.getCol() == 1 || col - super.getCol() == -1) {
                         if (board.getPiece(row, col) != null) {
-                            return this.color != board.getPiece(row, col).color;
+                            return super.getColor() != board.getPiece(row, col).getColor();
                         } else {
                             return false;
                         }
@@ -79,16 +79,16 @@ public class Pawn extends GamePiece {
                 }
             }
         } else { // move up 1 or 2
-            if (color) { // black color
+            if (super.getColor()) { // black color
                 // make sure you can only go up
-                if (row - currentX != 1 && row - currentX != 2) {
+                if (row - super.getRow() != 1 && row - super.getRow() != 2) {
                     return false;
                 } else {
                 	// check for col value change
-                	if (col - currentY == 1 || col - currentY == -1) {
-                        if (row - currentX == 1) {
+                	if (col - super.getCol() == 1 || col - super.getCol() == -1) {
+                        if (row - super.getRow() == 1) {
                             if (board.getPiece(row, col) != null) {
-                                return this.color != board.getPiece(row, col).color;
+                                return super.getColor() != board.getPiece(row, col).getColor();
                             } else {
                                 return false;
                             }
@@ -97,7 +97,7 @@ public class Pawn extends GamePiece {
                         }
                     } else {
                     	// its moving up 1 or 2 but not diagonally
-                    	if (row - currentX != 2) {
+                    	if (row - super.getRow() != 2) {
                     		return board.getPiece(row + 1, col) == null && board.getPiece(row, col) == null;
                     	} else {
                     		return board.getPiece(row, col) == null;
@@ -105,14 +105,14 @@ public class Pawn extends GamePiece {
                     }
                 }
             } else { // white color
-                if (row - currentX != -1 && row - currentX != -2) {
+                if (row - super.getRow() != -1 && row - super.getRow() != -2) {
                     return false;
                 } else {
                 	// check for diagonal move
-                    if (col - currentY == 1 || col - currentY == -1) {
-                        if (row - currentX == -1) {
+                    if (col - super.getCol() == 1 || col - super.getCol() == -1) {
+                        if (row - super.getRow() == -1) {
                             if (board.getPiece(row, col) != null) {
-                                return this.color != board.getPiece(row, col).color;
+                                return super.getColor() != board.getPiece(row, col).getColor();
                             } else {
                                 return false;
                             }
@@ -121,7 +121,7 @@ public class Pawn extends GamePiece {
                         }
                     } else {
                     	// its moving up 1 or 2 but not diagonally
-                    	if (row - currentX != -2) {
+                    	if (row - super.getRow() != -2) {
                     		return board.getPiece(row - 1, col) == null && board.getPiece(row, col) == null;
                     	} else {
                     		return board.getPiece(row, col) == null;
@@ -143,9 +143,9 @@ public class Pawn extends GamePiece {
         if (canMove(newRow, newCol, board)) {
             firstMove = false;
             board.setPiece(this, newRow, newCol);
-            board.setPiece(null, currentX, currentY);
-            currentX = newRow;
-            currentY = newCol;
+            board.setPiece(null, super.getRow(), super.getCol());
+            super.setRow(newRow);
+            super.setCol(newCol);
             return true;
         }
         return false;

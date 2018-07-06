@@ -2,9 +2,9 @@ package chess;
 
 abstract public class GamePiece {
     // location of the piece (row, col)
-    protected int currentX, currentY;
+    private int currentX, currentY;
     // color of the piece: black = true, white = false;
-    protected boolean color;
+    private boolean color;
     // if this is the first move of the piece
     protected boolean firstMove;
 
@@ -32,6 +32,48 @@ abstract public class GamePiece {
      */
     public boolean getColor() {
         return this.color;
+    }
+    
+    /**
+     * Gets the row number of the piece
+     * @return the row number of the piece
+     */
+    public int getRow() {
+    	return this.currentX;
+    }
+    
+    /**
+     * Sets the row location of the piece
+     * @param newRow - the new row location
+     * @return if the row was set to the new location
+     */
+    public boolean setRow(int newRow) {
+    	if (newRow < 0 || newRow > 7) {
+    		return false;
+    	}
+    	this.currentX = newRow;
+    	return true;
+    }
+    
+    /**
+     * Gets the column number of the piece
+     * @return the column number of the piece
+     */
+    public int getCol() {
+    	return this.currentY;
+    }
+    
+    /**
+     * Sets the column location of the piece
+     * @param newCol - the new column location
+     * @return if the column was set to the new location
+     */
+    public boolean setCol(int newCol) {
+    	if (newCol < 0 || newCol > 7) {
+    		return false;
+    	}
+    	this.currentY = newCol;
+    	return true;
     }
 
     /**

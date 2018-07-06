@@ -27,66 +27,66 @@ public class Queen extends GamePiece {
      * @return if Queen can move to and/or attack a piece
      */
     public boolean canMove(int row, int col, Board board) {
-    	  if (currentX == row && currentY == col) {
+    	  if (super.getRow() == row && super.getCol() == col) {
             return false;
         }
         if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
-        if ((currentX != row && currentY != col) && (Math.abs(row - currentX) != Math.abs(col - currentY))) {
+        if ((super.getRow() != row && super.getCol() != col) && (Math.abs(row - super.getRow()) != Math.abs(col - super.getCol()))) {
         		return false;
         }
-        if (currentX == row) {
+        if (super.getRow() == row) {
             // positive or negative y direction
-            if (col > currentY) {
+            if (col > super.getCol()) {
                 // see if all the spots in between are empty
-                for (int i = currentY + 1; i < col; i++) {
-                    if (board.getPiece(currentX, i) != null) {
+                for (int i = super.getCol() + 1; i < col; i++) {
+                    if (board.getPiece(super.getRow(), i) != null) {
                         return false;
                     }
                 }
             } else {
-                for (int i = currentY - 1; i > col; i--) {
-                    if (board.getPiece(currentX, i) != null) {
+                for (int i = super.getCol() - 1; i > col; i--) {
+                    if (board.getPiece(super.getRow(), i) != null) {
                         return false;
                     }
                 }
             }
-        } else if (currentY == col) { // same y, but different x
+        } else if (super.getCol() == col) { // same y, but different x
             // positive or negative x direction
-            if (row > currentX) {
-                for (int i = currentX + 1; i < row; i++) {
+            if (row > super.getRow()) {
+                for (int i = super.getRow() + 1; i < row; i++) {
                     if (board.getPiece(i, col) != null) {
                         return false;
                     }
                 }
             } else {
-                for (int i = currentX - 1; i > row; i--) {
+                for (int i = super.getRow() - 1; i > row; i--) {
                     if (board.getPiece(i, col) != null) {
                         return false;
                     }
                 }
             }
-        } else if ((row - currentX) > 0 &&  (col - currentY) > 0) { // positive x, positive y
-            for (int i = currentX + 1, j = currentY + 1; i < row; i++, j++) {
+        } else if ((row - super.getRow()) > 0 &&  (col - super.getCol()) > 0) { // positive x, positive y
+            for (int i = super.getRow() + 1, j = super.getCol() + 1; i < row; i++, j++) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
-        } else if ((row - currentX) > 0 && (col - currentY) < 0) { // positive x, negative y
-            for (int i = currentX + 1, j = currentY - 1; i < row; i++, j--) {
+        } else if ((row - super.getRow()) > 0 && (col - super.getCol()) < 0) { // positive x, negative y
+            for (int i = super.getRow() + 1, j = super.getCol() - 1; i < row; i++, j--) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
-        } else if ((row - currentX) < 0 && (col - currentY) < 0) { // negative x, negative y
-            for (int i = currentX - 1, j = currentY - 1; i > row; i--, j--) {
+        } else if ((row - super.getRow()) < 0 && (col - super.getCol()) < 0) { // negative x, negative y
+            for (int i = super.getRow() - 1, j = super.getCol() - 1; i > row; i--, j--) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
         } else { // negative x, positive y
-            for (int i = currentX - 1, j = currentY + 1; i > row; i--, j++) {
+            for (int i = super.getRow() - 1, j = super.getCol() + 1; i > row; i--, j++) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
@@ -97,7 +97,7 @@ public class Queen extends GamePiece {
         		return true;
         }
         // cannot attack your own piece
-        return this.color != board.getPiece(row, col).color;
+        return super.getColor() != board.getPiece(row, col).getColor();
     }
 
     /**
@@ -111,9 +111,9 @@ public class Queen extends GamePiece {
         if (canMove(newRow, newCol, board)) {
             firstMove = false;
             board.setPiece(this, newRow, newCol);
-            board.setPiece(null, currentX, currentY);
-            currentX = newRow;
-            currentY = newCol;
+            board.setPiece(null, super.getRow(), super.getCol());
+            super.setRow(newRow);
+            super.setCol(newCol);
             return true;
         }
         return false;
