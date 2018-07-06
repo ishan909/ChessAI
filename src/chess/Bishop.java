@@ -80,7 +80,7 @@ public class Bishop extends GamePiece {
      */
     public boolean move(int newRow, int newCol, Board board) {
         if (canMove(newRow, newCol, board)) {
-            firstMove = false;
+        	super.pieceMoved();
             board.setPiece(this, newRow, newCol);
             board.setPiece(null, super.getRow(), super.getCol());
             super.setRow(newRow);

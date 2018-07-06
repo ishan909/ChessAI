@@ -2,11 +2,11 @@ package chess;
 
 abstract public class GamePiece {
     // location of the piece (row, col)
-    private int currentX, currentY;
+    private int currentRow, currentCol;
     // color of the piece: black = true, white = false;
     private boolean color;
     // if this is the first move of the piece
-    protected boolean firstMove;
+    private boolean firstMove;
 
     /**
      * Constructor for a GamePiece
@@ -15,8 +15,8 @@ abstract public class GamePiece {
      * @param color - current color of piece
      */
     public GamePiece(int row, int col, boolean color) {
-        this.currentX = row;
-        this.currentY = col;
+        this.currentRow = row;
+        this.currentCol = col;
         this.color = color;
         this.firstMove = true;
     }
@@ -39,7 +39,7 @@ abstract public class GamePiece {
      * @return the row number of the piece
      */
     public int getRow() {
-    	return this.currentX;
+    	return this.currentRow;
     }
     
     /**
@@ -51,7 +51,7 @@ abstract public class GamePiece {
     	if (newRow < 0 || newRow > 7) {
     		return false;
     	}
-    	this.currentX = newRow;
+    	this.currentRow = newRow;
     	return true;
     }
     
@@ -60,7 +60,7 @@ abstract public class GamePiece {
      * @return the column number of the piece
      */
     public int getCol() {
-    	return this.currentY;
+    	return this.currentCol;
     }
     
     /**
@@ -72,8 +72,24 @@ abstract public class GamePiece {
     	if (newCol < 0 || newCol > 7) {
     		return false;
     	}
-    	this.currentY = newCol;
+    	this.currentCol = newCol;
     	return true;
+    }
+    
+    /**
+     * Returns if this is the piece's first move
+     * @return if this is the piece's first move
+     */
+    public boolean getFirstMove() {
+    	return this.firstMove;
+    }
+    
+    /**
+     * Sets the first move to be false
+     * A piece's first move will be set to false after one successful move
+     */
+    public void pieceMoved() {
+    	this.firstMove = false;
     }
 
     /**
