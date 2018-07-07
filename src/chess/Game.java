@@ -38,25 +38,21 @@ public class Game {
                 int current_col, current_row, new_col, new_row;
                 do {
 	                if (!first_move) {
-//	                 	System.out.println("Invalid Move.");
+	                		System.out.println("Invalid Move.");
 	                }
-                    //System.out.print("Black, which piece would you like to move?\nEnter row number: ");
-                    current_row = gui.firstX;
-                   // System.out.print("Enter col number: ");
-                    current_col = gui.firstY;
-                  //  System.out.print("Black, where would you like to move this piece?\nEnter row number: ");
-                    new_row = gui.secondX;
-                   // System.out.print("Enter col number: ");
-                    new_col = gui.secondY;
+                    System.out.print("Black, which piece would you like to move?\nEnter row number: ");
+                    current_row = Integer.parseInt(input.nextLine());
+                    System.out.print("Enter col number: ");
+                    current_col = Integer.parseInt(input.nextLine());
+                    System.out.print("Black, where would you like to move this piece?\nEnter row number: ");
+                    new_row = Integer.parseInt(input.nextLine());
+                    System.out.print("Enter col number: ");
+                    new_col = Integer.parseInt(input.nextLine());
                     first_move = false;
-                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true) );
+                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true));
                 if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
-            			board.setPawnToPiece(new_row, new_col, input);
+            		board.setPawnToPiece(new_row, new_col, input);
                 }
-                gui.firstX = -1;
-                gui.firstY = -1;
-                gui.secondX = -1;
-                gui.secondY = -1;
                 gui.update(board);
                 System.out.println("Black, your piece has been moved.");
                 moveCount += 1;
@@ -74,25 +70,21 @@ public class Game {
                 int current_col, current_row, new_col, new_row;
                 do {
 	                if (!first_move) {
-//	                		System.out.println("Invalid Move.");
+	                		System.out.println("Invalid Move.");
 	                }
-	              //  System.out.print("White, which piece would you like to move?\nEnter row number: ");
-                    current_row = gui.firstX;
-                  //  System.out.print("Enter col number: ");
-                    current_col = gui.firstY;
-                  //  System.out.print("White, where would you like to move this piece?\nEnter row number: ");
-                    new_row = gui.secondX;
-                  //  System.out.print("Enter col number: ");
-                    new_col = gui.secondY;
+	                System.out.print("White, which piece would you like to move?\nEnter row number: ");
+                    current_row = Integer.parseInt(input.nextLine());
+                    System.out.print("Enter col number: ");
+                    current_col = Integer.parseInt(input.nextLine());
+                    System.out.print("White, where would you like to move this piece?\nEnter row number: ");
+                    new_row = Integer.parseInt(input.nextLine());
+                    System.out.print("Enter col number: ");
+                    new_col = Integer.parseInt(input.nextLine());
                     first_move = false;
                 } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(false));
                 if (new_row == 0 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
-        				board.setPawnToPiece(new_row, new_col, input);
+        			board.setPawnToPiece(new_row, new_col, input);
                 }
-                gui.firstX = -1;
-                gui.firstY = -1;
-                gui.secondX = -1;
-                gui.secondY = -1;
                 gui.update(board);
                 System.out.println("White, your piece has been moved.");
                 moveCount += 1;

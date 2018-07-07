@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -22,7 +21,7 @@ public class ChessGraphics  {
 	public ChessGraphics(Board gameBoard) {
 		// JFrame - whole box (GUI container)
 		window = new JFrame();
-		window.setSize(800, 700);
+		window.setSize(700, 700);
 		window.setVisible(true);
 		panel = new JPanel();
 		// each button is a square on the chess board
@@ -37,7 +36,7 @@ public class ChessGraphics  {
 	public void update(Board gameBoard) {
 		window.remove(panel); // remove the old panel
 		panel = new JPanel();
-		
+		boolean offset = false;
 		// loops used to alternate between colors for the chess board
 		for (int row = 0; row < buttonBoard.length; row++) {
 			for (int col = 0; col < buttonBoard[row].length; col++) {
@@ -52,29 +51,17 @@ public class ChessGraphics  {
 				        JToggleButton btn =  (JToggleButton) e.getSource();
 				        btn.setText(btn.isSelected() ? "1" : "0");
 				        if (firstX == -1) {
-				        		firstX = innerRow;
-				        		firstY = innerCol;
+				        	firstX = innerRow;
+				        	firstY = innerCol;
 				        } else if (secondX == -1) {
-				        		secondX = innerRow;
-				        		secondY = innerCol;
+				        	secondX = innerRow;
+				        	secondY = innerCol;
 				        }
-//				     	btn.setSelected(false);
-//				     	btn.setText(btn.isSelected() ? "1" : "0");
-				     	//btn.doClick();
-				     	
 				    }
 				});
-//				buttonBoard[row][col].addActionListener(null);
-			}
-		}
-		drawBoard(gameBoard);
-	}
-	
-	
-	public void drawBoard(Board gameBoard) {
-		boolean offset = false;
-		for (int row = 0; row < 8; row++) {
-			for (int col = 0; col < 8; col++) {
+				
+				
+				buttonBoard[row][col].addActionListener(null);
 				int colorCount = offset ? (row * 8 + col) : (row * 8 + col + 1);
 				if (colorCount % 2 == 0) {
 					buttonBoard[row][col].setBackground(Color.WHITE);
