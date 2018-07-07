@@ -16,27 +16,28 @@ public class ChessGraphics  {
 	public JFrame window;
 	public JPanel panel;
 	public JToggleButton[][] buttonBoard;
+	public Board gameBoard;
 	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
 
 	public ChessGraphics(Board gameBoard) {
 		// JFrame - whole box (GUI container)
 		window = new JFrame();
-		window.setSize(700, 700);
+		window.setSize(800, 700);
 		window.setVisible(true);
 		panel = new JPanel();
+		this.gameBoard = gameBoard;
 		// each button is a square on the chess board
 		buttonBoard = new JToggleButton[8][8];
-		update(gameBoard);
+		init();
 	}
 	
 	/**
 	 * Update the chess board as each player makes a move
 	 * @param gameBoard - an instance of the board
 	 */
-	public void update(Board gameBoard) {
+	public void init(/*Board gameBoard*/) {
 		window.remove(panel); // remove the old panel
 		panel = new JPanel();
-		boolean offset = false;
 		// loops used to alternate between colors for the chess board
 		for (int row = 0; row < buttonBoard.length; row++) {
 			for (int col = 0; col < buttonBoard[row].length; col++) {
@@ -57,11 +58,23 @@ public class ChessGraphics  {
 				        	secondX = innerRow;
 				        	secondY = innerCol;
 				        }
+				        btn.setSelected(false);
+//				        btn.setText(btn.isSelected() ? "1" : "0");
 				    }
 				});
-				
-				
 				buttonBoard[row][col].addActionListener(null);
+			}
+		}
+		drawBoard();
+	}
+	
+	public void drawBoard() {
+		window.remove(panel); // remove the old panel
+		panel = new JPanel();
+		boolean offset = false;
+		// loops used to alternate between colors for the chess board
+		for (int row = 0; row < buttonBoard.length; row++) {
+			for (int col = 0; col < buttonBoard[row].length; col++) {
 				int colorCount = offset ? (row * 8 + col) : (row * 8 + col + 1);
 				if (colorCount % 2 == 0) {
 					buttonBoard[row][col].setBackground(Color.WHITE);
