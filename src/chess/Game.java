@@ -34,21 +34,25 @@ public class Game {
                 }
 
                 boolean first_move = true;
-
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 do {
 	                if (!first_move) {
+	                	// TODO implement error message in GUI
 //	                	System.out.println("Invalid Move.");
 	                }
-	                System.out.print("");
-//                    System.out.print("Black, which piece would you like to move?\nEnter row number: ");
-                    current_row = gui.firstX;//Integer.parseInt(input.nextLine());
+	                System.out.print(""); // to allow piece to move
+	                current_row = gui.firstX;
+                    current_col = gui.firstY;
+                    new_row = gui.secondX;
+                    new_col = gui.secondY;
+//	                System.out.print("Black, which piece would you like to move?\nEnter row number: ");
+//                    current_row = Integer.parseInt(input.nextLine());
 //                    System.out.print("Enter col number: ");
-                    current_col = gui.firstY;//Integer.parseInt(input.nextLine());
+//                    current_col = Integer.parseInt(input.nextLine());
 //                    System.out.print("Black, where would you like to move this piece?\nEnter row number: ");
-                    new_row = gui.secondX;//Integer.parseInt(input.nextLine());
+//                    new_row = Integer.parseInt(input.nextLine());
 //                    System.out.print("Enter col number: ");
-                    new_col = gui.secondY;//Integer.parseInt(input.nextLine());
+//                    new_col = Integer.parseInt(input.nextLine());
                     first_move = false;
                 } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true));
                 if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
@@ -75,20 +79,21 @@ public class Game {
                 int current_col, current_row, new_col, new_row;
                 do {
 	                if (!first_move) {
+	                	// TODO implement error message in GUI
 //	                	System.out.println("Invalid Move.");
 	                }
-	                System.out.print("");
-//	                System.out.print("White, which piece would you like to move?\nEnter row number: ");
+	                System.out.print(""); // to allow piece to move
                     current_row = gui.firstX;
+                    current_col = gui.firstY;
+                    new_row = gui.secondX;
+                    new_col = gui.secondY;
+//	                System.out.print("White, which piece would you like to move?\nEnter row number: ");
 //                    current_row = Integer.parseInt(input.nextLine());
 //                    System.out.print("Enter col number: ");
-                    current_col = gui.firstY;
 //                    current_col = Integer.parseInt(input.nextLine());
 //                    System.out.print("White, where would you like to move this piece?\nEnter row number: ");
-                    new_row = gui.secondX;
 //                    new_row = Integer.parseInt(input.nextLine());
 //                    System.out.print("Enter col number: ");
-                    new_col = gui.secondY;
 //                    new_col = Integer.parseInt(input.nextLine());
                     first_move = false;
                 } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(false));

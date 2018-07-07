@@ -3,7 +3,6 @@ package chess;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,14 +27,14 @@ public class ChessGraphics  {
 		this.gameBoard = gameBoard;
 		// each button is a square on the chess board
 		buttonBoard = new JToggleButton[8][8];
-		init();
+		initialize();
 	}
 	
 	/**
 	 * Update the chess board as each player makes a move
 	 * @param gameBoard - an instance of the board
 	 */
-	public void init(/*Board gameBoard*/) {
+	public void initialize() {
 		window.remove(panel); // remove the old panel
 		panel = new JPanel();
 		// loops used to alternate between colors for the chess board
