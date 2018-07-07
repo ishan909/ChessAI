@@ -22,7 +22,7 @@ public class ChessGraphics  {
 	public ChessGraphics(Board gameBoard) {
 		// JFrame - whole box (GUI container)
 		window = new JFrame();
-		window.setSize(800, 700);
+		window.setSize(700, 700);
 		window.setVisible(true);
 		panel = new JPanel();
 		this.gameBoard = gameBoard;
@@ -45,12 +45,11 @@ public class ChessGraphics  {
 				final Integer innerRow = Integer.valueOf(row);
 				final Integer innerCol = Integer.valueOf(col);
 				
-				buttonBoard[row][col] = new JToggleButton("0");
+				buttonBoard[row][col] = new JToggleButton();
 				buttonBoard[row][col].addActionListener(new ActionListener() {
 				    @Override
 				    public void actionPerformed(ActionEvent e) {
 				        JToggleButton btn =  (JToggleButton) e.getSource();
-				        btn.setText(btn.isSelected() ? "1" : "0");
 				        if (firstX == -1) {
 				        	firstX = innerRow;
 				        	firstY = innerCol;
@@ -59,7 +58,6 @@ public class ChessGraphics  {
 				        	secondY = innerCol;
 				        }
 				        btn.setSelected(false);
-//				        btn.setText(btn.isSelected() ? "1" : "0");
 				    }
 				});
 				buttonBoard[row][col].addActionListener(null);
