@@ -49,6 +49,8 @@ public class Pawn extends GamePiece {
                         } else {
                             return false;
                         }
+                    } else if (col - super.getCol() > 1 || col - super.getCol() < -1) {
+                    	return false;
                     } else {
                     	if (board.getPiece(row, col) != null) { // null check
                     		return false;
@@ -69,6 +71,8 @@ public class Pawn extends GamePiece {
                         } else {
                             return false;
                         }
+                    } else if (col - super.getCol() > 1 || col - super.getCol() < -1) {
+                    	return false;
                     } else {
                     	if (board.getPiece(row, col) != null) { // null check
                     		return false;
@@ -95,6 +99,8 @@ public class Pawn extends GamePiece {
                         } else {
                             return false;
                         }
+                    } else if (col - super.getCol() > 1 || col - super.getCol() < -1) {
+                    	return false;
                     } else {
                     	// its moving up 1 or 2 but not diagonally
                     	if (row - super.getRow() != 2) {
@@ -119,6 +125,8 @@ public class Pawn extends GamePiece {
                         } else {
                             return false;
                         }
+                    } else if (col - super.getCol() > 1 || col - super.getCol() < -1) {
+                    	return false;
                     } else {
                     	// its moving up 1 or 2 but not diagonally
                     	if (row - super.getRow() != -2) {
