@@ -5,15 +5,35 @@ import java.util.Scanner;
 public class Game {
 	// keeps count of how many successful moves have been made
     private int moveCount;
+    private Board board;
+    private ChessGraphics gui;
     
     /**
      * Constructor for a new Game
      */
     public Game() {
-        Board board = new Board();
-        ChessGraphics gui = new ChessGraphics(board);
+        board = new Board();
+        gui = new ChessGraphics(board);
         playGame(board, gui);
     }
+    
+
+	
+	public boolean validSelection(int row, int col) {
+		if (row < 0 || row > 7 || col < 0 || col > 7) {
+			return false;
+		}
+		if (board.getPiece(row, col) != null) {
+  			if (moveCount % 2 == 0) {
+  				return board.getPiece(row, col).getColor();
+  			} else {
+  				return !board.getPiece(row, col).getColor();
+  			}
+  		}
+  		return false;
+  	}
+	
+	
     
     /**
      * User interface for playing game
@@ -32,29 +52,33 @@ public class Game {
                 if (board.check(true)) { // true for the black player
                     System.out.println("Black, you are in check");
                 }
-
-                boolean first_move = true;
+                
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 do {
-	                if (!first_move) {
-	                	// TODO implement error message in GUI
-//	                	System.out.println("Invalid Move.");
-	                }
 	                System.out.print(""); // to allow piece to move
+	                System.out.println("BLACK'S TURN");
+//	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+	                while (!validSelection(gui.firstX, gui.firstY)) {
+	                	System.out.print(""); // to allow piece to move
+	                	gui.firstX = -1;
+	                    gui.firstY = -1;
+	                	current_row = gui.firstX;
+	                    current_col = gui.firstY;
+	                    System.out.println("BLACK'S TURN");
+//	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+	                }
 	                current_row = gui.firstX;
                     current_col = gui.firstY;
                     new_row = gui.secondX;
                     new_col = gui.secondY;
-//	                System.out.print("Black, which piece would you like to move?\nEnter row number: ");
-//                    current_row = Integer.parseInt(input.nextLine());
-//                    System.out.print("Enter col number: ");
-//                    current_col = Integer.parseInt(input.nextLine());
-//                    System.out.print("Black, where would you like to move this piece?\nEnter row number: ");
-//                    new_row = Integer.parseInt(input.nextLine());
-//                    System.out.print("Enter col number: ");
-//                    new_col = Integer.parseInt(input.nextLine());
-                    first_move = false;
-                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(true));
+                    if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
+                    	break;
+                    }
+                    new_row = -1;
+                    gui.secondX = -1;
+                    new_col = -1;
+                    gui.secondY = -1;
+                } while (true);
                 if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
             		board.setPawnToPiece(new_row, new_col, input);
                 }
@@ -75,28 +99,32 @@ public class Game {
                     System.out.println("White, you are in check");
                 }
 
-                boolean first_move = true;
-                int current_col, current_row, new_col, new_row;
+                int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 do {
-	                if (!first_move) {
-	                	// TODO implement error message in GUI
-//	                	System.out.println("Invalid Move.");
-	                }
 	                System.out.print(""); // to allow piece to move
+	                System.out.println("WHITE'S TURN");
+//	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+	                while (!validSelection(gui.firstX, gui.firstY)) {
+	                	System.out.print(""); // to allow piece to move
+	                	gui.firstX = -1;
+	                    gui.firstY = -1;
+	                	current_row = gui.firstX;
+	                    current_col = gui.firstY;
+	                    System.out.println("WHITE'S TURN");
+//	                    System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+	                }
                     current_row = gui.firstX;
                     current_col = gui.firstY;
                     new_row = gui.secondX;
                     new_col = gui.secondY;
-//	                System.out.print("White, which piece would you like to move?\nEnter row number: ");
-//                    current_row = Integer.parseInt(input.nextLine());
-//                    System.out.print("Enter col number: ");
-//                    current_col = Integer.parseInt(input.nextLine());
-//                    System.out.print("White, where would you like to move this piece?\nEnter row number: ");
-//                    new_row = Integer.parseInt(input.nextLine());
-//                    System.out.print("Enter col number: ");
-//                    new_col = Integer.parseInt(input.nextLine());
-                    first_move = false;
-                } while (!board.movePiece(current_row, current_col, new_row, new_col, moveCount) || board.check(false));
+                    if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
+                    	break;
+                    }
+                    new_row = -1;
+                    gui.secondX = -1;
+                    new_col = -1;
+                    gui.secondY = -1;
+                } while (true);
                 if (new_row == 0 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
         			board.setPawnToPiece(new_row, new_col, input);
                 }

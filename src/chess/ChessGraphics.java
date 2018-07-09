@@ -37,7 +37,6 @@ public class ChessGraphics  {
 	public void initialize() {
 		window.remove(panel); // remove the old panel
 		panel = new JPanel();
-		// loops used to alternate between colors for the chess board
 		for (int row = 0; row < buttonBoard.length; row++) {
 			for (int col = 0; col < buttonBoard[row].length; col++) {
 				
@@ -126,5 +125,4 @@ public class ChessGraphics  {
 		panel.setVisible(true);
 		window.setVisible(true);
 	}
-
 }
