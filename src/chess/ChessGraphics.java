@@ -55,7 +55,7 @@ public class ChessGraphics  {
 				        	secondX = innerRow;
 				        	secondY = innerCol;
 				        }
-				        btn.setSelected(false);
+//				        btn.setSelected(false);
 				    }
 				});
 				buttonBoard[row][col].addActionListener(null);

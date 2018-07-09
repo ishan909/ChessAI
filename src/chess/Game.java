@@ -54,31 +54,36 @@ public class Game {
                 }
                 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
-                do {
-	                System.out.print(""); // to allow piece to move
-	                System.out.println("BLACK'S TURN");
-//	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+                while (true) {
+	                System.out.print("BLACK "); // to allow piece to move
+//	                System.out.println("BLACK'S TURN");
+	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
 	                while (!validSelection(gui.firstX, gui.firstY)) {
 	                	System.out.print(""); // to allow piece to move
+	                	if (gui.firstX != -1 && gui.firstY != -1) {
+		                	gui.buttonBoard[gui.firstX][gui.firstY].setSelected(false);
+	                	}
 	                	gui.firstX = -1;
 	                    gui.firstY = -1;
 	                	current_row = gui.firstX;
 	                    current_col = gui.firstY;
-	                    System.out.println("BLACK'S TURN");
-//	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+//	                    System.out.println("BLACK'S TURN");
+	                    System.out.println("BLACK INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
 	                }
 	                current_row = gui.firstX;
                     current_col = gui.firstY;
                     new_row = gui.secondX;
                     new_col = gui.secondY;
                     if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
+                    	gui.buttonBoard[current_row][current_col].setSelected(false);
+                    	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;
                     }
                     new_row = -1;
                     gui.secondX = -1;
                     new_col = -1;
                     gui.secondY = -1;
-                } while (true);
+                }
                 if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
             		board.setPawnToPiece(new_row, new_col, input);
                 }
@@ -100,31 +105,36 @@ public class Game {
                 }
 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
-                do {
-	                System.out.print(""); // to allow piece to move
-	                System.out.println("WHITE'S TURN");
-//	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+                while (true) {
+	                System.out.print("WHITE"); // to allow piece to move
+//	                System.out.println("WHITE'S TURN");
+	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
 	                while (!validSelection(gui.firstX, gui.firstY)) {
 	                	System.out.print(""); // to allow piece to move
+	                	if (gui.firstX != -1 && gui.firstY != -1) {
+		                	gui.buttonBoard[gui.firstX][gui.firstY].setSelected(false);
+	                	}
 	                	gui.firstX = -1;
 	                    gui.firstY = -1;
 	                	current_row = gui.firstX;
 	                    current_col = gui.firstY;
-	                    System.out.println("WHITE'S TURN");
-//	                    System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+//	                    System.out.println("WHITE'S TURN");
+	                    System.out.println("WHITE INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
 	                }
                     current_row = gui.firstX;
                     current_col = gui.firstY;
                     new_row = gui.secondX;
                     new_col = gui.secondY;
                     if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
+                    	gui.buttonBoard[current_row][current_col].setSelected(false);
+                    	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;
                     }
                     new_row = -1;
                     gui.secondX = -1;
                     new_col = -1;
                     gui.secondY = -1;
-                } while (true);
+                }
                 if (new_row == 0 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
         			board.setPawnToPiece(new_row, new_col, input);
                 }
