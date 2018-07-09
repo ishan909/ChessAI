@@ -16,25 +16,7 @@ public class Game {
         gui = new ChessGraphics(board);
         playGame(board, gui);
     }
-    
-
 	
-	public boolean validSelection(int row, int col) {
-		if (row < 0 || row > 7 || col < 0 || col > 7) {
-			return false;
-		}
-		if (board.getPiece(row, col) != null) {
-  			if (moveCount % 2 == 0) {
-  				return board.getPiece(row, col).getColor();
-  			} else {
-  				return !board.getPiece(row, col).getColor();
-  			}
-  		}
-  		return false;
-  	}
-	
-	
-    
     /**
      * User interface for playing game
      * @param board - an instance of the chess board
@@ -56,19 +38,19 @@ public class Game {
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 while (true) {
 	                System.out.print("BLACK "); // to allow piece to move
-//	                System.out.println("BLACK'S TURN");
 	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
 	                while (!validSelection(gui.firstX, gui.firstY)) {
 	                	System.out.print(""); // to allow piece to move
+	                	// updating button to be unselected if selected button is not valid
 	                	if (gui.firstX != -1 && gui.firstY != -1) {
 		                	gui.buttonBoard[gui.firstX][gui.firstY].setSelected(false);
 	                	}
 	                	gui.firstX = -1;
 	                    gui.firstY = -1;
-	                	current_row = gui.firstX;
-	                    current_col = gui.firstY;
-//	                    System.out.println("BLACK'S TURN");
-	                    System.out.println("BLACK INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+	                	current_row = -1;
+	                    current_col = -1;
+	                    System.out.print("BLACK ");
+	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
 	                }
 	                current_row = gui.firstX;
                     current_col = gui.firstY;
@@ -106,19 +88,19 @@ public class Game {
 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 while (true) {
-	                System.out.print("WHITE"); // to allow piece to move
-//	                System.out.println("WHITE'S TURN");
+	                System.out.print("WHITE "); // to allow piece to move
 	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
 	                while (!validSelection(gui.firstX, gui.firstY)) {
 	                	System.out.print(""); // to allow piece to move
+	                	// updating button to be unselected if selected button is not valid
 	                	if (gui.firstX != -1 && gui.firstY != -1) {
 		                	gui.buttonBoard[gui.firstX][gui.firstY].setSelected(false);
 	                	}
 	                	gui.firstX = -1;
 	                    gui.firstY = -1;
-	                	current_row = gui.firstX;
-	                    current_col = gui.firstY;
-//	                    System.out.println("WHITE'S TURN");
+	                	current_row = -1;
+	                    current_col = -1;
+	                    System.out.print("WHITE ");
 	                    System.out.println("WHITE INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
 	                }
                     current_row = gui.firstX;
@@ -149,8 +131,23 @@ public class Game {
                 break;
             }
         }
-
         System.out.println("Game Over! " + ((moveCount + 1) % 2 == 0 ? "Black" : "White") + " won!");
         input.close();
     }
+  	
+
+    
+	public boolean validSelection(int row, int col) {
+		if (row < 0 || row > 7 || col < 0 || col > 7) {
+			return false;
+		}
+		if (board.getPiece(row, col) != null) {
+  			if (moveCount % 2 == 0) {
+  				return board.getPiece(row, col).getColor();
+  			} else {
+  				return !board.getPiece(row, col).getColor();
+  			}
+  		}
+  		return false;
+  	}
 }
