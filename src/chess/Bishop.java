@@ -63,8 +63,7 @@ public class Bishop extends GamePiece {
                 }
             }
         }
-
-        // Check to make sure one cannot attack your own piece
+        
         if (board.getPiece(row, col) == null) {
         	return true;
         }
