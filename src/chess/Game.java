@@ -3,11 +3,10 @@ package chess;
 import java.util.Scanner;
 
 public class Game {
-	// keeps count of how many successful moves have been made
     private int moveCount;
     private Board board;
     private ChessGraphics gui;
-    
+
     /**
      * Constructor for a new Game
      */
@@ -16,7 +15,7 @@ public class Game {
         gui = new ChessGraphics(board);
         playGame(board, gui);
     }
-	
+
     /**
      * User interface for playing game
      * @param board - an instance of the chess board
@@ -34,7 +33,7 @@ public class Game {
                 if (board.check(true)) { // true for the black player
                     System.out.println("Black, you are in check");
                 }
-                
+
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 while (true) {
 	                System.out.print("BLACK "); // to allow piece to move
@@ -134,9 +133,9 @@ public class Game {
         System.out.println("Game Over! " + ((moveCount + 1) % 2 == 0 ? "Black" : "White") + " won!");
         input.close();
     }
-  	
 
-    
+
+
 	public boolean validSelection(int row, int col) {
 		if (row < 0 || row > 7 || col < 0 || col > 7) {
 			return false;
