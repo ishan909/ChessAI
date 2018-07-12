@@ -19,30 +19,28 @@ public class ChessGraphics  {
 	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
 
 	public ChessGraphics(Board gameBoard) {
-		// JFrame - whole box (GUI container)
 		window = new JFrame();
 		window.setSize(700, 700);
 		window.setVisible(true);
 		panel = new JPanel();
 		this.gameBoard = gameBoard;
-		// each button is a square on the chess board
 		buttonBoard = new JToggleButton[8][8];
 		initialize();
 	}
-	
+
 	/**
 	 * Update the chess board as each player makes a move
 	 * @param gameBoard - an instance of the board
 	 */
 	public void initialize() {
-		window.remove(panel); // remove the old panel
+		window.remove(panel);
 		panel = new JPanel();
 		for (int row = 0; row < buttonBoard.length; row++) {
 			for (int col = 0; col < buttonBoard[row].length; col++) {
-				
+
 				final Integer innerRow = Integer.valueOf(row);
 				final Integer innerCol = Integer.valueOf(col);
-				
+
 				buttonBoard[row][col] = new JToggleButton();
 				buttonBoard[row][col].addActionListener(new ActionListener() {
 				    @Override
@@ -63,9 +61,9 @@ public class ChessGraphics  {
 		}
 		drawBoard();
 	}
-	
+
 	public void drawBoard() {
-		window.remove(panel); // remove the old panel
+		window.remove(panel);
 		panel = new JPanel();
 		boolean offset = false;
 		// loops used to alternate between colors for the chess board
