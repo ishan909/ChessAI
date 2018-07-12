@@ -5,10 +5,7 @@ import java.util.Scanner;
 // This class will contain what is at each location of the board
 
 public class Board {
-    // grid holding the cells on the board
     private GamePiece[][] matrix;
-
-    // Array-implementation of the location of black/white king
     private int[] blackKingLocation;
     private int[] whiteKingLocation;
 
@@ -28,7 +25,6 @@ public class Board {
     public void initializeNewBoard() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                // Initialize empty spaces in board at start of game
                 if (row > 1 && row < 6) {
                     matrix[row][col] = null;
                 }
@@ -86,11 +82,10 @@ public class Board {
     public boolean movePiece(int current_row, int current_col, int new_row, int new_col, int turn) {
         GamePiece temp = getPiece(current_row, current_col);
 
-        // mull Check
         if (temp == null) {
             return false;
         }
-        
+
         // true is black
         if (temp.getColor()) {
             // odd is white
@@ -166,7 +161,7 @@ public class Board {
         matrix[row][col] = piece;
         return true;
     }
-    
+
     /**
      * Fills the blackKingLocation and whiteKingLocation arrays which hold the current locations of the kings
      * @param color - the color of the king we are updating: true -> black, false -> white
