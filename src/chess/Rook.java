@@ -34,14 +34,11 @@ public class Rook extends GamePiece {
             return false;
         }
 
-        // same x, but different y
         if (super.getRow() != row && super.getCol() != col) {
         	return false;
         }
         if (super.getRow() == row) {
-            // positive or negative y direction
             if (col > super.getCol()) {
-                // see if all the spots in between are empty
                 for (int i = super.getCol() + 1; i < col; i++) {
                     if (board.getPiece(row, i) != null) {
                         return false;
@@ -54,8 +51,7 @@ public class Rook extends GamePiece {
                     }
                 }
             }
-        } else if (super.getCol() == col) { // same y, but different x
-            // positive or negative x direction
+        } else if (super.getCol() == col) {
             if (row > super.getRow()) {
                 for (int i = super.getRow() + 1; i < row; i++) {
                     if (board.getPiece(i, col) != null) {
@@ -71,7 +67,6 @@ public class Rook extends GamePiece {
             }
         }
 
-        // cannot attack your own piece
         if (board.getPiece(row, col) == null) {
         	return true;
         }
