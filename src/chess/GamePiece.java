@@ -1,11 +1,8 @@
 package chess;
 
 abstract public class GamePiece {
-    // location of the piece (row, col)
     private int currentRow, currentCol;
-    // color of the piece: black = true, white = false;
     private boolean color;
-    // if this is the first move of the piece
     private boolean firstMove;
 
     /**
@@ -33,7 +30,7 @@ abstract public class GamePiece {
     public boolean getColor() {
         return this.color;
     }
-    
+
     /**
      * Gets the row number of the piece
      * @return the row number of the piece
@@ -41,7 +38,7 @@ abstract public class GamePiece {
     public int getRow() {
     	return this.currentRow;
     }
-    
+
     /**
      * Sets the row location of the piece
      * @param newRow - the new row location
@@ -54,7 +51,7 @@ abstract public class GamePiece {
     	this.currentRow = newRow;
     	return true;
     }
-    
+
     /**
      * Gets the column number of the piece
      * @return the column number of the piece
@@ -62,7 +59,7 @@ abstract public class GamePiece {
     public int getCol() {
     	return this.currentCol;
     }
-    
+
     /**
      * Sets the column location of the piece
      * @param newCol - the new column location
@@ -75,7 +72,7 @@ abstract public class GamePiece {
     	this.currentCol = newCol;
     	return true;
     }
-    
+
     /**
      * Returns if this is the piece's first move
      * @return if this is the piece's first move
@@ -83,7 +80,7 @@ abstract public class GamePiece {
     public boolean getFirstMove() {
     	return this.firstMove;
     }
-    
+
     /**
      * Sets the first move to be false
      * A piece's first move will be set to false after one successful move
