@@ -50,7 +50,7 @@ public class Queen extends GamePiece {
                     }
                 }
             }
-        } else if (super.getCol() == col) { 
+        } else if (super.getCol() == col) {
             if (row > super.getRow()) {
                 for (int i = super.getRow() + 1; i < row; i++) {
                     if (board.getPiece(i, col) != null) {
@@ -93,7 +93,6 @@ public class Queen extends GamePiece {
         if (board.getPiece(row, col) == null) {
         		return true;
         }
-        // cannot attack your own piece
         return super.getColor() != board.getPiece(row, col).getColor();
     }
 
