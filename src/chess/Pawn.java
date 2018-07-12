@@ -35,14 +35,11 @@ public class Pawn extends GamePiece {
             return false;
         }
 
-        // can only move up once, do by colors
         if (!super.getFirstMove()) {
             if (super.getColor()) { // black color
-                // make sure you can only go up
                 if (row - super.getRow() != 1) {
                     return false;
                 } else {
-                	// check for diagonal move
                     if (col - super.getCol() == 1 || col - super.getCol() == -1) {
                         if (board.getPiece(row, col) != null) {
                             return super.getColor() != board.getPiece(row, col).getColor();
@@ -52,7 +49,7 @@ public class Pawn extends GamePiece {
                     } else if (col - super.getCol() > 1 || col - super.getCol() < -1) {
                     	return false;
                     } else {
-                    	if (board.getPiece(row, col) != null) { // null check
+                    	if (board.getPiece(row, col) != null) {
                     		return false;
                     	} else {
                     		return true;
@@ -64,7 +61,6 @@ public class Pawn extends GamePiece {
                 if (row - super.getRow() != -1) {
                     return false;
                 } else {
-                	// check for diagonal move
                     if (col - super.getCol() == 1 || col - super.getCol() == -1) {
                         if (board.getPiece(row, col) != null) {
                             return super.getColor() != board.getPiece(row, col).getColor();
@@ -74,7 +70,7 @@ public class Pawn extends GamePiece {
                     } else if (col - super.getCol() > 1 || col - super.getCol() < -1) {
                     	return false;
                     } else {
-                    	if (board.getPiece(row, col) != null) { // null check
+                    	if (board.getPiece(row, col) != null) {
                     		return false;
                     	} else {
                     		return true;
@@ -82,13 +78,11 @@ public class Pawn extends GamePiece {
                     }
                 }
             }
-        } else { // move up 1 or 2
+        } else {
             if (super.getColor()) { // black color
-                // make sure you can only go up
                 if (row - super.getRow() != 1 && row - super.getRow() != 2) {
                     return false;
                 } else {
-                	// check for col value change
                 	if (col - super.getCol() == 1 || col - super.getCol() == -1) {
                         if (row - super.getRow() == 1) {
                             if (board.getPiece(row, col) != null) {
@@ -102,7 +96,6 @@ public class Pawn extends GamePiece {
                     } else if (col - super.getCol() > 1 || col - super.getCol() < -1) {
                     	return false;
                     } else {
-                    	// its moving up 1 or 2 but not diagonally
                     	if (row - super.getRow() != 2) {
                     		return board.getPiece(row + 1, col) == null && board.getPiece(row, col) == null;
                     	} else {
@@ -114,7 +107,6 @@ public class Pawn extends GamePiece {
                 if (row - super.getRow() != -1 && row - super.getRow() != -2) {
                     return false;
                 } else {
-                	// check for diagonal move
                     if (col - super.getCol() == 1 || col - super.getCol() == -1) {
                         if (row - super.getRow() == -1) {
                             if (board.getPiece(row, col) != null) {
@@ -128,7 +120,6 @@ public class Pawn extends GamePiece {
                     } else if (col - super.getCol() > 1 || col - super.getCol() < -1) {
                     	return false;
                     } else {
-                    	// its moving up 1 or 2 but not diagonally
                     	if (row - super.getRow() != -2) {
                     		return board.getPiece(row - 1, col) == null && board.getPiece(row, col) == null;
                     	} else {
