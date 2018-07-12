@@ -28,7 +28,6 @@ public class King extends GamePiece {
      */
     public boolean canMove(int row, int col, Board board) {
         if (super.getRow() == row && super.getCol() == col) {
-            // makes sure it is not the same location
             return false;
         }
         if (row < 0 || row > 7 || col < 0 || col > 7) {
@@ -40,7 +39,6 @@ public class King extends GamePiece {
         if (distance > Math.sqrt(2)) {
             return false;
         }
-        // cannot attack your own piece
         if (board.getPiece(row, col) == null) {
         		return true;
         }
@@ -147,7 +145,6 @@ public class King extends GamePiece {
             board.setPiece(null, super.getRow(), super.getCol());
             super.setRow(newRow);
             super.setCol(newCol);
-            // update king's location in board class
             board.setKingLocation(super.getColor(), newRow, newCol);
             return true;
         }
