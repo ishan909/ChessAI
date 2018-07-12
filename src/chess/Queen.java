@@ -37,9 +37,7 @@ public class Queen extends GamePiece {
         		return false;
         }
         if (super.getRow() == row) {
-            // positive or negative y direction
             if (col > super.getCol()) {
-                // see if all the spots in between are empty
                 for (int i = super.getCol() + 1; i < col; i++) {
                     if (board.getPiece(super.getRow(), i) != null) {
                         return false;
@@ -52,8 +50,7 @@ public class Queen extends GamePiece {
                     }
                 }
             }
-        } else if (super.getCol() == col) { // same y, but different x
-            // positive or negative x direction
+        } else if (super.getCol() == col) { 
             if (row > super.getRow()) {
                 for (int i = super.getRow() + 1; i < row; i++) {
                     if (board.getPiece(i, col) != null) {
@@ -67,25 +64,25 @@ public class Queen extends GamePiece {
                     }
                 }
             }
-        } else if ((row - super.getRow()) > 0 &&  (col - super.getCol()) > 0) { // positive x, positive y
+        } else if ((row - super.getRow()) > 0 &&  (col - super.getCol()) > 0) {
             for (int i = super.getRow() + 1, j = super.getCol() + 1; i < row; i++, j++) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
-        } else if ((row - super.getRow()) > 0 && (col - super.getCol()) < 0) { // positive x, negative y
+        } else if ((row - super.getRow()) > 0 && (col - super.getCol()) < 0) {
             for (int i = super.getRow() + 1, j = super.getCol() - 1; i < row; i++, j--) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
-        } else if ((row - super.getRow()) < 0 && (col - super.getCol()) < 0) { // negative x, negative y
+        } else if ((row - super.getRow()) < 0 && (col - super.getCol()) < 0) {
             for (int i = super.getRow() - 1, j = super.getCol() - 1; i > row; i--, j--) {
                 if (board.getPiece(i, j) != null) {
                     return false;
                 }
             }
-        } else { // negative x, positive y
+        } else {
             for (int i = super.getRow() - 1, j = super.getCol() + 1; i > row; i--, j++) {
                 if (board.getPiece(i, j) != null) {
                     return false;
