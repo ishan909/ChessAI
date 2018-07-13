@@ -6,6 +6,8 @@ public class ChessEngine {
 
   // Assign weights?
 
+  // def minimax and A*, we will have to implement many of them
+
 
 
 
