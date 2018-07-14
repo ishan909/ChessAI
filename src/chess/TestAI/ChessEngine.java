@@ -2,11 +2,19 @@
 
 public class ChessEngine {
 
-  public static void main(String[] args) {
+
 
   // Assign weights?
 
-  // def minimax and A*, we will have to implement many of them
+  // Minimax algorithm, generating a search tree
+
+  /* Try to do a random
+   *
+   *
+   *
+   *
+   *
+   */
 
 
 
