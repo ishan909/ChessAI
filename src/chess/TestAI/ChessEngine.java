@@ -16,6 +16,7 @@ public class ChessEngine {
    *
    */
 
+   // change weights
 
    // King - 1000
    // Queen - 300
