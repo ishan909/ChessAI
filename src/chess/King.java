@@ -33,16 +33,48 @@ public class King extends GamePiece {
         if (row < 0 || row > 7 || col < 0 || col > 7) {
             return false;
         }
-
-        double distance = Math.sqrt((super.getRow() - row) * (super.getRow() - row)
-                + (super.getCol() - col) * (super.getCol() - col));
-        if (distance > Math.sqrt(2)) {
-            return false;
+        if (super.getRow() == row && (super.getCol() - col == 2 || super.getCol() - col == -2)) {
+        		if(super.getFirstMove()) {
+        			if(super.getCol() - getCol() == 2) {
+        				GamePiece rook = board.getPiece(super.getRow(), 7);
+        				if (rook == null) {
+        					return false;
+        				}
+        				if (rook.getFirstMove()) {
+        					for (int c = 5; c < 7; c++) {
+        						if (board.getPiece(super.getRow(), c) != null) {
+        							return false;
+        						}
+        					}
+        					return true;
+        				}
+        			} else {
+        				GamePiece rook = board.getPiece(super.getRow(), 0);
+        				if (rook == null) {
+        					return false;
+        				}
+        				if (rook.getFirstMove()) {
+        					for (int c = 1; c < 4; c++) {
+        						if (board.getPiece(super.getRow(), c) != null) {
+        							return false;
+        						}
+        					}
+        					return true;
+        				}
+        			}
+        		}
+        		return false;
+        } else {
+        		double distance = Math.sqrt((super.getRow() - row) * (super.getRow() - row) + (super.getCol() - col) * (super.getCol() - col));
+            if (distance > Math.sqrt(2)) {
+                return false;
+            }
+            if (board.getPiece(row, col) == null) {
+            		return true;
+            }
+            return super.getColor() != board.getPiece(row, col).getColor();
         }
-        if (board.getPiece(row, col) == null) {
-        		return true;
-        }
-        return super.getColor() != board.getPiece(row, col).getColor();
+        
     }
 
     /**
@@ -90,42 +122,42 @@ public class King extends GamePiece {
             return false;
         }
         for (int r = 0; r < 8; r++) {
-    		for (int c = 0; c < 8; c++) {
-    			GamePiece p = board.getPiece(r, c);
-    			if (p != null && p.getColor() == super.getColor()) {
-    				for (int newR = 0; newR < 8; newR++) {
-    					for (int newC = 0; newC < 8; newC++) {
-    						if (p.canMove(newR, newC, board)) {
-    							Board clone = new Board();
-    							for (int x = 0; x < 8; x++) {
-    								for (int y = 0; y < 8; y++) {
-    									if (board.getPiece(x, y) == null) {
-    										clone.setPiece(null, x, y);
-    									} else if (board.getPiece(x, y) instanceof Pawn) {
-    										clone.setPiece(new Pawn(x, y, board.getPiece(x, y).getColor()), x, y);
-    									} else if (board.getPiece(x, y) instanceof Rook) {
-    										clone.setPiece(new Rook(x, y, board.getPiece(x, y).getColor()), x, y);
-    									} else if (board.getPiece(x, y) instanceof Knight) {
-    										clone.setPiece(new Knight(x, y, board.getPiece(x, y).getColor()), x, y);
-    									} else if (board.getPiece(x, y) instanceof Bishop) {
-    										clone.setPiece(new Bishop(x, y, board.getPiece(x, y).getColor()), x, y);
-    									} else if (board.getPiece(x, y) instanceof Queen) {
-    										clone.setPiece(new Queen(x, y, board.getPiece(x, y).getColor()), x, y);
-    									} else if ((board.getPiece(x, y) instanceof King)) {
-    										clone.setPiece(new King(x, y, board.getPiece(x, y).getColor()), x, y);
-    									}
-    								}
-    							}
-    							clone.getPiece(r, c).move(newR, newC, clone);
+	    		for (int c = 0; c < 8; c++) {
+	    			GamePiece p = board.getPiece(r, c);
+	    			if (p != null && p.getColor() == super.getColor()) {
+	    				for (int newR = 0; newR < 8; newR++) {
+	    					for (int newC = 0; newC < 8; newC++) {
+	    						if (p.canMove(newR, newC, board)) {
+	    							Board clone = new Board();
+	    							for (int x = 0; x < 8; x++) {
+	    								for (int y = 0; y < 8; y++) {
+	    									if (board.getPiece(x, y) == null) {
+	    										clone.setPiece(null, x, y);
+	    									} else if (board.getPiece(x, y) instanceof Pawn) {
+	    										clone.setPiece(new Pawn(x, y, board.getPiece(x, y).getColor()), x, y);
+	    									} else if (board.getPiece(x, y) instanceof Rook) {
+	    										clone.setPiece(new Rook(x, y, board.getPiece(x, y).getColor()), x, y);
+	    									} else if (board.getPiece(x, y) instanceof Knight) {
+	    										clone.setPiece(new Knight(x, y, board.getPiece(x, y).getColor()), x, y);
+	    									} else if (board.getPiece(x, y) instanceof Bishop) {
+	    										clone.setPiece(new Bishop(x, y, board.getPiece(x, y).getColor()), x, y);
+	    									} else if (board.getPiece(x, y) instanceof Queen) {
+	    										clone.setPiece(new Queen(x, y, board.getPiece(x, y).getColor()), x, y);
+	    									} else if ((board.getPiece(x, y) instanceof King)) {
+	    										clone.setPiece(new King(x, y, board.getPiece(x, y).getColor()), x, y);
+	    									}
+	    								}
+	    							}
+	    							clone.getPiece(r, c).move(newR, newC, clone);
 								clone.setPiece(null, r, c);
 								if (!clone.check(super.getColor())) {
 									return false;
 								}
-    						}
-    					}
-    				}
-    			}
-    		}
+	    						}
+	    					}
+	    				}
+	    			}
+	    		}
         }
         return true;
     }
@@ -139,7 +171,18 @@ public class King extends GamePiece {
      */
     public boolean move(int newRow, int newCol, Board board) {
         if (canMove(newRow, newCol, board)) {
-        	super.pieceMoved();
+        	    if(super.getFirstMove() && (newCol - super.getCol() == 2 || newRow - super.getCol() == -2)) { // if it's king first move, it is possible to castle 
+        	    		if (newCol - super.getCol() == 2) {
+        	    			// move rook 
+        	    			GamePiece rook = board.getPiece(newRow, 7);
+        	    			rook.move(rook.getRow(), 5, board);
+        	    		} else if (newRow -super.getRow() == -2) {
+        	    			// move rook
+        	    			GamePiece rook = board.getPiece(newRow, 0);
+        	    			rook.move(rook.getRow(), 2, board);
+        	    		}
+        	    }
+            super.pieceMoved();
             board.setPiece(this, newRow, newCol);
             board.setPiece(null, super.getRow(), super.getCol());
             super.setRow(newRow);
@@ -149,4 +192,6 @@ public class King extends GamePiece {
         }
         return false;
     }
+    
+    
 }
