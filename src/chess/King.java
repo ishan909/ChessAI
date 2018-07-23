@@ -35,32 +35,34 @@ public class King extends GamePiece {
         }
         if (super.getRow() == row && (col - super.getCol() == 2 || col - super.getCol() == -2)) {
     		if (super.getFirstMove()) {
-    			if (col - super.getCol() == 2) {
-    				GamePiece rook = board.getPiece(super.getRow(), 7);
-    				if (rook == null) {
-    					return false;
-    				}
-    				if (rook.getFirstMove()) {
-    					for (int c = 5; c < 7; c++) {
-    						if (board.getPiece(super.getRow(), c) != null) {
-    							return false;
-    						}
-    					}
-    					return true;
-    				}
-    			} else if (col - super.getCol() == -2) {
-    				GamePiece rook = board.getPiece(super.getRow(), 0);
-    				if (rook == null) {
-    					return false;
-    				}
-    				if (rook.getFirstMove()) {
-    					for (int c = 1; c < 4; c++) {
-    						if (board.getPiece(super.getRow(), c) != null) {
-    							return false;
-    						}
-    					}
-    					return true;
-    				}
+    			if (!isInCheck(board)) {
+    				if (col - super.getCol() == 2) {
+        				GamePiece rook = board.getPiece(super.getRow(), 7);
+        				if (rook == null) {
+        					return false;
+        				}
+        				if (rook.getFirstMove()) {
+        					for (int c = 5; c < 7; c++) {
+        						if (board.getPiece(super.getRow(), c) != null) {
+        							return false;
+        						}
+        					}
+        					return true;
+        				}
+        			} else if (col - super.getCol() == -2) {
+        				GamePiece rook = board.getPiece(super.getRow(), 0);
+        				if (rook == null) {
+        					return false;
+        				}
+        				if (rook.getFirstMove()) {
+        					for (int c = 1; c < 4; c++) {
+        						if (board.getPiece(super.getRow(), c) != null) {
+        							return false;
+        						}
+        					}
+        					return true;
+        				}
+        			}
     			}
     		}
     		return false;
