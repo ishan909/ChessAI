@@ -46,7 +46,10 @@ public class ChessGraphics  {
 				    @Override
 				    public void actionPerformed(ActionEvent e) {
 				        JToggleButton btn =  (JToggleButton) e.getSource();
-				        if (firstX == -1) {
+				        if (firstX == innerRow && firstY == innerCol) {
+				        	firstX = -1;
+				        	firstY = -1;
+				        } else if (firstX == -1) {
 				        	firstX = innerRow;
 				        	firstY = innerCol;
 				        } else if (secondX == -1) {
