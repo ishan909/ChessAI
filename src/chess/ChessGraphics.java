@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -15,12 +16,13 @@ public class ChessGraphics  {
 	public JFrame window;
 	public JPanel panel;
 	public JToggleButton[][] buttonBoard;
+	public JButton close;
 	public Board gameBoard;
 	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
 
 	public ChessGraphics(Board gameBoard) {
 		window = new JFrame();
-		window.setSize(700, 700);
+		window.setSize(700, 710);
 		window.setVisible(true);
 		panel = new JPanel();
 		this.gameBoard = gameBoard;
@@ -45,7 +47,7 @@ public class ChessGraphics  {
 				buttonBoard[row][col].addActionListener(new ActionListener() {
 				    @Override
 				    public void actionPerformed(ActionEvent e) {
-				        JToggleButton btn =  (JToggleButton) e.getSource();
+//				        JToggleButton btn =  (JToggleButton) e.getSource();
 				        if (firstX == innerRow && firstY == innerCol) {
 				        	firstX = -1;
 				        	firstY = -1;
@@ -62,6 +64,14 @@ public class ChessGraphics  {
 				buttonBoard[row][col].addActionListener(null);
 			}
 		}
+		close = new JButton("Close");
+		close.addActionListener(new ActionListener() {
+			@Override
+		    public void actionPerformed(ActionEvent e) {
+		        System.out.println("Game has been terminated.");
+		        System.exit(0);
+		    }
+		});
 		drawBoard();
 	}
 
@@ -122,6 +132,7 @@ public class ChessGraphics  {
 			// for alternation of board colors row-by-row
 			offset = !offset;
 		}
+		panel.add(close);
 		window.add(panel);
 		panel.setVisible(true);
 		window.setVisible(true);
