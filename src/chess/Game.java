@@ -30,6 +30,7 @@ public class Game {
             board.printBoard();
             if (!board.checkmate(false)) { // false for the white player
                 System.out.println("It is white's turn.");
+                gui.setTurn(false);
                 if (board.check(false)) { // false for the white player
                     System.out.println("White, you are in check");
                 }
@@ -81,6 +82,7 @@ public class Game {
             board.printBoard();
             if (!board.checkmate(true)) {
                 System.out.println("It is black's turn.");
+                gui.setTurn(true);
                 if (board.check(true)) { // true for the black player
                     System.out.println("Black, you are in check");
                 }

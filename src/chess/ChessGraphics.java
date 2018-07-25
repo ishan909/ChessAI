@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -18,6 +19,7 @@ public class ChessGraphics  {
 	public JToggleButton[][] buttonBoard;
 	public JButton close;
 	public Board gameBoard;
+	public JLabel turn;
 	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
 
 	public ChessGraphics(Board gameBoard) {
@@ -72,6 +74,7 @@ public class ChessGraphics  {
 		        System.exit(0);
 		    }
 		});
+		setTurn(true);
 		drawBoard();
 	}
 
@@ -132,9 +135,18 @@ public class ChessGraphics  {
 			// for alternation of board colors row-by-row
 			offset = !offset;
 		}
+		panel.add(turn);
 		panel.add(close);
 		window.add(panel);
 		panel.setVisible(true);
 		window.setVisible(true);
+	}
+	
+	void setTurn(boolean player) {
+		if (!player) {
+			turn = new JLabel("It is Black's turn.");
+		} else {
+			turn = new JLabel("It is White's turn.");
+		}
 	}
 }
