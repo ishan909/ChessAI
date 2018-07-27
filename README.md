@@ -2,7 +2,7 @@
 A GUI Chess game that can be played between 2 players or an AI and a player!
 
 
-#TODO
+# TODO
 - Plan:
   - 1. Set a color to the AI
   - 2. Randomly generate moves (move generation)
