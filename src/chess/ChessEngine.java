@@ -2,10 +2,6 @@
 
 public class ChessEngine {
 
-
-
-  // Assign weights?
-
   // Minimax algorithm, generating a search tree
 
   /* Try to do a random algorithm first
@@ -24,6 +20,9 @@ public class ChessEngine {
    // Bishop - 60
    // Knight - 60
    // Pawn - 10
+
+
+   
 
 
 
