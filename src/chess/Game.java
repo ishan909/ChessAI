@@ -6,6 +6,7 @@ public class Game {
     private int moveCount;
     private Board board;
     private ChessGraphics gui;
+    private Engine e;
 
     /**
      * Constructor for a new Game
@@ -13,7 +14,8 @@ public class Game {
     public Game() {
         board = new Board();
         gui = new ChessGraphics(board);
-        playGame(board, gui);
+        e = new Engine(this);
+        playGame();
     }
 
     /**
@@ -21,7 +23,7 @@ public class Game {
      * @param board - an instance of the chess board
      * @param gui - an instance of the Chess Graphics
      */
-  	public void playGame(Board board, ChessGraphics gui) {
+  	public void playGame() {
         Scanner input = new Scanner(System.in);
         moveCount = 1; // Initialize move counter
         gui.drawBoard();
@@ -88,26 +90,13 @@ public class Game {
                 }
 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
-                while (true) { // true for black player  
-	                System.out.print("BLACK "); // to allow piece to move
-	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
-	                while (!validSelection(gui.movesArray[0], gui.movesArray[1])) {
-	                	System.out.print(""); // to allow piece to move
-	                	// updating button to be unselected if selected button is not valid
-	                	if (gui.movesArray[0] != -1 && gui.movesArray[1] != -1) {
-		                	gui.buttonBoard[gui.movesArray[0]][gui.movesArray[1]].setSelected(false);
-	                	}
-	                	gui.movesArray[0] = -1;
-	                    gui.movesArray[1] = -1;
-	                	current_row = -1;
-	                    current_col = -1;
-	                    System.out.print("BLACK ");
-	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
-	                }
-	                current_row = gui.movesArray[0];
-                    current_col = gui.movesArray[1];
-                    new_row = gui.movesArray[2];
-                    new_col = gui.movesArray[3];
+                while (true) { // true for black player
+                	int[] bestMove = e.calculateBestMove();
+                	current_row = bestMove[0];
+                	current_col = bestMove[1];
+                	new_row = bestMove[2];
+                	new_col = bestMove[3];
+                	
                     if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
                     	gui.buttonBoard[current_row][current_col].setSelected(false);
                     	gui.buttonBoard[new_row][new_col].setSelected(false);

@@ -90,9 +90,9 @@ abstract public class GamePiece {
     }
 
     /**
-     * Checks if an arbitrary piece can move to a different location
-     * @param row - current row location of a piece
-     * @param col - current column location of a piece
+     * Checks if a piece can move to a different location
+     * @param row - new row location of a piece
+     * @param col - new column location of a piece
      * @param board - instance of a board
      * @return if the piece can be moved
      */
