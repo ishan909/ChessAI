@@ -136,8 +136,6 @@ public class Game {
         input.close();
     }
 
-
-
 	public boolean validSelection(int row, int col) {
 		if (row < 0 || row > 7 || col < 0 || col > 7) {
 			return false;
@@ -151,4 +149,8 @@ public class Game {
   		}
   		return false;
   	}
+	
+	public Board getBoard() {
+		return this.board;
+	}
 }
