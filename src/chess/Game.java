@@ -38,42 +38,42 @@ public class Game {
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 while (true) {
 	                System.out.print("WHITE "); // to allow piece to move
-	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
-	                while (!validSelection(gui.firstX, gui.firstY)) {
+	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
+	                while (!validSelection(gui.movesArray[0], gui.movesArray[1])) {
 	                	System.out.print(""); // to allow piece to move
 	                	// updating button to be unselected if selected button is not valid
-	                	if (gui.firstX != -1 && gui.firstY != -1) {
-		                	gui.buttonBoard[gui.firstX][gui.firstY].setSelected(false);
+	                	if (gui.movesArray[0] != -1 && gui.movesArray[1] != -1) {
+		                	gui.buttonBoard[gui.movesArray[0]][gui.movesArray[1]].setSelected(false);
 	                	}
-	                	gui.firstX = -1;
-	                    gui.firstY = -1;
+	                	gui.movesArray[0] = -1;
+	                    gui.movesArray[1] = -1;
 	                	current_row = -1;
 	                    current_col = -1;
 	                    System.out.print("WHITE ");
-	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
 	                }
-                    current_row = gui.firstX;
-                    current_col = gui.firstY;
-                    new_row = gui.secondX;
-                    new_col = gui.secondY;
+                    current_row = gui.movesArray[0];
+                    current_col = gui.movesArray[1];
+                    new_row = gui.movesArray[2];
+                    new_col = gui.movesArray[3];
                     if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
                     	gui.buttonBoard[current_row][current_col].setSelected(false);
                     	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;
                     }
                     new_row = -1;
-                    gui.secondX = -1;
+                    gui.movesArray[2] = -1;
                     new_col = -1;
-                    gui.secondY = -1;
+                    gui.movesArray[3] = -1;
                 }
                 if (new_row == 0 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
         			board.setPawnToPiece(new_row, new_col, input);
                 }
                 gui.drawBoard();
-                gui.firstX = -1;
-                gui.firstY = -1;
-                gui.secondX = -1;
-                gui.secondY = -1;
+                gui.movesArray[0] = -1;
+                gui.movesArray[1] = -1;
+                gui.movesArray[2] = -1;
+                gui.movesArray[3] = -1;
                 System.out.println("White, your piece has been moved.");
                 moveCount += 1;
             } else {
@@ -90,42 +90,42 @@ public class Game {
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 while (true) { // true for black player  
 	                System.out.print("BLACK "); // to allow piece to move
-	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
-	                while (!validSelection(gui.firstX, gui.firstY)) {
+	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
+	                while (!validSelection(gui.movesArray[0], gui.movesArray[1])) {
 	                	System.out.print(""); // to allow piece to move
 	                	// updating button to be unselected if selected button is not valid
-	                	if (gui.firstX != -1 && gui.firstY != -1) {
-		                	gui.buttonBoard[gui.firstX][gui.firstY].setSelected(false);
+	                	if (gui.movesArray[0] != -1 && gui.movesArray[1] != -1) {
+		                	gui.buttonBoard[gui.movesArray[0]][gui.movesArray[1]].setSelected(false);
 	                	}
-	                	gui.firstX = -1;
-	                    gui.firstY = -1;
+	                	gui.movesArray[0] = -1;
+	                    gui.movesArray[1] = -1;
 	                	current_row = -1;
 	                    current_col = -1;
 	                    System.out.print("BLACK ");
-	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.firstX + " gfy " + gui.firstY + " gsx " + gui.secondX + " gsy " + gui.secondY);
+	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
 	                }
-	                current_row = gui.firstX;
-                    current_col = gui.firstY;
-                    new_row = gui.secondX;
-                    new_col = gui.secondY;
+	                current_row = gui.movesArray[0];
+                    current_col = gui.movesArray[1];
+                    new_row = gui.movesArray[2];
+                    new_col = gui.movesArray[3];
                     if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
                     	gui.buttonBoard[current_row][current_col].setSelected(false);
                     	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;
                     }
                     new_row = -1;
-                    gui.secondX = -1;
+                    gui.movesArray[2] = -1;
                     new_col = -1;
-                    gui.secondY = -1;
+                    gui.movesArray[3] = -1;
                 }
                 if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
             		board.setPawnToPiece(new_row, new_col, input);
                 }
                 gui.drawBoard();
-                gui.firstX = -1;
-                gui.firstY = -1;
-                gui.secondX = -1;
-                gui.secondY = -1;
+                gui.movesArray[0] = -1;
+                gui.movesArray[1] = -1;
+                gui.movesArray[2] = -1;
+                gui.movesArray[3] = -1;
                 System.out.println("Black, your piece has been moved.");
                 moveCount += 1;
             } else {

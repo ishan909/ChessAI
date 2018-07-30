@@ -20,7 +20,8 @@ public class ChessGraphics  {
 	public JButton close;
 	public Board gameBoard;
 	public JLabel turn;
-	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
+//	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
+	public int[] movesArray = {-1, -1, -1, -1}; // {oldRow, oldCol, newRow, newCol}
 
 	public ChessGraphics(Board gameBoard) {
 		window = new JFrame();
@@ -50,15 +51,15 @@ public class ChessGraphics  {
 				    @Override
 				    public void actionPerformed(ActionEvent e) {
 //				        JToggleButton btn =  (JToggleButton) e.getSource();
-				        if (firstX == innerRow && firstY == innerCol) {
-				        	firstX = -1;
-				        	firstY = -1;
-				        } else if (firstX == -1) {
-				        	firstX = innerRow;
-				        	firstY = innerCol;
-				        } else if (secondX == -1) {
-				        	secondX = innerRow;
-				        	secondY = innerCol;
+				        if (movesArray[0] == innerRow && movesArray[1] == innerCol) {
+				        	movesArray[0] = -1;
+				        	movesArray[1] = -1;
+				        } else if (movesArray[0] == -1) {
+				        	movesArray[0] = innerRow;
+				        	movesArray[1] = innerCol;
+				        } else if (movesArray[2] == -1) {
+				        	movesArray[2] = innerRow;
+				        	movesArray[3] = innerCol;
 				        }
 //				        btn.setSelected(false);
 				    }
