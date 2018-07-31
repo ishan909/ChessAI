@@ -17,6 +17,16 @@ public class Engine {
 		// Use the currentBoard to determine what the best next move would be for black to make. 
 		// Then return the best move by its coordinates.
 		
+		
+		// TODO
+		/*
+		 * 1. loop through the board and find every black piece
+		 * 2. for each black piece that was found, loop through the board again and see if it can move to every location
+		 * 	  - if it can move to that location add it to an List of valid moves which also contains the points gained for that move
+		 * 3. have the AI make the move that results in the most points gained
+		 * 	  - if there is a tie for most points gained, randomly select which move should be made
+		 */
+		
 		do {
 			int randOldRow = (int) (Math.random() * 8);
 			int randOldCol = (int) (Math.random() * 8);
