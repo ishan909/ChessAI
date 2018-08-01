@@ -10,3 +10,7 @@ A GUI Chess game between a player and an AI!
   - 4. Use minimax algorithm and use small depths first and then larger and larger
   - 5. Use Alpha-Beta Pruning to make sure that useless moves are disregarded (increase depth)
   - 6. AI is completed, make it more efficient or add a twist to make it better
+
+  
+  
+  

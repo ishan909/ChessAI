@@ -5,13 +5,14 @@ import java.util.ArrayList;
 /* This will be a test class for the eventual AI */
 
 public class Engine {
-	public Game game;
-	public int pawnWeight = 5;
-	public int knightWeight = 20;
-	public int bishopWeight = 20;
-	public int rookWeight = 50;
-	public int queenWeight = 150;
-	public int kingWeight = 1000;
+	private Game game;
+	private int pawnWeight = 5;
+	private int knightWeight = 20;
+	private int bishopWeight = 20;
+	private int rookWeight = 50;
+	private int queenWeight = 150;
+	private int kingWeight = 1000;
+	
 	
 	public Engine(Game game) {
 		this.game = game;
@@ -54,6 +55,38 @@ public class Engine {
 		return moves;
 	}
 	
+	private ArrayList<Integer[]> possibleMoves(GamePiece g) {
+		ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
+		int r = g.getRow();
+		int c = g.getCol();
+		if (g != null && g.getColor()) {
+			for (int newR = 0; newR < 8; newR++) {
+				for (int newC = 0; newC < 8; newC++) {
+					if (g.canMove(newR, newC, game.getBoard())) {
+						Integer[] move = {r, c, newR, newC};
+						moves.add(move);
+					}
+				}
+			}
+		}
+		return moves;
+	}
+	
+	public int[] minimax(int depth, int current_x, int current_y ) {
+		int [] result = {current_x, current_y, -1, -1};
+		if(depth == 0) {
+			return result;
+		}
+		int bestX = -10000;
+		int bestY = -10000;
+		return result;
+		
+	}
+//	public static void saveBoard(Game game) {
+//		
+//	}
+//	
+	
 	private int getPoints(Integer[] list) {
 		GamePiece p = game.getBoard().getPiece(list[2], list[3]);
 		if (p == null) {
@@ -74,4 +107,6 @@ public class Engine {
 			}
 		}
 	}
+	
+	
 }
