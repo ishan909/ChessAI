@@ -91,7 +91,7 @@ public class Game {
 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 while (true) { // true for black player
-                	int[] bestMove = e.calculateBestMove();
+                	Integer[] bestMove = e.calculateBestMove();
                 	current_row = bestMove[0];
                 	current_col = bestMove[1];
                 	new_row = bestMove[2];
