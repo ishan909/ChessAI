@@ -172,6 +172,7 @@ public class Engine {
 			for (int j = 0; j < movesList.size(); j++) {
 				System.out.println("Hello " + j);
 				Board tempBoard = new Board();
+				// deep copy
 				for (int r = 0; r < 8; r++) {
 					for (int c = 0; c < 8; c++) {
 						tempBoard.matrix[r][c] = game.getBoard().getPiece(r, c);

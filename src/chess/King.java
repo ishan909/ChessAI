@@ -76,7 +76,6 @@ public class King extends GamePiece {
             }
             return super.getColor() != board.getPiece(row, col).getColor();
         }
-        
     }
 
     /**
