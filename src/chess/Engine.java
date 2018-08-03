@@ -21,21 +21,22 @@ public class Engine {
 	// This method is the AI, 
 	// We will later add the minimax, Alpha-Bata Pruning, and more
 	public Integer[] calculateBestMove() { // {oldRow, oldCol, newRow, newCol}
-		ArrayList<Integer[]> moves = possibleMoves();
-		Integer[] best = moves.get((int) (Math.random() * moves.size()));
-		for (int i = 0; i < moves.size(); i++) {
-			if (getPoints(moves.get(i)) > getPoints(best)) {
-				best = moves.get(i);
-			}
-		}
-		return best;
+		return findBestMove();
+//		ArrayList<Integer[]> moves = possibleMoves();
+//		Integer[] best = moves.get((int) (Math.random() * moves.size()));
+//		for (int i = 0; i < moves.size(); i++) {
+//			if (getPoints(moves.get(i)) > getPoints(best)) {
+//				best = moves.get(i);
+//			}
+//		}
+//		return best;
 	}
 	
-	public int current_board_score() {
+	public int current_board_score(Board b) {
 		int current_score = 0;
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				GamePiece tmp = game.getBoard().getPiece(i,j);
+				GamePiece tmp = b.getPiece(i, j);
 				if (tmp != null && tmp.getColor()) {
 					if (tmp instanceof King) {
 						current_score += kingWeight;
@@ -70,11 +71,12 @@ public class Engine {
 		}
 		return current_score;
 	}
-	public int current_white_score() {
+	
+	public int current_white_score(Board b) {
 		int current_score = 0;
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				GamePiece tmp = game.getBoard().getPiece(i, j);
+				GamePiece tmp = b.getPiece(i, j);
 				if (tmp!= null) {
 					if (!tmp.getColor()) {
 						if (tmp instanceof King) {
@@ -96,11 +98,12 @@ public class Engine {
 		}
 		return current_score;
 	}
-	public int current_black_score() {
+	
+	public int current_black_score(Board b) {
 		int current_score = 0;
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				GamePiece tmp = game.getBoard().getPiece(i, j);
+				GamePiece tmp = b.getPiece(i, j);
 				if (tmp!= null) {
 					if (tmp.getColor()) {
 						if (tmp instanceof King) {
@@ -125,8 +128,7 @@ public class Engine {
 	
 	private ArrayList<Integer[]> possibleMoves() {
 		ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
-		int count = 0;
-		outLoop: for (int r = 0; r < 8; r++) {
+		for (int r = 0; r < 8; r++) {
 			for (int c = 0; c < 8; c++) {
 				if (game.getBoard().getPiece(r, c) != null && game.getBoard().getPiece(r, c).getColor()) {
 					for (int newR = 0; newR < 8; newR++) {
@@ -134,10 +136,6 @@ public class Engine {
 							if (game.getBoard().getPiece(r, c).canMove(newR, newC, game.getBoard())) {
 								Integer[] move = {r, c, newR, newC};
 								moves.add(move);
-								count++;
-								if (count == 16) {
-									break outLoop;
-								}
 							}
 						}
 					}
@@ -165,18 +163,46 @@ public class Engine {
 		return moves;
 	}
 	
-	public int[] minimax(int depth, int current_x, int current_y ) {
-		int [] result = {current_x, current_y, -1, -1};
-		if(depth == 0) {
-			return result;
+	public Integer[] findBestMove() {
+		System.out.println("Called");
+		Integer[] move = possibleMoves().get(0);
+		int maxBoardScore = 0;
+//		for (int i = 0; i < 1; i++) { // looking one move ahead
+			ArrayList<Integer[]> movesList = possibleMoves();
+			for (int j = 0; j < movesList.size(); j++) {
+				System.out.println("Hello " + j);
+				Board tempBoard = new Board();
+				for (int r = 0; r < 8; r++) {
+					for (int c = 0; c < 8; c++) {
+						tempBoard.matrix[r][c] = game.getBoard().getPiece(r, c);
+					}
+				}
+				for (int n = 0; n < 2; n++) {
+					tempBoard.whiteKingLocation[n] = game.getBoard().whiteKingLocation[n];
+					tempBoard.blackKingLocation[n] = game.getBoard().blackKingLocation[n];
+				}
+				
+				tempBoard.movePiece(movesList.get(j)[0], movesList.get(j)[1], movesList.get(j)[2], movesList.get(j)[3]);
+				if (current_black_score(tempBoard) > maxBoardScore) {
+					maxBoardScore = current_black_score(tempBoard);
+					move = movesList.get(j);
+				}
+				
+			}
+//		}
+		for (int i = 0; i < 4; i++) {
+			System.out.print(move[i] + " ");
 		}
+		System.out.println();
+		game.getBoard().printBoard();
 		
-		
-		return result;
-		
+//		if (game.getBoard().getPiece(move[2], move[3]) != null) {
+//			System.out.println(game.getBoard().getPiece(move[2], move[3]).getColor());
+//		}
+		return move;
 	}
 	
-	/* Write a save board/undo function for later */
+	/* TODO: Write a save board/undo function for later */
 	
 	private int getPoints(Integer[] list) {
 		GamePiece p = game.getBoard().getPiece(list[2], list[3]);

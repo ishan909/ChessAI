@@ -5,9 +5,9 @@ import java.util.Scanner;
 // This class will contain what is at each location of the board
 
 public class Board {
-    private GamePiece[][] matrix;
-    private int[] blackKingLocation;
-    private int[] whiteKingLocation;
+    public GamePiece[][] matrix;
+    public int[] blackKingLocation;
+    public int[] whiteKingLocation;
 
     /**
      * Board constructor
@@ -81,11 +81,9 @@ public class Board {
      */
     public boolean movePiece(int current_row, int current_col, int new_row, int new_col, int turn) {
         GamePiece temp = getPiece(current_row, current_col);
-
         if (temp == null) {
             return false;
         }
-
         // true is black
         if (temp.getColor()) {
             // odd is white
@@ -97,6 +95,28 @@ public class Board {
             if (turn % 2 == 0) {
                 return false;
             }
+        }
+        if (temp.canMove(new_row, new_col, this)) {
+        	temp.move(new_row, new_col, this);
+            this.matrix[current_row][current_col] = null;
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Checks if an arbitrary piece can move to a new location and then updates the board
+     * Note: THIS DOES NOT CHECK TO SEE IF THE CORRECT COLOR IS MAKING THE MOVE
+     * @param current_row - current row location of a piece
+     * @param current_col - current column location of a piece
+     * @param new_row - the new row location for a piece
+     * @param new_col - the new column location for a piece
+     * @return if the move was successful
+     */
+    public boolean movePiece(int current_row, int current_col, int new_row, int new_col) {
+        GamePiece temp = getPiece(current_row, current_col);
+        if (temp == null) {
+            return false;
         }
         if (temp.canMove(new_row, new_col, this)) {
         	temp.move(new_row, new_col, this);
