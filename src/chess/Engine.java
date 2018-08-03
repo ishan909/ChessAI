@@ -32,7 +32,7 @@ public class Engine {
 //		return best;
 	}
 	
-	public int current_board_score(Board b) {
+	public int currentBoardScore(Board b) {
 		int current_score = 0;
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -72,7 +72,7 @@ public class Engine {
 		return current_score;
 	}
 	
-	public int current_white_score(Board b) {
+	public int currentWhiteScore(Board b) {
 		int current_score = 0;
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -99,7 +99,7 @@ public class Engine {
 		return current_score;
 	}
 	
-	public int current_black_score(Board b) {
+	public int currentBlackScore(Board b) {
 		int current_score = 0;
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -184,8 +184,8 @@ public class Engine {
 				}
 				
 				tempBoard.movePiece(movesList.get(j)[0], movesList.get(j)[1], movesList.get(j)[2], movesList.get(j)[3]);
-				if (current_black_score(tempBoard) > maxBoardScore) {
-					maxBoardScore = current_black_score(tempBoard);
+				if (currentBlackScore(tempBoard) > maxBoardScore) {
+					maxBoardScore = currentBlackScore(tempBoard);
 					move = movesList.get(j);
 				}
 				
