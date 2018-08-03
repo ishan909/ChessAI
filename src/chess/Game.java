@@ -13,7 +13,7 @@ public class Game {
      */
     public Game() {
         board = new Board();
-        e = new Engine(this, gui);
+        e = new Engine(this);
         gui = new ChessGraphics(board, e);
         playGame();
     }
@@ -91,9 +91,8 @@ public class Game {
 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 try {
-					Thread.sleep(75);
+					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
                 while (true) { // true for black player

@@ -21,7 +21,7 @@ public class ChessGraphics  {
 	public Board gameBoard;
 	public JLabel turn;
 	private Engine e;
-	private Game g;
+	
 //	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
 	public int[] movesArray = {-1, -1, -1, -1}; // {oldRow, oldCol, newRow, newCol}
 
@@ -148,9 +148,9 @@ public class ChessGraphics  {
 	
 	void setTurn(boolean player) {
 		if (!player) {
-			turn = new JLabel("It is Black's turn. " + (e != null ? e.current_black_score(g) : " NULL BLACK"));
+			turn = new JLabel("It is Black's turn. " + (e != null ? e.current_black_score() : " NULL BLACK"));
 		} else {
-			turn = new JLabel("It is White's turn. " + (e != null ? e.current_white_score(g) : " NULL WHITE"));
+			turn = new JLabel("It is White's turn. " + (e != null ? e.current_white_score() : " NULL WHITE"));
 		}
 	}
 }

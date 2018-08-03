@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Engine {
 	private Game game;
-	private ChessGraphics gui;
 	private int pawnWeight = 5;
 	private int knightWeight = 20;
 	private int bishopWeight = 20;
@@ -15,9 +14,8 @@ public class Engine {
 	private int kingWeight = 1000;
 	
 	
-	public Engine(Game game, ChessGraphics gui) {
+	public Engine(Game game) {
 		this.game = game;
-		this.gui = gui;
 	}
 	
 	// This method is the AI, 
@@ -33,48 +31,38 @@ public class Engine {
 		return best;
 	}
 	
-	public int current_board_score(Game game) {
+	public int current_board_score() {
 		int current_score = 0;
-		for(int i = 0; i < 8; i++) {
-			for(int j = 0; j < 8; j++) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
 				GamePiece tmp = game.getBoard().getPiece(i,j);
-				if(tmp != null && tmp.getColor()) {
-					if(tmp instanceof King) {
+				if (tmp != null && tmp.getColor()) {
+					if (tmp instanceof King) {
 						current_score += kingWeight;
-					}
-					else if(tmp instanceof Queen) {
+					} else if (tmp instanceof Queen) {
 						current_score += queenWeight;
-					}
-					else if(tmp instanceof Rook) {
+					} else if (tmp instanceof Rook) {
 						current_score += rookWeight;
-					}
-					else if(tmp instanceof Bishop) {
+					} else if (tmp instanceof Bishop) {
 						current_score += bishopWeight;
-					}
-					else if(tmp instanceof Knight) {
+					} else if (tmp instanceof Knight) {
 						current_score += knightWeight;
-					}
-					else {
+					} else {
 						current_score += pawnWeight;
 					}
 				}
-				if(tmp!= null && !tmp.getColor()) {
-					if(tmp instanceof King) {
+				if (tmp!= null && !tmp.getColor()) {
+					if (tmp instanceof King) {
 						current_score -= kingWeight;
-					}
-					else if(tmp instanceof Queen) {
+					} else if (tmp instanceof Queen) {
 						current_score -= queenWeight;
-					}
-					else if(tmp instanceof Rook) {
+					} else if (tmp instanceof Rook) {
 						current_score -= rookWeight;
-					}
-					else if(tmp instanceof Bishop) {
+					} else if (tmp instanceof Bishop) {
 						current_score -= bishopWeight;
-					}
-					else if(tmp instanceof Knight) {
+					} else if (tmp instanceof Knight) {
 						current_score -= knightWeight;
-					}
-					else {
+					} else {
 						current_score -= pawnWeight;
 					}
 				}
@@ -82,29 +70,24 @@ public class Engine {
 		}
 		return current_score;
 	}
-	public int current_white_score(Game game) {
+	public int current_white_score() {
 		int current_score = 0;
-		for(int i = 0; i < 8; i++) {
-			for(int j = 0; j < 8; j++) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
 				GamePiece tmp = game.getBoard().getPiece(i, j);
-				if(tmp!= null) {
+				if (tmp!= null) {
 					if (!tmp.getColor()) {
-						if(tmp instanceof King) {
+						if (tmp instanceof King) {
 							current_score -= kingWeight;
-						}
-						else if(tmp instanceof Queen) {
+						} else if (tmp instanceof Queen) {
 							current_score -= queenWeight;
-						}
-						else if(tmp instanceof Rook) {
+						} else if (tmp instanceof Rook) {
 							current_score -= rookWeight;
-						}
-						else if(tmp instanceof Bishop) {
+						} else if (tmp instanceof Bishop) {
 							current_score -= bishopWeight;
-						}
-						else if(tmp instanceof Knight) {
+						} else if (tmp instanceof Knight) {
 							current_score -= knightWeight;
-						}
-						else {
+						} else {
 							current_score -= pawnWeight;
 						}
 					}
@@ -113,29 +96,26 @@ public class Engine {
 		}
 		return current_score;
 	}
-	public int current_black_score(Game game) {
+	public int current_black_score() {
 		int current_score = 0;
-		for(int i = 0; i < 8; i++) {
-			for(int j = 0; j < 8; j++) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
 				GamePiece tmp = game.getBoard().getPiece(i, j);
-				if(tmp!= null && tmp.getColor()) {
-					if(tmp instanceof King) {
-						current_score += kingWeight;
-					}
-					else if(tmp instanceof Queen) {
-						current_score += queenWeight;
-					}
-					else if(tmp instanceof Rook) {
-						current_score += rookWeight;
-					}
-					else if(tmp instanceof Bishop) {
-						current_score += bishopWeight;
-					}
-					else if(tmp instanceof Knight) {
-						current_score += knightWeight;
-					}
-					else {
-						current_score += pawnWeight;
+				if (tmp!= null) {
+					if (tmp.getColor()) {
+						if (tmp instanceof King) {
+							current_score += kingWeight;
+						} else if (tmp instanceof Queen) {
+							current_score += queenWeight;
+						} else if (tmp instanceof Rook) {
+							current_score += rookWeight;
+						} else if (tmp instanceof Bishop) {
+							current_score += bishopWeight;
+						} else if (tmp instanceof Knight) {
+							current_score += knightWeight;
+						} else {
+							current_score += pawnWeight;
+						}
 					}
 				}
 			}
