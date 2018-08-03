@@ -20,10 +20,13 @@ public class ChessGraphics  {
 	public JButton close;
 	public Board gameBoard;
 	public JLabel turn;
+	private Engine e;
+	private Game g;
 //	public int firstX = -1, firstY = -1, secondX = -1, secondY = -1;
 	public int[] movesArray = {-1, -1, -1, -1}; // {oldRow, oldCol, newRow, newCol}
 
-	public ChessGraphics(Board gameBoard) {
+	public ChessGraphics(Board gameBoard, Engine e) {
+		this.e = e;
 		window = new JFrame();
 		window.setSize(700, 710);
 		window.setVisible(true);
@@ -145,9 +148,9 @@ public class ChessGraphics  {
 	
 	void setTurn(boolean player) {
 		if (!player) {
-			turn = new JLabel("It is Black's turn.");
+			turn = new JLabel("It is Black's turn. " + (e != null ? e.current_black_score(g) : " NULL BLACK"));
 		} else {
-			turn = new JLabel("It is White's turn.");
+			turn = new JLabel("It is White's turn. " + (e != null ? e.current_white_score(g) : " NULL WHITE"));
 		}
 	}
 }

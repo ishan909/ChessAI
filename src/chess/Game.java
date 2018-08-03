@@ -13,8 +13,8 @@ public class Game {
      */
     public Game() {
         board = new Board();
-        gui = new ChessGraphics(board);
-        e = new Engine(this);
+        e = new Engine(this, gui);
+        gui = new ChessGraphics(board, e);
         playGame();
     }
 
@@ -90,6 +90,12 @@ public class Game {
                 }
 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
+                try {
+					Thread.sleep(75);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 while (true) { // true for black player
                 	Integer[] bestMove = e.calculateBestMove();
                 	current_row = bestMove[0];
@@ -97,7 +103,7 @@ public class Game {
                 	new_row = bestMove[2];
                 	new_col = bestMove[3];
                 	
-                    if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
+                if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
                     	gui.buttonBoard[current_row][current_col].setSelected(false);
                     	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;

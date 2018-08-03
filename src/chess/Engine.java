@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Engine {
 	private Game game;
+	private ChessGraphics gui;
 	private int pawnWeight = 5;
 	private int knightWeight = 20;
 	private int bishopWeight = 20;
@@ -14,11 +15,12 @@ public class Engine {
 	private int kingWeight = 1000;
 	
 	
-	public Engine(Game game) {
+	public Engine(Game game, ChessGraphics gui) {
 		this.game = game;
+		this.gui = gui;
 	}
 	
-	// This method is the AI
+	// This method is the AI, 
 	// We will later add the minimax, Alpha-Bata Pruning, and more
 	public Integer[] calculateBestMove() { // {oldRow, oldCol, newRow, newCol}
 		ArrayList<Integer[]> moves = possibleMoves();
@@ -29,6 +31,116 @@ public class Engine {
 			}
 		}
 		return best;
+	}
+	
+	public int current_board_score(Game game) {
+		int current_score = 0;
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < 8; j++) {
+				GamePiece tmp = game.getBoard().getPiece(i,j);
+				if(tmp != null && tmp.getColor()) {
+					if(tmp instanceof King) {
+						current_score += kingWeight;
+					}
+					else if(tmp instanceof Queen) {
+						current_score += queenWeight;
+					}
+					else if(tmp instanceof Rook) {
+						current_score += rookWeight;
+					}
+					else if(tmp instanceof Bishop) {
+						current_score += bishopWeight;
+					}
+					else if(tmp instanceof Knight) {
+						current_score += knightWeight;
+					}
+					else {
+						current_score += pawnWeight;
+					}
+				}
+				if(tmp!= null && !tmp.getColor()) {
+					if(tmp instanceof King) {
+						current_score -= kingWeight;
+					}
+					else if(tmp instanceof Queen) {
+						current_score -= queenWeight;
+					}
+					else if(tmp instanceof Rook) {
+						current_score -= rookWeight;
+					}
+					else if(tmp instanceof Bishop) {
+						current_score -= bishopWeight;
+					}
+					else if(tmp instanceof Knight) {
+						current_score -= knightWeight;
+					}
+					else {
+						current_score -= pawnWeight;
+					}
+				}
+			}
+		}
+		return current_score;
+	}
+	public int current_white_score(Game game) {
+		int current_score = 0;
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < 8; j++) {
+				GamePiece tmp = game.getBoard().getPiece(i, j);
+				if(tmp!= null) {
+					if (!tmp.getColor()) {
+						if(tmp instanceof King) {
+							current_score -= kingWeight;
+						}
+						else if(tmp instanceof Queen) {
+							current_score -= queenWeight;
+						}
+						else if(tmp instanceof Rook) {
+							current_score -= rookWeight;
+						}
+						else if(tmp instanceof Bishop) {
+							current_score -= bishopWeight;
+						}
+						else if(tmp instanceof Knight) {
+							current_score -= knightWeight;
+						}
+						else {
+							current_score -= pawnWeight;
+						}
+					}
+				}
+			}
+		}
+		return current_score;
+	}
+	public int current_black_score(Game game) {
+		int current_score = 0;
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < 8; j++) {
+				GamePiece tmp = game.getBoard().getPiece(i, j);
+				if(tmp!= null && tmp.getColor()) {
+					if(tmp instanceof King) {
+						current_score += kingWeight;
+					}
+					else if(tmp instanceof Queen) {
+						current_score += queenWeight;
+					}
+					else if(tmp instanceof Rook) {
+						current_score += rookWeight;
+					}
+					else if(tmp instanceof Bishop) {
+						current_score += bishopWeight;
+					}
+					else if(tmp instanceof Knight) {
+						current_score += knightWeight;
+					}
+					else {
+						current_score += pawnWeight;
+					}
+				}
+			}
+		}
+		return current_score;
 	}
 	
 	private ArrayList<Integer[]> possibleMoves() {
@@ -55,6 +167,7 @@ public class Engine {
 		return moves;
 	}
 	
+	/* Not entirely sure if needed */
 	private ArrayList<Integer[]> possibleMoves(GamePiece g) {
 		ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
 		int r = g.getRow();
@@ -77,15 +190,13 @@ public class Engine {
 		if(depth == 0) {
 			return result;
 		}
-		int bestX = -10000;
-		int bestY = -10000;
+		
+		
 		return result;
 		
 	}
-//	public static void saveBoard(Game game) {
-//		
-//	}
-//	
+	
+	/* Write a save board/undo function for later */
 	
 	private int getPoints(Integer[] list) {
 		GamePiece p = game.getBoard().getPiece(list[2], list[3]);
