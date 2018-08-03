@@ -91,7 +91,7 @@ public class Queen extends GamePiece {
         }
 
         if (board.getPiece(row, col) == null) {
-        		return true;
+        	return true;
         }
         return super.getColor() != board.getPiece(row, col).getColor();
     }

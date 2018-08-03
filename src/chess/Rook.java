@@ -70,9 +70,6 @@ public class Rook extends GamePiece {
         if (board.getPiece(row, col) == null) {
         	return true;
         }
-        if (board.getPiece(row, col) == null) {
-        	return true;
-        }
         return super.getColor() != board.getPiece(row, col).getColor();
     }
 
