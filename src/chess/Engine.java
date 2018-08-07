@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /* This will be a test class for the eventual AI */
 
@@ -110,44 +111,51 @@ public class Engine {
 	}
 	
 	public Integer[] findBestMove() {
-		System.out.println("Called");
-		Integer[] move = possibleMoves().get(0);
-		int maxBoardScore = 0;
-//		for (int i = 0; i < 1; i++) { // looking one move ahead
-			ArrayList<Integer[]> movesList = possibleMoves();
-			for (int j = 0; j < movesList.size(); j++) {
-				System.out.println("Hello " + j);
-				Board tempBoard = new Board();
-				// deep copy
-				for (int r = 0; r < 8; r++) {
-					for (int c = 0; c < 8; c++) {
-						tempBoard.matrix[r][c] = game.getBoard().getPiece(r, c);
-					}
-				}
-				for (int n = 0; n < 2; n++) {
-					tempBoard.whiteKingLocation[n] = game.getBoard().whiteKingLocation[n];
-					tempBoard.blackKingLocation[n] = game.getBoard().blackKingLocation[n];
-				}
-				
-				tempBoard.movePiece(movesList.get(j)[0], movesList.get(j)[1], movesList.get(j)[2], movesList.get(j)[3]);
-				if (currentBlackScore(tempBoard) > maxBoardScore) {
-					maxBoardScore = currentBlackScore(tempBoard);
-					move = movesList.get(j);
-				}
-				
+		// first get all the possible moves at a current level
+		ArrayList<Integer[]> possible = possibleMoves();
+		int highest = -9999;
+		int index = -1;
+		for(int i = 0; i < possible.size(); i++) {
+			Board[] tmp = reverse(possible.get(i)[0],possible.get(i)[1], possible.get(i)[2], possible.get(i)[3]);
+			int score = currentBlackScore(tmp[1]);
+			if(highest < score) {
+				index = i;
 			}
-//		}
-		for (int i = 0; i < 4; i++) {
-			System.out.print(move[i] + " ");
 		}
-		System.out.println();
-		game.getBoard().printBoard();
-		
-//		if (game.getBoard().getPiece(move[2], move[3]) != null) {
-//			System.out.println(game.getBoard().getPiece(move[2], move[3]).getColor());
-//		}
-		return move;
+		return possible.get(index);	
 	}
-	
-	/* TODO: Write a save board/undo function for later */
+	// convert array of boards to stack of boards if it works, do null checks
+	public Board[] reverse(int current_row, int current_col, int new_row, int new_col) {
+		Board[] boards = new Board[2];
+		boards[0] = game.getBoard();
+		boards[1] = game.getBoard();
+		GamePiece tmp =	boards[1].getPiece(current_row, current_col);
+		if(tmp != null) {
+			if(tmp.canMove(new_row, new_col, boards[1])) {
+				tmp.move(new_row, new_col, boards[1]);
+			}
+		}
+		return boards;
+		
+	}
+	private int getPoints(Integer[] list) {
+		GamePiece p = game.getBoard().getPiece(list[2], list[3]);
+		if (p == null) {
+			return -1;
+		} else {
+			if (p instanceof Pawn) {
+				return pawnWeight;
+			} else if (p instanceof Knight) {
+				return knightWeight;
+			} else if (p instanceof Bishop) {
+				return bishopWeight;
+			} else if (p instanceof Rook) {
+				return rookWeight;
+			} else if (p instanceof Queen) {
+				return queenWeight;
+			} else {
+				return kingWeight;
+			}
+		}
+	}
 }
