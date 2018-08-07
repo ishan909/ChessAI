@@ -33,43 +33,7 @@ public class Engine {
 	}
 	
 	public int currentBoardScore(Board b) {
-		int current_score = 0;
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				GamePiece tmp = b.getPiece(i, j);
-				if (tmp != null && tmp.getColor()) {
-					if (tmp instanceof King) {
-						current_score += kingWeight;
-					} else if (tmp instanceof Queen) {
-						current_score += queenWeight;
-					} else if (tmp instanceof Rook) {
-						current_score += rookWeight;
-					} else if (tmp instanceof Bishop) {
-						current_score += bishopWeight;
-					} else if (tmp instanceof Knight) {
-						current_score += knightWeight;
-					} else {
-						current_score += pawnWeight;
-					}
-				}
-				if (tmp!= null && !tmp.getColor()) {
-					if (tmp instanceof King) {
-						current_score -= kingWeight;
-					} else if (tmp instanceof Queen) {
-						current_score -= queenWeight;
-					} else if (tmp instanceof Rook) {
-						current_score -= rookWeight;
-					} else if (tmp instanceof Bishop) {
-						current_score -= bishopWeight;
-					} else if (tmp instanceof Knight) {
-						current_score -= knightWeight;
-					} else {
-						current_score -= pawnWeight;
-					}
-				}
-			}
-		}
-		return current_score;
+		return currentBlackScore(b) + currentWhiteScore(b);
 	}
 	
 	public int currentWhiteScore(Board b) {
@@ -145,24 +109,6 @@ public class Engine {
 		return moves;
 	}
 	
-	/* Not entirely sure if needed */
-	private ArrayList<Integer[]> possibleMoves(GamePiece g) {
-		ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
-		int r = g.getRow();
-		int c = g.getCol();
-		if (g != null && g.getColor()) {
-			for (int newR = 0; newR < 8; newR++) {
-				for (int newC = 0; newC < 8; newC++) {
-					if (g.canMove(newR, newC, game.getBoard())) {
-						Integer[] move = {r, c, newR, newC};
-						moves.add(move);
-					}
-				}
-			}
-		}
-		return moves;
-	}
-	
 	public Integer[] findBestMove() {
 		System.out.println("Called");
 		Integer[] move = possibleMoves().get(0);
@@ -204,27 +150,4 @@ public class Engine {
 	}
 	
 	/* TODO: Write a save board/undo function for later */
-	
-	private int getPoints(Integer[] list) {
-		GamePiece p = game.getBoard().getPiece(list[2], list[3]);
-		if (p == null) {
-			return -1;
-		} else {
-			if (p instanceof Pawn) {
-				return pawnWeight;
-			} else if (p instanceof Knight) {
-				return knightWeight;
-			} else if (p instanceof Bishop) {
-				return bishopWeight;
-			} else if (p instanceof Rook) {
-				return rookWeight;
-			} else if (p instanceof Queen) {
-				return queenWeight;
-			} else {
-				return kingWeight;
-			}
-		}
-	}
-	
-	
 }

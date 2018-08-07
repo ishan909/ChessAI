@@ -122,8 +122,9 @@ public class Board {
         	temp.move(new_row, new_col, this);
             this.matrix[current_row][current_col] = null;
             return true;
+        } else {
+        	return false;
         }
-        return false;
     }
 
     /**

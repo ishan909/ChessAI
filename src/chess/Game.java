@@ -58,7 +58,7 @@ public class Game {
                     current_col = gui.movesArray[1];
                     new_row = gui.movesArray[2];
                     new_col = gui.movesArray[3];
-                    if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
+                    if (board.movePiece(current_row, current_col, new_row, new_col) && !board.check(true)) {
                     	gui.buttonBoard[current_row][current_col].setSelected(false);
                     	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;
@@ -101,8 +101,7 @@ public class Game {
                 	current_col = bestMove[1];
                 	new_row = bestMove[2];
                 	new_col = bestMove[3];
-                	
-                	if (board.movePiece(current_row, current_col, new_row, new_col, moveCount) && !board.check(true)) {
+                	if (board.movePiece(current_row, current_col, new_row, new_col) && !board.check(true)) {
                     	gui.buttonBoard[current_row][current_col].setSelected(false);
                     	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;
