@@ -1,7 +1,6 @@
 package chess;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /* This will be a test class for the eventual AI */
 
@@ -124,20 +123,40 @@ public class Engine {
 		}
 		return possible.get(index);	
 	}
+	
 	// convert array of boards to stack of boards if it works, do null checks
 	public Board[] reverse(int current_row, int current_col, int new_row, int new_col) {
 		Board[] boards = new Board[2];
-		boards[0] = game.getBoard();
-		boards[1] = game.getBoard();
+//		boards[0] = game.getBoard(); // may need to be deep copies
+		boards[0] = new Board();
+		
+		
+//		boards[1] = game.getBoard();
+		boards[1] = new Board();
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				boards[0].matrix[i][j] = game.getBoard().matrix[i][j];
+				boards[1].matrix[i][j] = game.getBoard().matrix[i][j];
+			}
+		}
+		for (int i = 0; i < 2; i++) {
+			boards[0].blackKingLocation[i] = game.getBoard().blackKingLocation[i];
+			boards[0].whiteKingLocation[i] = game.getBoard().whiteKingLocation[i];
+			boards[1].blackKingLocation[i] = game.getBoard().blackKingLocation[i];
+			boards[1].whiteKingLocation[i] = game.getBoard().whiteKingLocation[i];
+		}
+		
+		
 		GamePiece tmp =	boards[1].getPiece(current_row, current_col);
-		if(tmp != null) {
-			if(tmp.canMove(new_row, new_col, boards[1])) {
+		if (tmp != null) {
+			if (tmp.canMove(new_row, new_col, boards[1])) {
 				tmp.move(new_row, new_col, boards[1]);
+				tmp.move(new_row, new_col, game.getBoard());
 			}
 		}
 		return boards;
-		
 	}
+	
 	private int getPoints(Integer[] list) {
 		GamePiece p = game.getBoard().getPiece(list[2], list[3]);
 		if (p == null) {

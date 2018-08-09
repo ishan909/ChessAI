@@ -90,18 +90,19 @@ public class Game {
                 }
 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
-//                try {
+//              try {
 //					Thread.sleep(1000);
 //				} catch (InterruptedException e1) {
 //					e1.printStackTrace();
 //				}
                 while (true) { // true for black player
-                	 try {
+                	try {
      					Thread.sleep(1000);
      				} catch (InterruptedException e1) {
      					e1.printStackTrace();
      				}
                 	Integer[] bestMove = e.calculateBestMove();
+                	System.out.println(bestMove[0] + " " + bestMove[1] + " " + bestMove[2] + " " + bestMove[3]);
                 	current_row = bestMove[0];
                 	current_col = bestMove[1];
                 	new_row = bestMove[2];
