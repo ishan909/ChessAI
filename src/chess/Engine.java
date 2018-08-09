@@ -90,6 +90,7 @@ public class Engine {
 		return current_score;
 	}
 	
+	// first store the state of the current board
 	private ArrayList<Integer[]> possibleMoves() {
 		ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
 		for (int r = 0; r < 8; r++) {
@@ -114,29 +115,60 @@ public class Engine {
 		ArrayList<Integer[]> possible = possibleMoves();
 		int highest = -9999;
 		int index = -1;
-		for(int i = 0; i < possible.size(); i++) {
-			Board[] tmp = reverse(possible.get(i)[0],possible.get(i)[1], possible.get(i)[2], possible.get(i)[3]);
+		for (int i = 0; i < possible.size(); i++) {
+			Board[] tmp = reverse(possible.get(i)[0], possible.get(i)[1], possible.get(i)[2], possible.get(i)[3]);
 			int score = currentBlackScore(tmp[1]);
-			if(highest < score) {
+			if (highest < score) {
 				index = i;
 			}
 		}
-		return possible.get(index);	
+		return possible.get(index);
 	}
 	
 	// convert array of boards to stack of boards if it works, do null checks
 	public Board[] reverse(int current_row, int current_col, int new_row, int new_col) {
 		Board[] boards = new Board[2];
-//		boards[0] = game.getBoard(); // may need to be deep copies
 		boards[0] = new Board();
-		
-		
-//		boards[1] = game.getBoard();
 		boards[1] = new Board();
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				boards[0].matrix[i][j] = game.getBoard().matrix[i][j];
 				boards[1].matrix[i][j] = game.getBoard().matrix[i][j];
+				
+				GamePiece p = game.getBoard().matrix[i][j];
+				if (p == null) {
+					continue;
+				} else if (p instanceof Pawn) {
+					boards[0].matrix[i][j] = new Pawn(i, j, p.color);
+					boards[1].matrix[i][j] = new Pawn(i, j, p.color);
+					boards[0].matrix[i][j].firstMove = p.firstMove;
+					boards[1].matrix[i][j].firstMove = p.firstMove;
+				} else if (p instanceof Rook) {
+					boards[0].matrix[i][j] = new Rook(i, j, p.color);
+					boards[1].matrix[i][j] = new Rook(i, j, p.color);
+					boards[0].matrix[i][j].firstMove = p.firstMove;
+					boards[1].matrix[i][j].firstMove = p.firstMove;
+				} else if (p instanceof Knight) {
+					boards[0].matrix[i][j] = new Knight(i, j, p.color);
+					boards[1].matrix[i][j] = new Knight(i, j, p.color);
+					boards[0].matrix[i][j].firstMove = p.firstMove;
+					boards[1].matrix[i][j].firstMove = p.firstMove;
+				} else if (p instanceof Bishop) {
+					boards[0].matrix[i][j] = new Bishop(i, j, p.color);
+					boards[1].matrix[i][j] = new Bishop(i, j, p.color);
+					boards[0].matrix[i][j].firstMove = p.firstMove;
+					boards[1].matrix[i][j].firstMove = p.firstMove;
+				} else if (p instanceof Queen) {
+					boards[0].matrix[i][j] = new Queen(i, j, p.color);
+					boards[1].matrix[i][j] = new Queen(i, j, p.color);
+					boards[0].matrix[i][j].firstMove = p.firstMove;
+					boards[1].matrix[i][j].firstMove = p.firstMove;
+				} else if (p instanceof King) { // instanceof King
+					boards[0].matrix[i][j] = new King(i, j, p.color);
+					boards[1].matrix[i][j] = new King(i, j, p.color);
+					boards[0].matrix[i][j].firstMove = p.firstMove;
+					boards[1].matrix[i][j].firstMove = p.firstMove;
+				}
 			}
 		}
 		for (int i = 0; i < 2; i++) {
@@ -146,14 +178,13 @@ public class Engine {
 			boards[1].whiteKingLocation[i] = game.getBoard().whiteKingLocation[i];
 		}
 		
-		
-		GamePiece tmp =	boards[1].getPiece(current_row, current_col);
+		GamePiece tmp =	boards[1].getPiece(current_row, current_col); // index 0 is original and 1 is the one we are changing
 		if (tmp != null) {
 			if (tmp.canMove(new_row, new_col, boards[1])) {
 				tmp.move(new_row, new_col, boards[1]);
-				tmp.move(new_row, new_col, game.getBoard());
 			}
 		}
+		
 		return boards;
 	}
 	

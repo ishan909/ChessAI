@@ -1,9 +1,9 @@
 package chess;
 
 abstract public class GamePiece {
-    private int currentRow, currentCol;
-    private boolean color;
-    private boolean firstMove;
+    public int currentRow, currentCol;
+    public boolean color;
+    public boolean firstMove;
 
     /**
      * Constructor for a GamePiece

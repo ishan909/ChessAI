@@ -95,9 +95,12 @@ public class Game {
 //				} catch (InterruptedException e1) {
 //					e1.printStackTrace();
 //				}
+                
+                
+                
                 while (true) { // true for black player
                 	try {
-     					Thread.sleep(1000);
+     					Thread.sleep(2000);
      				} catch (InterruptedException e1) {
      					e1.printStackTrace();
      				}
@@ -112,11 +115,15 @@ public class Game {
                     	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;
                     }
+//                	board.movePiece(current_row, current_col, new_row, new_col);
                     new_row = -1;
                     gui.movesArray[2] = -1;
                     new_col = -1;
                     gui.movesArray[3] = -1;
                 }
+            
+            
+            
                 if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
             		board.setPawnToPiece(new_row, new_col, input);
                 }
