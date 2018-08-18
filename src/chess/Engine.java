@@ -22,14 +22,6 @@ public class Engine {
 	// We will later add the minimax, Alpha-Bata Pruning, and more
 	public Integer[] calculateBestMove() { // {oldRow, oldCol, newRow, newCol}
 		return findBestMove();
-//		ArrayList<Integer[]> moves = possibleMoves();
-//		Integer[] best = moves.get((int) (Math.random() * moves.size()));
-//		for (int i = 0; i < moves.size(); i++) {
-//			if (getPoints(moves.get(i)) > getPoints(best)) {
-//				best = moves.get(i);
-//			}
-//		}
-//		return best;
 	}
 	
 	public int currentBoardScore(Board b) {
@@ -116,7 +108,7 @@ public class Engine {
 		int highest = -9999;
 		int index = -1;
 		for (int i = 0; i < possible.size(); i++) {
-			Board[] tmp = reverse(possible.get(i)[0], possible.get(i)[1], possible.get(i)[2], possible.get(i)[3]);
+			Board[] tmp = generate(possible.get(i)[0], possible.get(i)[1], possible.get(i)[2], possible.get(i)[3]);
 			int score = currentBlackScore(tmp[1]);
 			if (highest < score) {
 				index = i;
@@ -126,7 +118,7 @@ public class Engine {
 	}
 	
 	// convert array of boards to stack of boards if it works, do null checks
-	public Board[] reverse(int current_row, int current_col, int new_row, int new_col) {
+	public Board[] generate(int current_row, int current_col, int new_row, int new_col) {
 		Board[] boards = new Board[2];
 		boards[0] = new Board();
 		boards[1] = new Board();
@@ -141,33 +133,33 @@ public class Engine {
 				} else if (p instanceof Pawn) {
 					boards[0].matrix[i][j] = new Pawn(i, j, p.color);
 					boards[1].matrix[i][j] = new Pawn(i, j, p.color);
-					boards[0].matrix[i][j].firstMove = p.firstMove;
-					boards[1].matrix[i][j].firstMove = p.firstMove;
+//					boards[0].matrix[i][j].firstMove = p.firstMove;
+//					boards[1].matrix[i][j].firstMove = p.firstMove;
 				} else if (p instanceof Rook) {
 					boards[0].matrix[i][j] = new Rook(i, j, p.color);
 					boards[1].matrix[i][j] = new Rook(i, j, p.color);
-					boards[0].matrix[i][j].firstMove = p.firstMove;
-					boards[1].matrix[i][j].firstMove = p.firstMove;
+//					boards[0].matrix[i][j].firstMove = p.firstMove;
+//					boards[1].matrix[i][j].firstMove = p.firstMove;
 				} else if (p instanceof Knight) {
 					boards[0].matrix[i][j] = new Knight(i, j, p.color);
 					boards[1].matrix[i][j] = new Knight(i, j, p.color);
-					boards[0].matrix[i][j].firstMove = p.firstMove;
-					boards[1].matrix[i][j].firstMove = p.firstMove;
+//					boards[0].matrix[i][j].firstMove = p.firstMove;
+//					boards[1].matrix[i][j].firstMove = p.firstMove;
 				} else if (p instanceof Bishop) {
 					boards[0].matrix[i][j] = new Bishop(i, j, p.color);
 					boards[1].matrix[i][j] = new Bishop(i, j, p.color);
-					boards[0].matrix[i][j].firstMove = p.firstMove;
-					boards[1].matrix[i][j].firstMove = p.firstMove;
+//					boards[0].matrix[i][j].firstMove = p.firstMove;
+//					boards[1].matrix[i][j].firstMove = p.firstMove;
 				} else if (p instanceof Queen) {
 					boards[0].matrix[i][j] = new Queen(i, j, p.color);
 					boards[1].matrix[i][j] = new Queen(i, j, p.color);
-					boards[0].matrix[i][j].firstMove = p.firstMove;
-					boards[1].matrix[i][j].firstMove = p.firstMove;
+//					boards[0].matrix[i][j].firstMove = p.firstMove;
+//					boards[1].matrix[i][j].firstMove = p.firstMove;
 				} else if (p instanceof King) { // instanceof King
 					boards[0].matrix[i][j] = new King(i, j, p.color);
 					boards[1].matrix[i][j] = new King(i, j, p.color);
-					boards[0].matrix[i][j].firstMove = p.firstMove;
-					boards[1].matrix[i][j].firstMove = p.firstMove;
+//					boards[0].matrix[i][j].firstMove = p.firstMove;
+//					boards[1].matrix[i][j].firstMove = p.firstMove;
 				}
 			}
 		}
@@ -177,17 +169,64 @@ public class Engine {
 			boards[1].blackKingLocation[i] = game.getBoard().blackKingLocation[i];
 			boards[1].whiteKingLocation[i] = game.getBoard().whiteKingLocation[i];
 		}
-		
 		GamePiece tmp =	boards[1].getPiece(current_row, current_col); // index 0 is original and 1 is the one we are changing
 		if (tmp != null) {
+			// Does it actually move it on boards[1]?
+			
+			// Before
+			System.out.println("This is before");
+			printBoard(boards[1]);
 			if (tmp.canMove(new_row, new_col, boards[1])) {
+				System.out.println("This is after");
 				tmp.move(new_row, new_col, boards[1]);
+				
 			}
 		}
 		
 		return boards;
 	}
 	
+	public void printBoard(Board board) {
+		 System.out.println(" - 0- 1- 2- 3- 4- 5- 6- 7-");
+	        System.out.println("---------------------------");
+	        for (int row = 0; row < 8; row++) {
+	            System.out.print("" + row + "|");
+	            for (int col = 0; col < 8; col++) {
+	                if (board.matrix[row][col] == null) {
+	                    System.out.print("  ");
+	                } else {
+	                    GamePiece p = board.matrix[row][col];
+	                    if (p == null) {
+	            			System.out.print("  |");
+	            			continue;
+	                    }
+	                    if (p.getColor()) {
+	                        System.out.print("B");
+	                    } else {
+	                        System.out.print("W");
+	                    }
+	                    if (p instanceof Rook) {
+	                        System.out.print("R");
+	                    } else if (p instanceof Knight) {
+	                        System.out.print("k");
+	                    } else if (p instanceof Bishop) {
+	                        System.out.print("B");
+	                    } else if (p instanceof King) {
+	                        System.out.print("K");
+	                    } else if (p instanceof Queen) {
+	                        System.out.print("Q");
+	                    } else if (p instanceof Pawn) {
+	                        System.out.print("P");
+	                    }
+	                }
+	                System.out.print("|");
+	            }
+	            System.out.println();
+	        }
+	        System.out.println("---------------------------");
+	}
+	
+	/* Not needed but here in case we revert back */
 	private int getPoints(Integer[] list) {
 		GamePiece p = game.getBoard().getPiece(list[2], list[3]);
 		if (p == null) {

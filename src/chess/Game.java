@@ -40,7 +40,7 @@ public class Game {
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 while (true) {
 	                System.out.print("WHITE "); // to allow piece to move
-	                System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
+                	    System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
 	                while (!validSelection(gui.movesArray[0], gui.movesArray[1])) {
 	                	System.out.print(""); // to allow piece to move
 	                	// updating button to be unselected if selected button is not valid
@@ -51,8 +51,8 @@ public class Game {
 	                    gui.movesArray[1] = -1;
 	                	current_row = -1;
 	                    current_col = -1;
-	                    System.out.print("WHITE ");
-	                    System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
+	                   System.out.print("WHITE ");
+	                   System.out.println("INSIDE cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
 	                }
                     current_row = gui.movesArray[0];
                     current_col = gui.movesArray[1];

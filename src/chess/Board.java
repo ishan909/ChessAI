@@ -132,7 +132,7 @@ public class Board {
      * @param player - white or black
      * @return if the player is in check
      */
-    public boolean check(boolean player) {
+    public boolean check(boolean player)  {
         if (player) {
             return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck(this);
         } else {
