@@ -179,6 +179,7 @@ public class Engine {
 			if (tmp.canMove(new_row, new_col, boards[1])) {
 				System.out.println("This is after");
 				tmp.move(new_row, new_col, boards[1]);
+				printBoard(boards[1]);
 				
 			}
 		}
