@@ -157,7 +157,7 @@ public class Engine {
 	 * @param new_col
 	 * @return returns the current evaluation of the board for black in terms of a quantitative value
 	 */
-	public static int evaluateBoard(int current_row, int current_col, int new_row, int new_col) {
+	public int evaluateBoard(int current_row, int current_col, int new_row, int new_col) {
 		/* Algorithm: 
 		 * Instantiate a board that will have the CURRENT state (internal)
 		 * Perform the move on the board
@@ -165,17 +165,47 @@ public class Engine {
 		 * When function is called again, it will be able to score a different move and this will help simplify the code 
 		 */
 		
-		 // We will first try to test the algorithm by avoiding the deep copy, since every time the function is called, a new board is called. Hard part is
-		 // is to just make sure when you create a copy of the board, it is of the current state.
-		 // If the normal copy doesn't work, we will use the deep copy part of the code below ONLY just for this. 
+		 // Screw it, deep copy for just 1 board every time , Have to reset the board or clean the board pieces
 		
+		 // WE HAVE to access the internal definition of the board everytime
 		
+		// we can also make the board update or a helper function that returns a deep copy of the board to make the code cleaner and easier to debug
+		Board res = new Board();
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < 8; j++) {
+				res.matrix[i][j] = game.getBoard().matrix[i][j];
+				GamePiece p = game.getBoard().matrix[i][j];
+				if (p == null) {
+					continue;
+				} else if (p instanceof Pawn) {
+					res.matrix[i][j] = new Pawn(i, j, p.color);
+				} else if (p instanceof Rook) {
+					res.matrix[i][j] = new Rook(i, j, p.color);
+				} else if (p instanceof Knight) {
+					res.matrix[i][j] = new Knight(i, j, p.color);
+				} else if (p instanceof Bishop) {
+					res.matrix[i][j] = new Bishop(i, j, p.color);
+				} else if (p instanceof Queen) {
+					res.matrix[i][j] = new Queen(i, j, p.color);
+				} else if (p instanceof King) { 
+					res.matrix[i][j] = new King(i, j, p.color);
+				}
+			}
+		}
+		for(int i = 0; i < 2; i++) {
+			res.blackKingLocation[i] = game.getBoard().blackKingLocation[i];
+			res.whiteKingLocation[i] = game.getBoard().whiteKingLocation[i];
+		}
+		// board is now copied, now finish
 		
+		GamePiece eval = res.getPiece(current_row, current_col);
+		if(eval != null) {
+			// PROBLEM IS WITH MOVING THE PIECE LOL WE GOTTA FIX THIS LMAO
+		}
+		else {
+			return -1;
+		}
 		
-		
-		
-		// Fill later
-		return -1;
 	}
 	
 	
