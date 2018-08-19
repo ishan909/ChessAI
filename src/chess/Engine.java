@@ -6,12 +6,6 @@ import java.util.ArrayList;
 
 public class Engine {
 	private Game game;
-	private int pawnWeight = 5;
-	private int knightWeight = 20;
-	private int bishopWeight = 20;
-	private int rookWeight = 50;
-	private int queenWeight = 150;
-	private int kingWeight = 1000;
 	
 	public Engine(Game game) {
 		this.game = game;
@@ -26,10 +20,7 @@ public class Engine {
 	public Integer[] calculateBestMove() { // {oldRow, oldCol, newRow, newCol}
 		return findBestMove();
 	}
-	/* Current total score of game */
-	public int currentBoardScore(Board b) {
-		return b.currentBlackScore() + b.currentWhiteScore();
-	}
+	
 	
 	/* Generate all the possible moves */
 	private ArrayList<Integer[]> possibleMoves() {
@@ -83,14 +74,13 @@ public class Engine {
 			
 			// Skeleton of Algorithm below
 			int current = evaluateBoard(possible_moves.get(i)[0], possible_moves.get(i)[1], possible_moves.get(i)[2], possible_moves.get(i)[3]);
-			if(highest <= current) {
-				if(highest == current) {
-					if(Math.random() < 0.4) {
+			if (highest <= current) {
+				if (highest == current) {
+					if (Math.random() < 0.4) {
 						highest = current;
 						index = i;
 					}
-				}
-				else {
+				} else {
 					highest = current;
 					index = i;
 				}
@@ -128,8 +118,8 @@ public class Engine {
 		
 		// we can also make the board update or a helper function that returns a deep copy of the board to make the code cleaner and easier to debug
 		Board res = new Board();
-		for(int i = 0; i < 8; i++) {
-			for(int j = 0; j < 8; j++) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
 				res.matrix[i][j] = game.getBoard().matrix[i][j];
 				GamePiece p = game.getBoard().matrix[i][j];
 				if (p == null) {
@@ -149,18 +139,17 @@ public class Engine {
 				}
 			}
 		}
-		for(int i = 0; i < 2; i++) {
+		for (int i = 0; i < 2; i++) {
 			res.blackKingLocation[i] = game.getBoard().blackKingLocation[i];
 			res.whiteKingLocation[i] = game.getBoard().whiteKingLocation[i];
 		}
 
 		
 		GamePiece eval = res.getPiece(current_row, current_col);
-		if(eval != null) {
+		if (eval != null) {
 			eval.move(new_row, new_col, res);
 			return res.currentBlackScore();
-		}
-		else {
+		} else {
 			return -1;
 		}
 		

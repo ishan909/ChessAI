@@ -275,6 +275,11 @@ public class Board {
         System.out.println("---------------------------");
     }
     
+    /* Current total score of game */
+	public int currentBoardScore() {
+		return currentBlackScore() + currentWhiteScore();
+	}
+    
     /* Current score for white */
 	public int currentWhiteScore() {
 		int current_score = 0;
