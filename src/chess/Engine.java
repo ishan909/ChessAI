@@ -38,16 +38,9 @@ public class Engine {
 				}
 			}
 		}
-		/* Use for testing to make sure possible moves gives out correct values
-		for(Integer[] a : moves) {
-			for(int b : a) {
-				System.out.print(b + " ");
-			}
-			System.out.println();
-		}
-		*/
 		return moves;
 	}
+	
 	//  Continue onto findBestMove(), assuming possibleMoves() has correctly generated all the possible moves
 	
 	/* AI still has problem recognizing the checks/check-mate (This has to be fixed first or it will be impossible).
