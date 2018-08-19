@@ -133,7 +133,7 @@ public class Board {
      * @return if the player is in check
      */
     public boolean check(boolean player)  {
-        if (player) {
+        if (!player) {
             return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheck(this);
         } else {
             return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheck(this);
@@ -148,7 +148,7 @@ public class Board {
     public boolean checkmate(boolean player) {
         // loop through all of the possible moves for the player's king and see if it will
         // still be in check in all of those moves
-        if (player) {
+        if (!player) {
             return this.getPiece(blackKingLocation[0], blackKingLocation[1]).isInCheckmate(this);
         } else {
             return this.getPiece(whiteKingLocation[0], whiteKingLocation[1]).isInCheckmate(this);
