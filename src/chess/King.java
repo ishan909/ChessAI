@@ -149,7 +149,7 @@ public class King extends GamePiece {
 	    									}
 	    								}
 	    							}
-    								clone.getPiece(r, c).move(newR, newC, clone);
+    						clone.getPiece(r, c).move(newR, newC, clone);
 //    									clone.setPiece(null, r, c);
 								if (!clone.check(super.getColor())) {
 									return false;
