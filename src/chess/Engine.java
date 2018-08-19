@@ -13,9 +13,12 @@ public class Engine {
 	private int queenWeight = 150;
 	private int kingWeight = 1000;
 	
-	
 	public Engine(Game game) {
 		this.game = game;
+	}
+	
+	public Game getGame() {
+		return game;
 	}
 	
 	// This method is the AI, 
@@ -25,61 +28,7 @@ public class Engine {
 	}
 	/* Current total score of game */
 	public int currentBoardScore(Board b) {
-		return currentBlackScore(b) + currentWhiteScore(b);
-	}
-	/* Current score for white */
-	public int currentWhiteScore(Board b) {
-		int current_score = 0;
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				GamePiece tmp = b.getPiece(i, j);
-				if (tmp!= null) {
-					if (!tmp.getColor()) {
-						if (tmp instanceof King) {
-							current_score -= kingWeight;
-						} else if (tmp instanceof Queen) {
-							current_score -= queenWeight;
-						} else if (tmp instanceof Rook) {
-							current_score -= rookWeight;
-						} else if (tmp instanceof Bishop) {
-							current_score -= bishopWeight;
-						} else if (tmp instanceof Knight) {
-							current_score -= knightWeight;
-						} else {
-							current_score -= pawnWeight;
-						}
-					}
-				}
-			}
-		}
-		return current_score;
-	}
-	/* Current score for black */
-	public int currentBlackScore(Board b) {
-		int current_score = 0;
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				GamePiece tmp = b.getPiece(i, j);
-				if (tmp!= null) {
-					if (!tmp.getColor()) {
-						if (tmp instanceof King) {
-							current_score -= kingWeight;
-						} else if (tmp instanceof Queen) {
-							current_score -= queenWeight;
-						} else if (tmp instanceof Rook) {
-							current_score -= rookWeight;
-						} else if (tmp instanceof Bishop) {
-							current_score -= bishopWeight;
-						} else if (tmp instanceof Knight) {
-							current_score -= knightWeight;
-						} else {
-							current_score -= pawnWeight;
-						}
-					}
-				}
-			}
-		}
-		return current_score;
+		return b.currentBlackScore() + b.currentWhiteScore();
 	}
 	
 	/* Generate all the possible moves */
@@ -209,7 +158,7 @@ public class Engine {
 		GamePiece eval = res.getPiece(current_row, current_col);
 		if(eval != null) {
 			eval.move(new_row, new_col, res);
-			return currentBlackScore(res);
+			return res.currentBlackScore();
 		}
 		else {
 			return -1;

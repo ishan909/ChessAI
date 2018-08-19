@@ -274,4 +274,60 @@ public class Board {
         }
         System.out.println("---------------------------");
     }
+    
+    /* Current score for white */
+	public int currentWhiteScore() {
+		int current_score = 0;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				GamePiece tmp = getPiece(i, j);
+				if (tmp!= null) {
+					if (tmp.getColor()) {
+						if (tmp instanceof King) {
+							current_score += 1000;
+						} else if (tmp instanceof Queen) {
+							current_score += 150;
+						} else if (tmp instanceof Rook) {
+							current_score += 50;
+						} else if (tmp instanceof Bishop) {
+							current_score += 20;
+						} else if (tmp instanceof Knight) {
+							current_score += 20;
+						} else {
+							current_score += 5;
+						}
+					}
+				}
+			}
+		}
+		return current_score;
+	}
+	
+	/* Current score for black */
+	public int currentBlackScore() {
+		int current_score = 0;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				GamePiece tmp = getPiece(i, j);
+				if (tmp!= null) {
+					if (!tmp.getColor()) {
+						if (tmp instanceof King) {
+							current_score -= 1000;
+						} else if (tmp instanceof Queen) {
+							current_score -= 150;
+						} else if (tmp instanceof Rook) {
+							current_score -= 50;
+						} else if (tmp instanceof Bishop) {
+							current_score -= 20;
+						} else if (tmp instanceof Knight) {
+							current_score -= 20;
+						} else {
+							current_score -= 5;
+						}
+					}
+				}
+			}
+		}
+		return current_score;
+	}
 }

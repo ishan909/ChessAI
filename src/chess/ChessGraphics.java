@@ -148,9 +148,9 @@ public class ChessGraphics  {
 	
 	void setTurn(boolean player) {
 		if (!player) {
-			turn = new JLabel("It is Black's turn. " + (e != null ? e.currentBlackScore(gameBoard) : " NULL BLACK"));
+			turn = new JLabel("It is Black's turn. " + (e != null ? e.getGame().getBoard().currentBlackScore() : " NULL BLACK"));
 		} else {
-			turn = new JLabel("It is White's turn. " + (e != null ? e.currentWhiteScore(gameBoard) : " NULL WHITE"));
+			turn = new JLabel("It is White's turn. " + (e != null ? e.getGame().getBoard().currentWhiteScore() : " NULL WHITE"));
 		}
 	}
 }
