@@ -19,12 +19,14 @@ public class Engine {
 	public Game getGame() {
 		return game;
 	}
+
 	/**
 	 * @return Returns an integer array of the best move
 	 */
 	public Integer[] calculateBestMove() {
 		return findBestMove();
 	}
+
 	/**
 	 * @return Returns the find best possible move
 	 */
@@ -46,6 +48,7 @@ public class Engine {
 		}
 		return moves;
 	}
+	
 	/**
 	 * @return Returns the find best possible move
 	 */
