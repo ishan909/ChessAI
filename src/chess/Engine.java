@@ -61,19 +61,19 @@ public class Engine {
 			for (int j = 0; j < 8; j++) {
 				GamePiece tmp = b.getPiece(i, j);
 				if (tmp!= null) {
-					if (tmp.getColor()) {
+					if (!tmp.getColor()) {
 						if (tmp instanceof King) {
-							current_score += kingWeight;
+							current_score -= kingWeight;
 						} else if (tmp instanceof Queen) {
-							current_score += queenWeight;
+							current_score -= queenWeight;
 						} else if (tmp instanceof Rook) {
-							current_score += rookWeight;
+							current_score -= rookWeight;
 						} else if (tmp instanceof Bishop) {
-							current_score += bishopWeight;
+							current_score -= bishopWeight;
 						} else if (tmp instanceof Knight) {
-							current_score += knightWeight;
+							current_score -= knightWeight;
 						} else {
-							current_score += pawnWeight;
+							current_score -= pawnWeight;
 						}
 					}
 				}
@@ -134,9 +134,17 @@ public class Engine {
 			
 			// Skeleton of Algorithm below
 			int current = evaluateBoard(possible_moves.get(i)[0], possible_moves.get(i)[1], possible_moves.get(i)[2], possible_moves.get(i)[3]);
-			if(highest < current) {
-				highest = current;
-				index = i;
+			if(highest <= current) {
+				if(highest == current) {
+					if(Math.random() < 0.4) {
+						highest = current;
+						index = i;
+					}
+				}
+				else {
+					highest = current;
+					index = i;
+				}
 			}
 		}
 		return possible_moves.get(index);
@@ -196,11 +204,12 @@ public class Engine {
 			res.blackKingLocation[i] = game.getBoard().blackKingLocation[i];
 			res.whiteKingLocation[i] = game.getBoard().whiteKingLocation[i];
 		}
-		// board is now copied, now finish
+
 		
 		GamePiece eval = res.getPiece(current_row, current_col);
 		if(eval != null) {
-			// PROBLEM IS WITH MOVING THE PIECE LOL WE GOTTA FIX THIS LMAO
+			eval.move(new_row, new_col, res);
+			return currentBlackScore(res);
 		}
 		else {
 			return -1;
