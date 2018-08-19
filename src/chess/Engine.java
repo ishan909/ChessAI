@@ -14,21 +14,21 @@ public class Engine {
 	}
 
 	/**
-	 * @return instance of internal game
+	 * @return returns an instance of internal game
 	 */
 	public Game getGame() {
 		return game;
 	}
 
 	/**
-	 * @return Returns an integer array of the best move
+	 * @return returns an integer array of the best move
 	 */
 	public Integer[] calculateBestMove() {
 		return findBestMove();
 	}
 
 	/**
-	 * @return Returns the find best possible move
+	 * @return returns the find best possible move
 	 */
 	private ArrayList<Integer[]> possibleMoves() {
 		ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
@@ -48,9 +48,9 @@ public class Engine {
 		}
 		return moves;
 	}
-	
+
 	/**
-	 * @return Returns the find best possible move
+	 * @return returns the find best possible move
 	 */
 	public Integer[] findBestMove() {
 		int highest = Integer.MIN_VALUE;
