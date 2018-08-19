@@ -6,18 +6,29 @@ public class Engine {
 
 	private Game game;
 
+	/**
+	 * Constructor for a new Bishop
+	 * @param game - instance of internal game
+	 */
 	public Engine(Game game) {
 		this.game = game;
 	}
 
+	/**
+	 * @return instance of internal game
+	 */
 	public Game getGame() {
 		return game;
 	}
-
+	/**
+	 * @return Returns an integer array of the best move
+	 */
 	public Integer[] calculateBestMove() {
 		return findBestMove();
 	}
-
+	/**
+	 * @return Returns the find best possible move
+	 */
 	private ArrayList<Integer[]> possibleMoves() {
 		ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
 		for (int r = 0; r < 8; r++) {
@@ -36,7 +47,9 @@ public class Engine {
 		}
 		return moves;
 	}
-
+	/**
+	 * @return Returns the find best possible move
+	 */
 	public Integer[] findBestMove() {
 		int highest = Integer.MIN_VALUE;
 		ArrayList<Integer[]> possible_moves = possibleMoves();
