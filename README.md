@@ -1,6 +1,5 @@
 # ChessAI
 
-## Description
 The game allows a user to play 1v1 against a Chess AI in a GUI interface. 
 
 
