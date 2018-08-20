@@ -24,7 +24,6 @@ public class Engine {
 	 * @return returns an integer array of the best move
 	 */
 	public Integer[] calculateBestMove() {
-//		return findBestMoveMinimax();
 		return findBestMoveMinimaxRecursive(game.getBoard(), 4);
 	}
 
@@ -49,7 +48,11 @@ public class Engine {
 		}
 		return moves;
 	}
-	
+	/**
+	 * @param currentBoard
+	 * @param recursiveLevel
+	 * @return returns the best move 
+	 */
 	public Integer[] findBestMoveMinimaxRecursive(Board currentBoard, int recursiveLevel) {
 		if (recursiveLevel == 0) {
 			int highest = Integer.MIN_VALUE;
@@ -117,18 +120,18 @@ public class Engine {
 						highest = current;
 					}
 				}
-				// so once we have that done, return the highest board score
 			}
 			return moves1.get(highestTies.get((int) (Math.random() * highestTies.size())));
 		}
 	}
-	
+	/**
+	 * @return returns the best 1 move (Greedy Optimization)
+	 */
 	public Integer[] findBestMoveMinimax() {
 		int highest = Integer.MIN_VALUE;
 		ArrayList<Integer> highestTies = new ArrayList<Integer>();
-		ArrayList<Integer[]> moves1 = possibleMoves(game.getBoard(), true /*black*/);
+		ArrayList<Integer[]> moves1 = possibleMoves(game.getBoard(), true);
 		for (int i1 = 0; i1 < moves1.size(); i1++) {
-			// make a temp deep copied board
 			Board res1 = new Board();
 			for (int r1 = 0; r1 < 8; r1++) {
 				for (int c1 = 0; c1 < 8; c1++) {
@@ -155,19 +158,12 @@ public class Engine {
 				res1.blackKingLocation[i] = game.getBoard().blackKingLocation[i];
 				res1.whiteKingLocation[i] = game.getBoard().whiteKingLocation[i];
 			}
-			// need to make the move
 			GamePiece eval1 = res1.getPiece(moves1.get(i1)[0], moves1.get(i1)[1]);
 			if (eval1 != null) {
 				eval1.move(moves1.get(i1)[2], moves1.get(i1)[3], res1);
 				res1.matrix[moves1.get(i1)[0]][moves1.get(i1)[1]] = null;
 			}
-			
-//			ArrayList<Integer[]> moves2 = possibleMoves(res1, false /*white*/);
-//			for (int i2 = 0; i2 < moves2.size(); i2++) {
-//				
-//			}
-			
-			// needs to go into the lowest level of the checking
+
 			int current = res1.currentBoardScore();
 			if (highest <= current) {
 				if (highest == current) {
@@ -190,9 +186,6 @@ public class Engine {
 		ArrayList<Integer[]> possible_moves = possibleMoves(game.getBoard(), true /*black*/);
 		ArrayList<Integer> highestTies = new ArrayList<Integer>();
 		for (int i = 0; i < possible_moves.size(); i++) {
-			// make a temp board and make the move in the board
-			// on that board, get the list of possible moves
-			// wait for death
 			int current = evaluateBoard(game.getBoard(), possible_moves.get(i)[0], possible_moves.get(i)[1], possible_moves.get(i)[2], possible_moves.get(i)[3]);
 			if (highest <= current) {
 				if (highest == current) {
@@ -204,9 +197,6 @@ public class Engine {
 				}
 			}
 		}
-		// retrieve ddeep opcy of board w that black bes t move
-		// repaet the llop process but u call the possible moves for white based on the board above
-		// then u repeat what was done between 56-72, and u do so such that it is an odd usm times and that black has done AI n+1 times compared to white which is n
 		return possible_moves.get(highestTies.get((int) (Math.random() * highestTies.size())));
 	}
 
