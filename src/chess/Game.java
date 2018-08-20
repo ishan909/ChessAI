@@ -40,7 +40,7 @@ public class Game {
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
                 while (true) {
 	                System.out.print("WHITE "); // to allow piece to move
-                	    System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
+                	System.out.println("cr " + current_row + " cc " + current_col  + " nr " + new_row  + " nc " + new_col + " gfx " + gui.movesArray[0] + " gfy " + gui.movesArray[1] + " gsx " + gui.movesArray[2] + " gsy " + gui.movesArray[3]);
 	                while (!validSelection(gui.movesArray[0], gui.movesArray[1])) {
 	                	System.out.print(""); // to allow piece to move
 	                	// updating button to be unselected if selected button is not valid
@@ -90,14 +90,6 @@ public class Game {
                 }
 
                 int current_col = -1, current_row = -1, new_col = -1, new_row = -1;
-//              try {
-//					Thread.sleep(1000);
-//				} catch (InterruptedException e1) {
-//					e1.printStackTrace();
-//				}
-                
-                
-                
                 while (true) { // true for black player
                 	try {
      					Thread.sleep(2000);
@@ -115,14 +107,11 @@ public class Game {
                     	gui.buttonBoard[new_row][new_col].setSelected(false);
                     	break;
                     }
-//                	board.movePiece(current_row, current_col, new_row, new_col);
                     new_row = -1;
                     gui.movesArray[2] = -1;
                     new_col = -1;
                     gui.movesArray[3] = -1;
                 }
-            
-            
             
                 if (new_row == 7 && board.getPiece(new_row, new_col) != null && board.getPiece(new_row, new_col) instanceof Pawn) {
             		board.setPawnToPiece(new_row, new_col, input);
